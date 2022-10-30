@@ -1,0 +1,4 @@
+# Ignore artifacts:
+.expo-shared/
+.expo/
+node_modules/
