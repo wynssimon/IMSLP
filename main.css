@@ -15,6 +15,9 @@ main {
 .show {
   display: block;
 }
+.is-hidden {
+  display: none;
+}
 #myBtnContainer {
   width: 20%;
   border: 1px solid black;

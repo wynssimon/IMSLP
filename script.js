@@ -64,6 +64,7 @@ for (var i = 0; i < btns.length; i++) {
 let cards = document.querySelectorAll('.filterDiv');
 
 function liveSearch() {
+  console.log('livesearch');
   let search_query = document.getElementById('myInput').value;
 
   //Use innerText if all contents are visible
@@ -78,3 +79,5 @@ function liveSearch() {
     }
   }
 }
+
+document.getElementById('myInput').oninput = liveSearch;

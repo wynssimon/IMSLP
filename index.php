@@ -42,8 +42,8 @@
         </button>
       </div>
       <div class="container" id="myUL">
-        <div class="filterDiv Renaissance"><p>Di Lasso</p></div>
-        <div class="filterDiv Renaissance"><p>Sweelinck</div>
+        <div class="filterDiv Renaissance">Di Lasso</div>
+        <div class="filterDiv Renaissance">Sweelinck</div>
         <div class="filterDiv Classic">Haydn</div>
         <div class="filterDiv Romantic">Wagner</div>
         <div class="filterDiv Classic">Mozart</div>
