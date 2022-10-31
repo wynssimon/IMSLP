@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
-    <link rel="stylesheet" href="../styles/main.css" />
     <title>IMSLP</title>
   </head>
   <body>
@@ -21,6 +20,5 @@
   </header>
     <main>
     </main>
-    <script src="script.js"></script>
   </body>
 </html>

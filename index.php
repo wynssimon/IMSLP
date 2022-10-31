@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/sheetsresults.css" />
     <title>IMSLP</title>
   </head>
   <body>
@@ -56,6 +57,6 @@
         <div class="filterDiv Romantic">Tchaikovsky</div>
       </div>
     </main>
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
   </body>
 </html>
