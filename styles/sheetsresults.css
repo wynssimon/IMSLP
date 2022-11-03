@@ -2,11 +2,14 @@
   float: left;
   background-color: #2a6496;
   color: #ffffff;
-  width: 100px;
-  line-height: 100px;
+  width: 50%;
   text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 100px;
+  height: 100px;
   margin: 2px;
-  display: none;
+  margin-left: 25%;
 }
 .show {
   display: block;
@@ -14,11 +17,17 @@
 .is-hidden {
   display: none;
 }
-#myBtnContainer {
+p {
+  text-decoration: underline;
+}
+#filters {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+  margin-top: 1%;
   width: 20%;
-  border: 1px solid black;
-  float: left;
-  margin-top: 20px;
+  height: 20vh;
+  position: absolute;
 }
 /* Style the buttons */
 .btn {
@@ -43,6 +52,7 @@
   margin: 0;
   overflow: hidden;
   width: 50%;
+  margin-left: 25%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
