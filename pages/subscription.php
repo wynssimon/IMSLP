@@ -21,9 +21,12 @@
       </nav>
     </header>
     <main>
-      <h1>Subscribe!</h1>
+      <h2>Subscribe!</h2>
       <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want</p>
-      <button>Subscribe</button>
+      <div class="subscribe">
+        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=W77KRHZ4HH84J"><button>Subscribe for one month</button></a>    
+        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A"><button>Subscribe for one year</button></a>    
+      </div>
     </main>
   </body>
 </html>

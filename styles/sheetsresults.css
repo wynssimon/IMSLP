@@ -4,12 +4,34 @@
   color: #ffffff;
   width: 50%;
   text-align: center;
+  display: flex;
   justify-content: center;
-  vertical-align: middle;
-  line-height: 100px;
-  height: 100px;
+  align-items: center;
+  height: 150px;
   margin: 2px;
   margin-left: 25%;
+}
+.hidden {
+  display: none;
+}
+#noResult {
+  font-size: 25px;
+  text-align: center;
+  margin-top: 5%;
+  position: absolute;
+  width: 100%;
+}
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 2%;
+  display: grid;
+  grid-template-columns: 1fr;
+  position: absolute;
+  z-index: -1;
 }
 .show {
   display: block;
@@ -26,15 +48,27 @@ p {
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
   margin-left: 3%;
+  margin-top: 2%;
   background-color: lightgrey;
   width: 20%;
-  height: 50vh;
+  height: 60vh;
   padding: 1%;
-  position: absolute;
+  position: fixed;
 }
 #myInput {
-  width: 20%;
-  margin: 0 40% 2% 40%;
+  width: 30%;
+  margin: 0.5% 0 0 5%;
+  position: absolute;
+  z-index: 10;
+  padding: 10px;
+  border: 1px solid grey;
+  background: #f1f1f1;
+}
+.checkbox {
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
 }
 /* Style the buttons */
 .btn {
@@ -46,19 +80,10 @@ p {
   margin: 2%;
 }
 .btn:hover {
-  background-color: #ddd;
-}
-
-.btn.active {
-  background-color: #666;
+  background-color: #2a6496;
   color: white;
 }
-#myUL {
-  list-style-type: none;
-  padding: 0;
-  overflow: hidden;
-  width: 50%;
-  margin-left: 25%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.btn.active {
+  background-color: #2a6496;
+  color: white;
 }
