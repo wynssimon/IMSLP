@@ -22,7 +22,6 @@ function filterSelection() {
 }
 //searchbar
 function liveSearch() {
-  console.log('livesearch');
   let search_query = document.getElementById('myInput').value;
 
   //Use innerText if all contents are visible

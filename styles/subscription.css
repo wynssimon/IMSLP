@@ -1,0 +1,14 @@
+p {
+  text-align: center;
+}
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1%;
+}
+button {
+  width: 10%;
+  margin-left: 45%;
+  margin-top: 2%;
+  cursor: pointer;
+}

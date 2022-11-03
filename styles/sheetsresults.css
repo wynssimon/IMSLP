@@ -19,15 +19,22 @@
 }
 p {
   text-decoration: underline;
+  margin-bottom: 2%;
 }
 #filters {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
-  margin-top: 1%;
+  margin-left: 3%;
+  background-color: lightgrey;
   width: 20%;
-  height: 20vh;
+  height: 50vh;
+  padding: 1%;
   position: absolute;
+}
+#myInput {
+  width: 20%;
+  margin: 0 40% 2% 40%;
 }
 /* Style the buttons */
 .btn {
@@ -36,8 +43,8 @@ p {
   padding: 12px 16px;
   background-color: #f1f1f1;
   cursor: pointer;
+  margin: 2%;
 }
-
 .btn:hover {
   background-color: #ddd;
 }
@@ -49,7 +56,6 @@ p {
 #myUL {
   list-style-type: none;
   padding: 0;
-  margin: 0;
   overflow: hidden;
   width: 50%;
   margin-left: 25%;

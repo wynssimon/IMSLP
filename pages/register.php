@@ -36,7 +36,7 @@
         }
     }
     ?>
-<form class="registreer" action="register.php" method="post" enctype="multipart/form-data">
+    <form class="registreer" action="register.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="register">
         <h2>REGISTER</h2>
         <label>User Name</label>
@@ -47,13 +47,10 @@
         <input type="text" name="users_name" placeholder="Name"><br>
         <label>Email</label>
         <input type="email" name="users_email" placeholder="Email"><br>
-
         <button type="submit">Register</button>
 
-     </form>
+    </form>
 <hr />
-<?php  ?>
-
-    </main>
+</main>
 </body>
 </html>
