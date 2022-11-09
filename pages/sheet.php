@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
 </head>
+
 <body>
     <header>
         <h1>IMSLP</h1>
@@ -20,11 +22,10 @@
         </nav>
     </header>
     <main>
-    <script src="../scripts/opensheetmusicdisplay.min.js"></script>
-    <div id="osmdCanvas" />
-    <input type="file" id="files" />
-    <output id="list"></output>
-    <script src="../scripts/fileSelectAndLoadOSMD.js"></script>
-</main>
+        <script src="../scripts/opensheetmusicdisplay.min.js"></script>
+        <div id="osmdCanvas"></div>
+        <script src="../scripts/loadMusicXML.js"></script>
+    </main>
 </body>
+
 </html>
