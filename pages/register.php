@@ -30,9 +30,11 @@
             $getName = $_POST['users_name'];
             $getEmail = $_POST['users_email'];
 
-            $query = "INSERT INTO `imslp_users` (`users_ID`, `users_username`, `users_password`, `users_name`, `users_email`,           `users_permissions`) VALUES (1, '$getUsername', '$getPassword', '$getName','$getEmail',0)";
+            $query = "INSERT INTO `imslp_users` (`users_ID`, `users_username`, `users_password`, `users_name`, `users_email`,`users_permissions`) VALUES (NULL, '$getUsername', '$getPassword', '$getName','$getEmail',0)";
             $result = $conn->query($query);
-            header('Location:../index.php');
+            echo '<p>account made, log in now</p>';
+            include './login.php';
+            exit();
         }
     }
     ?>
@@ -48,7 +50,6 @@
         <label>Email</label>
         <input type="email" name="users_email" placeholder="Email"><br>
         <button type="submit">Register</button>
-
     </form>
 <hr />
 </main>

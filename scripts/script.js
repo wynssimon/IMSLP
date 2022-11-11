@@ -1,6 +1,6 @@
-const buttons = document.querySelectorAll('.btn');
+//const buttons = document.querySelectorAll('.btn');
 const sheets = document.querySelectorAll('.filterDiv');
-const checkbox = document.querySelectorAll('.check');
+/*const checkbox = document.querySelectorAll('.check');
 
 checkbox.forEach((btn) =>
   btn.addEventListener('change', (e) => {
@@ -10,7 +10,7 @@ checkbox.forEach((btn) =>
 );
 
 /*Hieronder wordt de classlist active toegevoegd aan de button als erop geklikt wordt en wordt de functie filterSelection gestart*/
-buttons.forEach((btn) =>
+/*buttons.forEach((btn) =>
   btn.addEventListener('click', (e) => {
     e.target.classList.toggle('active');
     filterSelection();
@@ -18,15 +18,15 @@ buttons.forEach((btn) =>
 );
 
 /*...om een array terug te keren aangezien querySelectorAll geen array weergeeft.*/
-function filterSelection() {
+/*function filterSelection() {
   const filters = [...document.querySelectorAll('.btn.active')].map(
     (el) => el.dataset.filter,
   );
   sheets.forEach((c) => {
     /*Als bv classic al verborgen is EN ENKEL EN ALLEEN ALS OOK de desbetreffende datafilter wordt geselecteerd dan wordt de naam van de filter (bv Classic) toegevoegd als class (vandaar het puntje ervoor) filter.join('.')  zet gewoon een puntje voor de elementen van filters (dus classic, rennaisance,...)*/
-    if (filters.length === 0 || c.matches(`.${filters.join('.')}`)) {
+/*if (filters.length === 0 || c.matches(`.${filters.join('.')}`)) {
       /*dan wordt de hidden class verwijderd dus wordt de div zichtbaar*/
-      c.classList.remove('hidden');
+/*     c.classList.remove('hidden');
     } else {
       c.classList.add('hidden');
     }
@@ -36,7 +36,7 @@ function filterSelection() {
   const noResultElement = document.getElementById('noResult');
 
   /*als al de totale hoeveelheid componisten gelijk is aan de totale hoeveelheid verborgen componisten dan wordt de classlist 'hidden' verwijderd waardoor "no results" zichtbaar wordt*/
-  if (sheets.length === hiddensheets.length) {
+/*  if (sheets.length === hiddensheets.length) {
     noResultElement.classList.remove('hidden');
   } else {
     noResultElement.classList.add('hidden');
@@ -62,7 +62,7 @@ function filterSelection2() {
   } else {
     noResultElement.classList.add('hidden');
   }
-}
+}*/
 //searchbar
 function liveSearch() {
   let search_query = document.getElementById('myInput').value;
@@ -81,3 +81,25 @@ function liveSearch() {
 }
 
 document.getElementById('myInput').oninput = liveSearch;
+
+//buttons filter
+let knop = document.querySelectorAll('.btn');
+
+knop.forEach((btn) =>
+  btn.addEventListener('click', (e) => {
+    e.target.classList.toggle('active');
+    liveSearch2();
+  }),
+);
+function liveSearch2() {
+  let button = document.getElementById('btn').value;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].textContent.toLowerCase().includes(button.toLowerCase())) {
+      sheets[i].classList.remove('is-hidden');
+    } else {
+      sheets[i].classList.add('is-hidden');
+    }
+  }
+}
+
+document.getElementById('btn').oninput = liveSearch2;

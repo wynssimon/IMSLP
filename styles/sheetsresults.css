@@ -152,10 +152,6 @@
   margin: 2%;
   transition: 1s;
 }
-.btn:hover {
-  background-color: #2a6496;
-  color: white;
-}
 .btn.active {
   background-color: #2a6496;
   color: white;

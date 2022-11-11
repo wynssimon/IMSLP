@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2022 at 10:16 PM
+-- Generation Time: Nov 10, 2022 at 03:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -37,6 +37,13 @@ CREATE TABLE `imslp_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `imslp_users`
+--
+
+INSERT INTO `imslp_users` (`users_ID`, `users_username`, `users_password`, `users_name`, `users_email`, `users_permissions`) VALUES
+(1, 'Simonwyns', '123456789', 'simon wyns', 'wynssimonw@gmail.com', 0);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -54,7 +61,7 @@ ALTER TABLE `imslp_users`
 -- AUTO_INCREMENT for table `imslp_users`
 --
 ALTER TABLE `imslp_users`
-  MODIFY `users_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `users_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

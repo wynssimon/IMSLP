@@ -15,44 +15,45 @@
     <nav>
         <a href="../index.php">Home</a>
         <a href="subscription.php">Subscription</a>
-        <a href="login.php">Login</a>
+        <?php if (
+            isset($_SESSION['users_ID']) &&
+            isset($_SESSION['users_username'])
+        ) {
+            echo "<a href='myaccount.php'>My Account</a>";
+        } else {
+            echo "<a href='login.php'>Login</a>";
+        } ?>
         <a href="about.php">About</a>
     </nav>
 </header>
 <main>
 <?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include './config.php';
+?>
+<?php
 include 'config.php';
-
 if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
     $users_username = $_POST['users_username'];
     $users_password = $_POST['users_password'];
-
     if (empty($users_username)) {
         $error = 'Incorect User name or password';
     } elseif (empty($users_password)) {
         $error = 'Incorect User name or password';
     } else {
-        $query = "SELECT * FROM imslp_users WHERE users_username='$users_username' AND users_password='$users_password'";
-
+        $query = "SELECT `users_username`, `users_password` FROM imslp_users WHERE users_username='$users_username' AND users_password='$users_password'";
         $result = mysqli_query($conn, $query);
-
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-
             if (
                 $row['users_username'] === $users_username &&
                 $row['users_password'] === $users_password
             ) {
-                echo 'Logged in!';
-
                 $_SESSION['users_username'] = $row['users_username'];
-
-                $_SESSION['users_name'] = $row['users_name'];
-
-                $_SESSION['users_ID'] = $row['users_ID'];
-
-                //header('Location: index.php');
-
+                echo $_SESSION['users_username'] . ' Logged in!';
+                header('Location: ../index.php');
                 exit();
             } else {
                 $error = 'Incorect User name or password';
@@ -61,10 +62,9 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
             $error = 'Incorect User name or password';
         }
     }
-} else {
 }
 ?>
-<form action="index.php" method="post">
+<form action="../index.php" method="post">
         <h2>LOGIN</h2>
 
         <?php if (isset($error)) { ?>
@@ -83,9 +83,7 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
 
         <button type="submit">Login</button>
         <a href="register.php">Registreren</a>
-
-     </form>
-<hr />
+</form>
 <?php  ?>
 
 </main>
