@@ -1,3 +1,9 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include './config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +33,7 @@
     </nav>
 </header>
 <main>
-<?php
-session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-include './config.php';
-?>
+
 <?php
 include 'config.php';
 if (isset($_POST['users_username']) && isset($_POST['users_password'])) {

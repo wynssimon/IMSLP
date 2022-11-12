@@ -13,10 +13,10 @@
   <body>
     <header>
     <?php
-    session_start();
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
     include './pages/config.php';
+    session_start();
     ?>
       <h1>IMSLP</h1>
       <nav>
@@ -38,7 +38,7 @@
       <div id="filters">
         <div id="myBtnContainer">
           <p class="titeltje">Genre</p>
-          <input value="Barok" type="button" class="btn" id="btn"></input>
+          <input value="Baroque" type="button" class="btn" id="btn"></input>
           <input value="Classic" type="button" class="btn" id="btn"></input>
           <input value="Rennaisance" type="button" class="btn" id="btn"></input>
           <input value="Romantic" type="button" class="btn" id="btn"></input>
@@ -81,6 +81,8 @@
         </div>
       </div>
       <div class="container" id="myUL">
+      <a href='./pages/upload.php?action=add'>INSERT NEW WINE</a>
+
       <?php
       $query = 'SELECT * FROM `imslp_sheets` WHERE 1';
       $result = $conn->query($query);
