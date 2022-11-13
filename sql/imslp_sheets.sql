@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 04:34 PM
+-- Generation Time: Nov 13, 2022 at 04:03 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -28,23 +28,38 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `imslp_sheets` (
+  `sheets_ID` int(255) NOT NULL,
   `sheets_title` varchar(255) NOT NULL,
   `sheets_composer` varchar(255) NOT NULL,
   `sheets_genre` varchar(255) NOT NULL,
-  `sheets_instrument` varchar(255) NOT NULL,
+  `sheets_instrument1` varchar(255) NOT NULL,
   `sheets_instrument2` varchar(255) NOT NULL,
   `sheets_instrument3` varchar(255) NOT NULL,
-  `sheets_difficulty` varchar(255) NOT NULL,
-  `sheets_file` varchar(255) NOT NULL,
-  `sheets_pdf` varchar(255) NOT NULL
+  `sheets_instrument4` varchar(255) NOT NULL,
+  `sheets_instrument5` varchar(255) NOT NULL,
+  `sheets_img` varchar(255) NOT NULL,
+  `sheets_xml` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `imslp_sheets`
+-- Indexes for dumped tables
 --
 
-INSERT INTO `imslp_sheets` (`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument`, `sheets_instrument2`, `sheets_instrument3`, `sheets_difficulty`, `sheets_file`, `sheets_pdf`) VALUES
-('Band Of Brothers', 'Michael Kamen', 'Movies', 'Accordion', '', '', '1', '', '');
+--
+-- Indexes for table `imslp_sheets`
+--
+ALTER TABLE `imslp_sheets`
+  ADD PRIMARY KEY (`sheets_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `imslp_sheets`
+--
+ALTER TABLE `imslp_sheets`
+  MODIFY `sheets_ID` int(255) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

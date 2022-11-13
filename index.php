@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (isset($_GET['success'])) {
+    echo 'You are now logged in';
+} elseif (isset($_GET['logout'])) {
+    session_destroy();
+} elseif (isset($_GET['invalid'])) {
+    echo 'Invalid username or password';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,46 +22,70 @@
     <title>IMSLP</title>
   </head>
   <body>
-    <header>
     <?php
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
     include './pages/config.php';
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] === 'logout') {
+            include './pages/logout.php';
+        }
+    }
     session_start();
     ?>
-      <h1>IMSLP</h1>
-      <nav>
-        <a href="index.php">Home</a>
-        <a href="pages/subscription.php">Subscription</a>
-        <?php if (
-            isset($_SESSION['username']) &&
-            !empty($_SESSION['username'])
-        ) { ?>
-        <a href="logout.php">Logout</a>
-        <?php } else { ?>
-        <a href="pages/login.php">Login</a>
-        <?php } ?>
-        <a href="pages/about.php">About</a>
-        <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />
-      </nav>
-    </header>
     <main>
+    <header>
+        <h1>IMSLP</h1>
+        <nav>        
+            <a href="index.php">Home</a>
+            <a href="pages/subscription.php">Subscription</a>
+            <?php if (
+                isset($_SESSION['users_ID']) &&
+                isset($_SESSION['users_username'])
+            ) { ?>
+            <a href='./pages/logout.php?action=logout'>Logout</a>
+            <a href='./pages/upload.php?action=add'>Insert</a>
+            <?php } else { ?>
+            <a href="pages/login.php">Login</a>
+            <?php } ?>
+            <a href="pages/about.php">About</a>
+            <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />
+        </nav>
+      </header>
+      <?php if (
+          isset($_SESSION['users_ID']) &&
+          isset($_SESSION['users_username'])
+      ) {
+          echo 'Hey ' . $_SESSION['users_username'];
+      } else {
+          echo 'hoi je bent niet ingelogd';
+      } ?>
       <div id="filters">
         <div id="myBtnContainer">
           <p class="titeltje">Genre</p>
-          <input value="Baroque" type="button" class="btn" id="btn"></input>
-          <input value="Classic" type="button" class="btn" id="btn"></input>
-          <input value="Rennaisance" type="button" class="btn" id="btn"></input>
-          <input value="Romantic" type="button" class="btn" id="btn"></input>
-          <input value="Movies" type="button" class="btn" id="btn"></input>
+          <?php
+          $query = 'SELECT * FROM `imslp_genre` WHERE 1';
+          $result = $conn->query($query);
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  $thisGenre = $row['imslp_genre'];
+                  echo "<input type='button' class='btn' id='btn' value='$thisGenre'/>";
+              }
+          }
+          ?>
         </div>
         <div id="myBtnContainer">
-          <p class="titeltje">Composer</p>
-          <input value="Di Lasso" type="button" class="btn" id="btn"></input>
-          <input value="Bach" type="button" class="btn" id="btn"></input>
-          <input value="Vivaldi" type="button" class="btn" id="btn"></input>
-          <input value="Schubert" type="button" class="btn" id="btn"></input>
-          <input value="Tchaikovsky" type="button" class="btn" id="btn"></input>
+          <p class="titeltje">Genre</p>
+          <?php
+          $query = 'SELECT * FROM `imslp_composers` WHERE 1';
+          $result = $conn->query($query);
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  $thisComposer = $row['imslp_composers'];
+                  echo "<input type='button' class='btn' id='btn' value='$thisComposer'/>";
+              }
+          }
+          ?>
         </div>
         <div>
           <p class="titeltje">Instruments</p>
@@ -81,18 +116,15 @@
         </div>
       </div>
       <div class="container" id="myUL">
-      <a href='./pages/upload.php?action=add'>INSERT NEW WINE</a>
-
       <?php
       $query = 'SELECT * FROM `imslp_sheets` WHERE 1';
       $result = $conn->query($query);
       if ($result->num_rows > 0) {
-          // output data of each row
           while ($row = $result->fetch_assoc()) {
               $thisTitle = $row['sheets_title'];
               $thisComposer = $row['sheets_composer'];
               $thisGenre = $row['sheets_genre'];
-              $thisInstrument = $row['sheets_instrument'];
+              $thisInstrument = $row['sheets_instrument1'];
               $thisInstrument2 = $row['sheets_instrument2'];
               echo "
                 <div class='filterDiv'>

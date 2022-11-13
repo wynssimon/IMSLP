@@ -1,6 +1,11 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include './config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +22,15 @@
         <nav>
             <a href="../index.php">Home</a>
             <a href="subscription.php">Subscription</a>
-            <a href="login.php">Login</a>
-            <a href="about.php">About</a>
+            <?php if (
+                isset($_SESSION['users_ID']) &&
+                isset($_SESSION['users_username'])
+            ) { ?>
+            <a href='./logout.php?action=logout'>Logout</a>
+            <a href='./upload.php?action=add'>Insert</a>
+            <?php } else { ?>
+            <a href="./login.php">Login</a>
+            <?php } ?>            <a href="about.php">About</a>
         </nav>
     </header>
     <main>

@@ -24,18 +24,19 @@ include './config.php';
         <?php if (
             isset($_SESSION['users_ID']) &&
             isset($_SESSION['users_username'])
-        ) {
-            echo "<a href='myaccount.php'>My Account</a>";
-        } else {
-            echo "<a href='login.php'>Login</a>";
-        } ?>
+        ) { ?>
+        <a href='./logout.php?action=logout'>Logout</a>
+        <a href='./upload.php?action=add'>Insert</a>
+        <?php } else { ?>
+        <a href="./login.php">Login</a>
+        <?php } ?>
         <a href="about.php">About</a>
     </nav>
 </header>
 <main>
 
 <?php
-include 'config.php';
+include './config.php';
 if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
     $users_username = $_POST['users_username'];
     $users_password = $_POST['users_password'];
@@ -67,26 +68,16 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
 ?>
 <form action="../index.php" method="post">
         <h2>LOGIN</h2>
-
         <?php if (isset($error)) { ?>
-
             <p class="error"><?php echo $error; ?></p>
-
         <?php } ?>
-
         <label>User Name</label>
-
         <input type="text" name="users_username" placeholder="User Name"><br>
-
         <label>Password</label>
-
         <input type="password" name="users_password" placeholder="Password"><br>
-
         <button type="submit">Login</button>
         <a href="register.php">Registreren</a>
 </form>
-<?php  ?>
-
 </main>
 </body>
 </html>
