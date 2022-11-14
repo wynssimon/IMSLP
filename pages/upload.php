@@ -47,7 +47,7 @@ include 'config.php';
           <input type="hidden" name="action" value="insert">  
          <?php
          $query =
-             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2` FROM `imslp_sheets` WHERE 1';
+             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`, `sheets_img` FROM `imslp_sheets` WHERE 1';
          $result = $conn->query($query);
          if ($result->num_rows > 0) {
              while ($row = $result->fetch_assoc()) {
@@ -56,9 +56,13 @@ include 'config.php';
                  $thisGenre = $row['sheets_genre'];
                  $thisInstrument1 = $row['sheets_instrument1'];
                  $thisInstrument2 = $row['sheets_instrument2'];
+                 $thisInstrument3 = $row['sheets_instrument3'];
+                 $thisInstrument4 = $row['sheets_instrument4'];
+                 $thisInstrument5 = $row['sheets_instrument5'];
+                 $thisImgSheet = $row['sheets_img'];
                  echo "
                 <div>
-                    <p>$thisComposer - $thisTitle - $thisGenre - $thisInstrument1, $thisInstrument2</p>
+                    <p>$thisComposer - $thisTitle - $thisGenre - $thisInstrument1 $thisInstrument2 $thisInstrument3 $thisInstrument4 $thisInstrument5 $thisImgSheet</p>
                 </div>
               ";
              }
@@ -69,6 +73,13 @@ include 'config.php';
           <input type='text' name='genre' class='textInput' placeholder='genre'>
           <input type='text' name='instrument1' class='textInput' placeholder='instrument1'>
           <input type='text' name='instrument2' class='textInput' placeholder='instrument2'>
+          <input type='text' name='instrument3' class='textInput' placeholder='instrument3'>
+          <input type='text' name='instrument4' class='textInput' placeholder='instrument4'>
+          <input type='text' name='instrument5' class='textInput' placeholder='instrument5'>
+          <label for="pngSheet">Image PNG file</label>
+          <input type="file" name='pngSheet' accept='.png'><br>
+          <label for="xmlSheet">Music XML file</label>
+          <input type="file" name='xmlSheet' accept='.musicxml'><br>
           <input type='submit' name='submit' value='Add'>
         </form>
       </div>
@@ -82,7 +93,12 @@ include 'config.php';
              $getGenre = $_POST['genre'];
              $getInstrument1 = $_POST['instrument1'];
              $getInstrument2 = $_POST['instrument2'];
-             $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2')";
+             $getInstrument3 = $_POST['instrument3'];
+             $getInstrument4 = $_POST['instrument4'];
+             $getInstrument5 = $_POST['instrument5'];
+             $getImgSheet = $_POST['pngSheet'];
+             $getSheet = $_POST['xmlSheet'];
+             $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`, `sheets_img`,`sheets_xml`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5', '$getImgSheet','$getSheet')";
              $result = $conn->query($query);
          }
      }

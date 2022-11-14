@@ -117,44 +117,52 @@ if (isset($_GET['success'])) {
       </div>
       <div class="container" id="myUL">
       <?php
-      $query = 'SELECT * FROM `imslp_sheets` WHERE 1';
+      $query = 'SELECT * FROM `imslp_sheets`';
       $result = $conn->query($query);
       if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
+
               $thisTitle = $row['sheets_title'];
               $thisComposer = $row['sheets_composer'];
               $thisGenre = $row['sheets_genre'];
-              $thisInstrument = $row['sheets_instrument1'];
+              $thisInstrument1 = $row['sheets_instrument1'];
               $thisInstrument2 = $row['sheets_instrument2'];
-              echo "
+              $thisInstrument3 = $row['sheets_instrument3'];
+              $thisInstrument4 = $row['sheets_instrument4'];
+              $thisInstrument5 = $row['sheets_instrument5'];
+              $thisArrangement = $row['sheets_arrangement'];
+              $thisDifficulty = $row['sheets_difficulty'];
+              isset($_SESSION['sheet_img']);
+              ?>
                 <div class='filterDiv'>
                   <div class='titel'>
-                    <h2>$thisComposer - $thisTitle</h2>
+                    <h2><?php echo "$thisComposer - $thisTitle"; ?></h2>
                   </div>
                   <div class='genre'>
                     <h3>Genre</h3>
-                    <p>$thisGenre</p>
+                    <p><?php echo "$thisGenre"; ?></p>
                   </div>
                   <div class='instruments'>
                     <h3>Instruments</h3>
-                    <p>$thisInstrument</p>
-                    <p>$thisInstrument2</p>
+                    <p><?php echo "$thisInstrument1"; ?></p>
+                    <p><?php echo "$thisInstrument2"; ?></p>
                   </div>
                   <div class='arrangement'>
                     <h3>Arrangement</h3>
-                    <p>Original song</p>
+                    <p><?php echo "$thisArrangement"; ?></p>
                   </div>
                   <div class='difficulty'>
                     <h3>Difficulty</h3>
-                    <p>...</p>
+                    <p><?php echo "$thisDifficulty"; ?></p>
                   </div>
                   <div class='naarsheet'>
                     <a href='./pages/sheet.php'><button>Naar sheet</button></a>
                   </div>
                   <div class='sheet'>
-                    <img src='./img/scottish.png' alt=''>
+                    <img src="images/ <?php.
+                  $_SESSION['sheets_img'] . ?>"></img>
                   </div>
-                </div>";
+                </div><?php
           }
       }
       ?>
