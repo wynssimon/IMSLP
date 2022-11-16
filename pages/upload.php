@@ -13,38 +13,37 @@ include 'config.php';
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/about.css" />
-    <title>IMSLP</title>
+    <link rel="stylesheet" href="../styles/upload.css" />
+    <title>Sheetly</title>
   </head>
   <body>
-    <header>
-      <h1>IMSLP</h1>
-      <nav>
-          <a href="../index.php">Home</a>
-          <a href="subscription.php">Subscription</a>
-          <?php if (
-              isset($_SESSION['users_ID']) &&
-              isset($_SESSION['users_username'])
-          ) { ?>
-            <a href='./logout.php?action=logout'>Logout</a>
-            <a href='./upload.php?action=add'>Insert</a>
-            <?php } else { ?>
-            <a href="./login.php">Login</a>
-            <?php } ?>          <a href="about.php">About</a>
-      </nav>
-    </header>
+  <?php include '../includes/header.php'; ?>
     <main>
      <?php
-     if (isset($_GET['action']) and $_GET['action'] == 'add') {
-         if (
-             isset($_SESSION['users_ID']) &&
-             isset($_SESSION['users_username'])
-         ) {
-             echo ' Hey ' . $_SESSION['users_username'];
-         } ?>    
+     if (isset($_GET['action']) and $_GET['action'] == 'add') { ?>    
       <div>
          <form method='post' action='upload.php?action=add'>
+          <h2>Add new songs</h2>
           <input type="hidden" name="action" value="insert">  
+          <input type='text' name='title' class='textInput' placeholder='song title'>
+          <input type='text' name='composer' class='textInput' placeholder='composer'>
+          <input type='text' name='genre' class='textInput' placeholder='genre'>
+          <input type='text' name='instrument1' class='textInput' placeholder='instrument1'>
+          <input type='text' name='instrument2' class='textInput' placeholder='instrument2'>
+          <input type='text' name='instrument3' class='textInput' placeholder='instrument3'>
+          <input type='text' name='instrument4' class='textInput' placeholder='instrument4'>
+          <input type='text' name='instrument5' class='textInput' placeholder='instrument5'>
+          <div>
+            <label for="pngSheet">Image PNG file</label>
+            <input type="file" name='pngSheet' accept='.png'>
+          </div>
+          <div>
+            <label for="xmlSheet">Music XML file</label>
+            <input type="file" name='xmlSheet' accept='.musicxml'>
+          </div>
+          <input type='submit' name='submit' value='Add'>
+        </form>
+      </div>
          <?php
          $query =
              'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`, `sheets_img` FROM `imslp_sheets` WHERE 1';
@@ -59,33 +58,27 @@ include 'config.php';
                  $thisInstrument3 = $row['sheets_instrument3'];
                  $thisInstrument4 = $row['sheets_instrument4'];
                  $thisInstrument5 = $row['sheets_instrument5'];
-                 $thisImgSheet = $row['sheets_img'];
+                 $thisSheet = $row['sheets_img'];
                  echo "
-                <div>
-                    <p>$thisComposer - $thisTitle - $thisGenre - $thisInstrument1 $thisInstrument2 $thisInstrument3 $thisInstrument4 $thisInstrument5 $thisImgSheet</p>
+                <div class='inhoud'>
+                    <p>Composer</p>
+                    <p>Title</p>
+                    <p>Genre</p>
+                    <p>Instruments</p>
+                    <p>png</p>
+                    <p>$thisComposer </p>
+                    <p>$thisTitle</p>
+                    <p>$thisGenre</p>
+                    <p>$thisInstrument1 $thisInstrument2 $thisInstrument3 $thisInstrument4 $thisInstrument5 </p>
+                    <img class='sheetImg' src='../img/$thisSheet'></img>
                 </div>
               ";
              }
          }
          ?>  
-          <input type='text' name='title' class='textInput' placeholder='song title'>
-          <input type='text' name='composer' class='textInput' placeholder='composer'>
-          <input type='text' name='genre' class='textInput' placeholder='genre'>
-          <input type='text' name='instrument1' class='textInput' placeholder='instrument1'>
-          <input type='text' name='instrument2' class='textInput' placeholder='instrument2'>
-          <input type='text' name='instrument3' class='textInput' placeholder='instrument3'>
-          <input type='text' name='instrument4' class='textInput' placeholder='instrument4'>
-          <input type='text' name='instrument5' class='textInput' placeholder='instrument5'>
-          <label for="pngSheet">Image PNG file</label>
-          <input type="file" name='pngSheet' accept='.png'><br>
-          <label for="xmlSheet">Music XML file</label>
-          <input type="file" name='xmlSheet' accept='.musicxml'><br>
-          <input type='submit' name='submit' value='Add'>
-        </form>
-      </div>
 
-    <?php
-     }
+
+    <?php }
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          if ($_POST['action'] == 'insert') {
              $getTitle = $_POST['title'];

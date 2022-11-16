@@ -1,40 +1,19 @@
 <?php
-session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-include './config.php';
-?>
+session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sheetly</title>
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
 </head>
 <body>
-<header>
-    <h1>IMSLP</h1>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="subscription.php">Subscription</a>
-        <?php if (
-            isset($_SESSION['users_ID']) &&
-            isset($_SESSION['users_username'])
-        ) { ?>
-        <a href='./logout.php?action=logout'>Logout</a>
-        <a href='./upload.php?action=add'>Insert</a>
-        <?php } else { ?>
-        <a href="./login.php">Login</a>
-        <?php } ?>
-        <a href="about.php">About</a>
-    </nav>
-</header>
+<?php include '../includes/header.php'; ?>
 <main>
-
 <?php
 include './config.php';
 if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
@@ -45,7 +24,7 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
     } elseif (empty($users_password)) {
         $error = 'Incorect User name or password';
     } else {
-        $query = "SELECT `users_username`, `users_password` FROM imslp_users WHERE users_username='$users_username' AND users_password='$users_password'";
+        $query = "SELECT `users_username`, `users_password`, `users_permissions` FROM imslp_users WHERE users_username='$users_username' AND users_password='$users_password'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
@@ -54,9 +33,10 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
                 $row['users_password'] === $users_password
             ) {
                 $_SESSION['users_username'] = $row['users_username'];
+                $_SESSION['users_permissions'] = $row['users_permissions'];
                 echo $_SESSION['users_username'] . ' Logged in!';
-                header('Location: ../index.php');
-                exit();
+                header('Location: ../index.php?' . $row['users_username']);
+                //exit();
             } else {
                 $error = 'Incorect User name or password';
             }
@@ -66,7 +46,7 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
     }
 }
 ?>
-<form action="../index.php" method="post">
+<form action="login.php" method="post">
         <h2>LOGIN</h2>
         <?php if (isset($error)) { ?>
             <p class="error"><?php echo $error; ?></p>

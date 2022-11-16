@@ -17,7 +17,6 @@ header h1 {
   font-size: 42px;
   color: #fff;
   line-height: 130px;
-  text-transform: uppercase;
   font-weight: 100;
 }
 header nav {
@@ -34,4 +33,11 @@ header nav a {
   padding: 10px 15px;
   line-height: 1;
   text-decoration: none;
+}
+.myaccount {
+  text-decoration: none;
+  color: white;
+  float: right;
+  margin-right: 2.5%;
+  margin-top: -5%;
 }

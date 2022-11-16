@@ -1,13 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include 'pages/config.php';
 session_start();
-
-if (isset($_GET['success'])) {
-    echo 'You are now logged in';
-} elseif (isset($_GET['logout'])) {
-    session_destroy();
-} elseif (isset($_GET['invalid'])) {
-    echo 'Invalid username or password';
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,47 +14,18 @@ if (isset($_GET['success'])) {
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/sheetsresults.css" />
-    <title>IMSLP</title>
+    <title>Sheetly</title>
   </head>
   <body>
-    <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
-    include './pages/config.php';
-    if (isset($_GET['action'])) {
-        if ($_GET['action'] === 'logout') {
-            include './pages/logout.php';
-        }
-    }
-    session_start();
-    ?>
     <main>
-    <header>
-        <h1>IMSLP</h1>
-        <nav>        
-            <a href="index.php">Home</a>
-            <a href="pages/subscription.php">Subscription</a>
-            <?php if (
-                isset($_SESSION['users_ID']) &&
-                isset($_SESSION['users_username'])
-            ) { ?>
-            <a href='./pages/logout.php?action=logout'>Logout</a>
-            <a href='./pages/upload.php?action=add'>Insert</a>
-            <?php } else { ?>
-            <a href="pages/login.php">Login</a>
-            <?php } ?>
-            <a href="pages/about.php">About</a>
-            <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />
-        </nav>
-      </header>
-      <?php if (
-          isset($_SESSION['users_ID']) &&
-          isset($_SESSION['users_username'])
-      ) {
-          echo 'Hey ' . $_SESSION['users_username'];
-      } else {
-          echo 'hoi je bent niet ingelogd';
-      } ?>
+<?php
+include 'includes/headerHome.php';
+if (isset($_SESSION['users_username'])) {
+    echo 'Hey ' . $_SESSION['users_username'];
+} else {
+    echo 'hoi je bent niet ingelogd';
+}
+?>
       <div id="filters">
         <div id="myBtnContainer">
           <p class="titeltje">Genre</p>
@@ -75,7 +41,7 @@ if (isset($_GET['success'])) {
           ?>
         </div>
         <div id="myBtnContainer">
-          <p class="titeltje">Genre</p>
+          <p class="titeltje">Composer</p>
           <?php
           $query = 'SELECT * FROM `imslp_composers` WHERE 1';
           $result = $conn->query($query);
@@ -132,7 +98,7 @@ if (isset($_GET['success'])) {
               $thisInstrument5 = $row['sheets_instrument5'];
               $thisArrangement = $row['sheets_arrangement'];
               $thisDifficulty = $row['sheets_difficulty'];
-              isset($_SESSION['sheet_img']);
+              $thisSheet = $row['sheets_img'];
               ?>
                 <div class='filterDiv'>
                   <div class='titel'>
@@ -159,8 +125,7 @@ if (isset($_GET['success'])) {
                     <a href='./pages/sheet.php'><button>Naar sheet</button></a>
                   </div>
                   <div class='sheet'>
-                    <img src="images/ <?php.
-                  $_SESSION['sheets_img'] . ?>"></img>
+                    <img src="img/<?php echo "$thisSheet"; ?>"></img>
                   </div>
                 </div><?php
           }

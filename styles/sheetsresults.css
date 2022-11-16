@@ -92,7 +92,6 @@
   display: grid;
   grid-template-columns: 1fr;
   position: absolute;
-  z-index: -1;
 }
 .show {
   display: block;

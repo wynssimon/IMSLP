@@ -1,8 +1,8 @@
 <?php
-session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-include './config.php';
+include 'pages/config.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,26 +14,10 @@ include './config.php';
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/subscription.css" />
-    <title>IMSLP</title>
+    <title>Sheetly</title>
   </head>
   <body>
-    <header>
-      <h1>IMSLP</h1>
-      <nav>
-          <a href="../index.php">Home</a>
-          <a href="subscription.php">Subscription</a>
-          <?php if (
-              isset($_SESSION['users_ID']) &&
-              isset($_SESSION['users_username'])
-          ) { ?>
-            <a href='./logout.php?action=logout'>Logout</a>
-            <a href='./upload.php?action=add'>Insert</a>
-            <?php } else { ?>
-            <a href="./login.php">Login</a>
-            <?php } ?>
-          <a href="about.php">About</a>
-      </nav>
-    </header>
+  <?php include '../includes/header.php'; ?>
     <main>
       <h2>Subscribe!</h2>
       <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want</p>

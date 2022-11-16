@@ -14,26 +14,11 @@ include './config.php';
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/about.css" />
-    <title>IMSLP</title>
+    <title>Sheetly</title>
   </head>
   <body>
-    <header>
-      <h1>IMSLP</h1>
-      <nav>
-          <a href="../index.php">Home</a>
-          <a href="subscription.php">Subscription</a>
-          <?php if (
-              isset($_SESSION['users_ID']) &&
-              isset($_SESSION['users_username'])
-          ) { ?>
-            <a href='./logout.php?action=logout'>Logout</a>
-            <a href='./upload.php?action=add'>Insert</a>
-            <?php } else { ?>
-            <a href="./login.php">Login</a>
-            <?php } ?>
-          <a href="about.php">About</a>
-      </nav>
-    </header>
+  <?php include '../includes/header.php'; ?>
+
     <main>
       <h2>About</h2>
       <p>IMSLP is the biggest music library in the world. With sheets from the biggest universities in the world we try to make your music experience even better, every day again.</p>

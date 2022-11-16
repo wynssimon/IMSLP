@@ -10,22 +10,18 @@ include './config.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sheet</title>
+    <title>Sheetly</title>
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
 </head>
-
 <body>
     <header>
-        <h1>IMSLP</h1>
+        <h1>Sheetly</h1>
         <nav>
             <a href="../index.php">Home</a>
             <a href="subscription.php">Subscription</a>
-            <?php if (
-                isset($_SESSION['users_ID']) &&
-                isset($_SESSION['users_username'])
-            ) { ?>
+            <?php if (isset($_SESSION['users_username'])) { ?>
             <a href='./logout.php?action=logout'>Logout</a>
             <a href='./upload.php?action=add'>Insert</a>
             <?php } else { ?>

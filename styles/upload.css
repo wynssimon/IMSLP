@@ -1,0 +1,25 @@
+.sheetImg {
+  width: 25%;
+}
+.inhoud {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin: 1%;
+  border: 1px solid grey;
+  padding: 1%;
+}
+form {
+  display: grid;
+  width: 25%;
+  grid-gap: 2%;
+  margin: auto;
+  margin-bottom: 5%;
+  margin-top: 3%;
+}
+h2 {
+  font-size: 2rem;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  text-align: center;
+}
