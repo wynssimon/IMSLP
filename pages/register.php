@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
+include 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +13,13 @@ session_start();
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/form.css" />
     <title>Sheetly</title>
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
- <main>
-    <?php
-    include 'config.php';
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+ <main class="main">
+    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['action'] == 'register') {
             $getUsername = $_POST['users_username'];
             $getPassword = $_POST['users_password'];
@@ -30,19 +30,26 @@ session_start();
             $result = $conn->query($query);
             echo '<p>account made, log in now</p>';
         }
-    }
-    ?>
-    <form class="registreer" action="../index.php" method="post" enctype="multipart/form-data">
+    } ?>
+    <form class="registreer" action="login.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="register">
         <h2>REGISTER</h2>
-        <label>User Name</label>
-        <input type="text" name="users_username" placeholder="User Name"><br>
-        <label>Password</label>
-        <input type="password" name="users_password" placeholder="Password"><br>
-        <label>Name</label>
-        <input type="text" name="users_name" placeholder="Name"><br>
-        <label>Email</label>
-        <input type="email" name="users_email" placeholder="Email"><br>
+        <div>
+            <label>User Name</label>
+            <input type="text" name="users_username" placeholder="User Name"><br>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="users_password" placeholder="Password"><br>
+        </div>
+        <div>
+            <label>Name</label>
+            <input type="text" name="users_name" placeholder="Name"><br>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email" name="users_email" placeholder="Email"><br>
+        </div>
         <button type="submit">Register</button>
     </form>
 </main>

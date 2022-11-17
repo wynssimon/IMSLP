@@ -10,10 +10,11 @@ session_start(); ?>
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/form.css" />
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
-<main>
+<main class="main">
 <?php
 include './config.php';
 if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
@@ -36,7 +37,6 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
                 $_SESSION['users_permissions'] = $row['users_permissions'];
                 echo $_SESSION['users_username'] . ' Logged in!';
                 header('Location: ../index.php?' . $row['users_username']);
-                //exit();
             } else {
                 $error = 'Incorect User name or password';
             }
@@ -51,12 +51,18 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
         <?php if (isset($error)) { ?>
             <p class="error"><?php echo $error; ?></p>
         <?php } ?>
-        <label>User Name</label>
-        <input type="text" name="users_username" placeholder="User Name"><br>
-        <label>Password</label>
-        <input type="password" name="users_password" placeholder="Password"><br>
-        <button type="submit">Login</button>
-        <a href="register.php">Registreren</a>
+        <div>
+            <label>User Name</label>
+            <input type="text" name="users_username" placeholder="User Name"><br>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="users_password" placeholder="Password"><br>
+        </div>
+        <div class="logreg">
+            <button type="submit">Login</button>
+            <a href="register.php">Registreren</a>
+        </div>
 </form>
 </main>
 </body>

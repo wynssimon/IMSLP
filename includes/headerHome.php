@@ -3,18 +3,17 @@
         <?php if (isset($_SESSION['users_username'])) { ?>
             <a class='myaccount' href='pages/myaccount.php'>My account</a>
             <?php } ?>
-        <nav>        
+        <nav> 
             <a href="index.php">Home</a>
             <a href="pages/subscription.php">Subscription</a>
+            <a href="pages/about.php">About</a>
             <?php if (isset($_SESSION['users_username'])) { ?>
             <a href='pages/logout.php?action=logout'>Logout</a>
             <?php } else { ?>
             <a href="pages/login.php">Login</a>
             <?php } ?>
-            <a href="pages/about.php">About</a>
-            <?php if (isset($_SESSION['users_permissions']) === '3') { ?>
+            <?php if ($_SESSION['users_permissions'] == '3') { ?>
                 <a href='pages/upload.php?action=add'>Insert</a>
             <?php } ?>
-            <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />
         </nav>
       </header>

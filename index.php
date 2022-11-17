@@ -17,6 +17,7 @@ session_start();
     <title>Sheetly</title>
   </head>
   <body>
+    <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />       
     <main>
 <?php
 include 'includes/headerHome.php';

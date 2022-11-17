@@ -1,0 +1,32 @@
+form {
+  width: 90%;
+  padding: 0 3% 0 3%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+form h2 {
+  text-align: center;
+  margin-bottom: 2%;
+}
+form label {
+  position: absolute;
+}
+form button {
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 2%;
+}
+form div {
+  width: 100%;
+  margin: 1% 0 1% 5%;
+}
+input {
+  width: 70%;
+  margin-left: 10%;
+}
+.logreg {
+  margin-left: 0;
+}

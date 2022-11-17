@@ -88,7 +88,6 @@
   overflow: hidden;
   width: 80%;
   margin-left: 20%;
-  margin-top: 2%;
   display: grid;
   grid-template-columns: 1fr;
   position: absolute;
@@ -108,7 +107,6 @@
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
   margin-left: 3%;
-  margin-top: 2%;
   background-color: lightgrey;
   width: 20%;
   height: 60vh;
@@ -117,8 +115,9 @@
 }
 #myInput {
   width: 30%;
-  margin: 0.5% 0 0 5%;
-  position: absolute;
+  margin-left: 35%;
+  margin-top: 13%;
+  position: relative;
   z-index: 10;
   padding: 10px;
   border: 1px solid grey;
@@ -140,7 +139,6 @@
   border: 2px solid red;
   font-size: 2rem;
 }
-/* Style the buttons */
 .btn {
   border: none;
   outline: none;

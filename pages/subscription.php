@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-include 'pages/config.php';
+include 'config.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ session_start();
   </head>
   <body>
   <?php include '../includes/header.php'; ?>
-    <main>
+    <main class="main">
       <h2>Subscribe!</h2>
       <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want</p>
       <div class="subscribe">

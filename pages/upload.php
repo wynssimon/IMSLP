@@ -18,7 +18,7 @@ include 'config.php';
   </head>
   <body>
   <?php include '../includes/header.php'; ?>
-    <main>
+    <main class="main">
      <?php
      if (isset($_GET['action']) and $_GET['action'] == 'add') { ?>    
       <div>

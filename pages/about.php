@@ -18,8 +18,7 @@ include './config.php';
   </head>
   <body>
   <?php include '../includes/header.php'; ?>
-
-    <main>
+    <main class="main">
       <h2>About</h2>
       <p>IMSLP is the biggest music library in the world. With sheets from the biggest universities in the world we try to make your music experience even better, every day again.</p>
     </main>
