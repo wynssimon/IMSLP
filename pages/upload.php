@@ -91,6 +91,10 @@ include 'config.php';
              $getInstrument5 = $_POST['instrument5'];
              $getImgSheet = $_POST['pngSheet'];
              $getSheet = $_POST['xmlSheet'];
+
+             $move = '../img/';
+             move_uploaded_file($_POST['pngSheet']['tmp_name'], $move);
+
              $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`, `sheets_img`,`sheets_xml`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5', '$getImgSheet','$getSheet')";
              $result = $conn->query($query);
          }
