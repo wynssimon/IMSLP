@@ -14,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/subscription.css" />
+    <link rel="stylesheet" href="../styles/text.css" />
     <title>Sheetly</title>
   </head>
   <body>

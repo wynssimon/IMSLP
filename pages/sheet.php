@@ -14,44 +14,34 @@ include './config.php';
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/sheet.css" />
 </head>
 <body>
-    <header>
-        <h1>Sheetly</h1>
-        <nav>
-            <a href="../index.php">Home</a>
-            <a href="subscription.php">Subscription</a>
-            <?php if (isset($_SESSION['users_username'])) { ?>
-            <a href='./logout.php?action=logout'>Logout</a>
-            <a href='./upload.php?action=add'>Insert</a>
-            <?php } else { ?>
-            <a href="./login.php">Login</a>
-            <?php } ?>            <a href="about.php">About</a>
-        </nav>
-    </header>
+    <?php include '../includes/headerSheet.php'; ?>
     <main>
-    <?php
-    $query = 'SELECT `sheets_xml` FROM `imslp_sheets`';
-    $result = $conn->query($query);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $thisXmlSheet = $row['sheets_xml'];
+        <?php
+        $query = 'SELECT `sheets_xml` FROM `imslp_sheets`';
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $thisXmlSheet = $row['sheets_xml'];
+            }
         }
-    }
-    ?>
+        ?>
         <script src="../scripts/opensheetmusicdisplay.min.js"></script>
-            <div id="osmdCanvas"></div>
-            <script >
+        <div id="osmdCanvas"></div>
+        <script >
                 var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay('osmdCanvas');
-                    osmd.setOptions({
-                    backend: 'svg',
-                    drawTitle: true,
-                    });
+                osmd.setOptions({
+                backend: 'svg',
+                drawTitle: true,
+                });
 
-                osmd.load('../xml/<?php echo $thisXmlSheet; ?>').then(function () {
+                osmd.load('../xml/Band_Of_Brothers.musicxml').then(function () {
                 osmd.render();
                 });
-            </script>
+
+        </script>
     </main>
 </body>
 

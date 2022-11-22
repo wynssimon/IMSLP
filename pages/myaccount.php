@@ -13,6 +13,7 @@ session_start();
         <link rel="stylesheet" href="../styles/reset.css" />
         <link rel="stylesheet" href="../styles/header.css" />
         <link rel="stylesheet" href="../styles/main.css" />
+        <link rel="stylesheet" href="../styles/text.css" />
         <link rel="stylesheet" href="../styles/myaccount.css" />
         <title>
             <?php echo 'Profile ' . $_SESSION['users_name']; ?>

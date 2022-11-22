@@ -1,4 +1,4 @@
-<header>
+<header class="headerSheet">
         <h1>Sheetly</h1>
         <?php if (isset($_SESSION['users_username'])) { ?>
             <a class='myaccount' href='../pages/myaccount.php'>My account</a>
@@ -17,5 +17,5 @@
             <?php } ?>
 
         </nav>
-      </header>
+</header>
 

@@ -1,5 +1,18 @@
-const sheets = document.querySelectorAll('.filterDiv');
+const sheets = document.querySelectorAll('.shop-card');
 
+//dropdown
+function myFunction() {
+  document.getElementById('myDropdown').classList.toggle('show');
+}
+function myFunction1() {
+  document.getElementById('myDropdown').classList.toggle('hide');
+}
+function myFunction2() {
+  document.getElementById('myDropdown1').classList.toggle('show');
+}
+function myFunction3() {
+  document.getElementById('myDropdown1').classList.toggle('hide');
+}
 //searchbar
 function liveSearch() {
   let search_query = document.getElementById('myInput').value;
