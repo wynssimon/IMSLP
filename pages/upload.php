@@ -23,7 +23,7 @@ include 'config.php';
      <?php
      if (isset($_GET['action']) and $_GET['action'] == 'add') { ?>    
       <div>
-         <form method='post' action='upload.php?action=add'>
+         <form method='post' action='upload.php?action=add' enctype="multipart/form-data">
           <h2>Add new songs</h2>
           <input type="hidden" name="action" value="insert">  
           <input type='text' name='title' class='textInput' placeholder='song title'>
@@ -34,6 +34,7 @@ include 'config.php';
           <input type='text' name='instrument3' class='textInput' placeholder='instrument3'>
           <input type='text' name='instrument4' class='textInput' placeholder='instrument4'>
           <input type='text' name='instrument5' class='textInput' placeholder='instrument5'>
+          <input type='text' name='difficulty' class='textInput' placeholder='difficulty'>
           <div>
             <label for="pngSheet">Image PNG file</label>
             <input type="file" name='pngSheet' accept='.png'>
@@ -45,9 +46,15 @@ include 'config.php';
           <input type='submit' name='submit' value='Add'>
         </form>
       </div>
+      <div class='inhoud'>
+                    <p>Composer</p>
+                    <p>Title</p>
+                    <p>Genre</p>
+                    <p>Instruments</p>
+                    <p>png</p>
          <?php
          $query =
-             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`, `sheets_img` FROM `imslp_sheets` WHERE 1';
+             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`,`sheets_difficulty`, `sheets_img` FROM `imslp_sheets` WHERE 1';
          $result = $conn->query($query);
          if ($result->num_rows > 0) {
              while ($row = $result->fetch_assoc()) {
@@ -59,26 +66,22 @@ include 'config.php';
                  $thisInstrument3 = $row['sheets_instrument3'];
                  $thisInstrument4 = $row['sheets_instrument4'];
                  $thisInstrument5 = $row['sheets_instrument5'];
+                 $thisDifficulty = $row['sheets_difficulty'];
                  $thisSheet = $row['sheets_img'];
                  echo "
-                <div class='inhoud'>
-                    <p>Composer</p>
-                    <p>Title</p>
-                    <p>Genre</p>
-                    <p>Instruments</p>
-                    <p>png</p>
+                
                     <p>$thisComposer </p>
                     <p>$thisTitle</p>
                     <p>$thisGenre</p>
+                    <p>$thisDifficulty</p>
                     <p>$thisInstrument1 $thisInstrument2 $thisInstrument3 $thisInstrument4 $thisInstrument5 </p>
                     <img class='sheetImg' src='../img/$thisSheet'></img>
-                </div>
+                
               ";
              }
          }
          ?>  
-
-
+</div>
     <?php }
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          if ($_POST['action'] == 'insert') {
@@ -90,14 +93,26 @@ include 'config.php';
              $getInstrument3 = $_POST['instrument3'];
              $getInstrument4 = $_POST['instrument4'];
              $getInstrument5 = $_POST['instrument5'];
-             $getImgSheet = $_POST['pngSheet'];
-             $getSheet = $_POST['xmlSheet'];
+             $getDifficulty = $_POST['difficulty'];
+             $getImgSheet = $_FILES['pngSheet']['name'];
+             $location = '../img/' . $getImgSheet;
+             $getSheet = $_FILES['xmlSheet']['name'];
+             $location2 = '../xml/' . $getSheet;
 
-             $move = '../img/';
-             move_uploaded_file($_POST['pngSheet']['tmp_name'], $move);
-
-             $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`, `sheets_img`,`sheets_xml`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5', '$getImgSheet','$getSheet')";
-             $result = $conn->query($query);
+             if (
+                 move_uploaded_file(
+                     $_FILES['pngSheet']['tmp_name'],
+                     $location
+                 ) and
+                 move_uploaded_file($_FILES['xmlSheet']['tmp_name'], $location2)
+             ) {
+                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`,`sheets_difficulty`, `sheets_img`,`sheets_xml`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5','$getDifficulty', '$getImgSheet','$getSheet')";
+                 $result = $conn->query($query);
+                 echo 'gelukt';
+             } else {
+                 echo "Error uploading file<br>\n";
+                 echo 'Error : ' . $_FILES['pngSheet']['error'] . '<br>';
+             }
          }
      }
      ?>    

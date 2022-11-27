@@ -17,5 +17,5 @@
             <?php } ?>
 
         </nav>
-      </header>
+</header>
 

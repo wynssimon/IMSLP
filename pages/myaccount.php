@@ -38,7 +38,7 @@ session_start();
                 ]; ?>">
             </p>
             <p>Password:
-                <input type="text" value="<?php echo $_SESSION[
+                <input type="password" value="<?php echo $_SESSION[
                     'users_password'
                 ]; ?>">
             </p>

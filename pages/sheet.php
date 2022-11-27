@@ -30,17 +30,20 @@ include './config.php';
         ?>
         <script src="../scripts/opensheetmusicdisplay.min.js"></script>
         <div id="osmdCanvas"></div>
-        <script >
+        <script >    
+                var url_string = window.location.href; 
+                var url = new URL(url_string);
+                var sheet = url.searchParams.get("sheet");
+
                 var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay('osmdCanvas');
                 osmd.setOptions({
                 backend: 'svg',
                 drawTitle: true,
                 });
 
-                osmd.load('../xml/Band_Of_Brothers.musicxml').then(function () {
+                osmd.load('../xml/' + sheet).then(function () {
                 osmd.render();
-                });
-
+                });       
         </script>
     </main>
 </body>

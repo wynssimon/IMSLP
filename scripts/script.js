@@ -13,6 +13,12 @@ function myFunction2() {
 function myFunction3() {
   document.getElementById('myDropdown1').classList.toggle('hide');
 }
+function myFunction4() {
+  document.getElementById('myDropdown2').classList.toggle('show');
+}
+function myFunction5() {
+  document.getElementById('myDropdown2').classList.toggle('hide');
+}
 //searchbar
 function liveSearch() {
   let search_query = document.getElementById('myInput').value;
@@ -48,5 +54,19 @@ function liveSearch2(button) {
     } else {
       sheets[i].classList.add('is-hidden');
     }
+  }
+}
+
+let btn2 = document.querySelectorAll('#all');
+
+btn2.forEach((btn) =>
+  btn.addEventListener('click', (e) => {
+    e.target.classList.toggle('active');
+    liveSearch3(e.target.value);
+  }),
+);
+function liveSearch3(button) {
+  for (var i = 0; i < sheets.length; i++) {
+    sheets[i].classList.remove('is-hidden');
   }
 }

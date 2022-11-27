@@ -2,7 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
-include 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,36 +19,53 @@ include 'config.php';
 <body>
 <?php include '../includes/header.php'; ?>
  <main class="main">
-    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    <?php
+    include 'config.php';
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['action'] == 'register') {
             $getUsername = $_POST['users_username'];
             $getPassword = $_POST['users_password'];
             $getName = $_POST['users_name'];
             $getEmail = $_POST['users_email'];
 
-            $query = "INSERT INTO `imslp_users` (`users_ID`, `users_username`, `users_password`, `users_name`, `users_email`,`users_permissions`) VALUES (NULL, '$getUsername', '$getPassword', '$getName','$getEmail',0)";
-            $result = $conn->query($query);
-            echo '<p>account made, log in now</p>';
+            $check_email = mysqli_query(
+                $conn,
+                "SELECT users_email FROM imslp_users where users_email = '$getEmail' "
+            );
+            $check_username = mysqli_query(
+                $conn,
+                "SELECT users_username FROM imslp_users where users_username = '$getUsername' "
+            );
+            if (
+                mysqli_num_rows($check_email) > 0
+            ) { ?><script>alert("User with this email already exists")</script><?php } elseif (
+                mysqli_num_rows($check_username) > 0
+            ) { ?><script>alert("User with this username already exists")</script><?php } else {$query = "INSERT INTO `imslp_users` (`users_ID`, `users_username`, `users_password`, `users_name`, `users_email`,`users_permissions`) VALUES (NULL, '$getUsername', '$getPassword', '$getName','$getEmail',0)";
+                $result = $conn->query($query);
+                echo '<p>account made, log in now</p>';
+                header('location: login.php');}
         }
-    } ?>
-    <form class="registreer" action="login.php" method="post" enctype="multipart/form-data">
+    }
+    ?>
+    <form class="registreer" action="register.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="register">
         <h2>REGISTER</h2>
         <div>
             <label>User Name</label>
-            <input type="text" name="users_username" placeholder="User Name"><br>
+            <input type="text" name="users_username" placeholder="User Name" required><br>
         </div>
         <div>
             <label>Password</label>
-            <input type="password" name="users_password" placeholder="Password"><br>
+            <input type="password" name="users_password" placeholder="Password" required><br>
         </div>
         <div>
             <label>Name</label>
-            <input type="text" name="users_name" placeholder="Name"><br>
+            <input type="text" name="users_name" placeholder="Name" required><br>
         </div>
         <div>
             <label>Email</label>
-            <input type="email" name="users_email" placeholder="Email"><br>
+            <input type="email" name="users_email" placeholder="Email" required><br>
         </div>
         <button type="submit">Register</button>
     </form>

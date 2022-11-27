@@ -3,18 +3,19 @@
 }
 #myInput {
   width: 30%;
-  margin-left: 35%;
+  margin-left: 15%;
+  margin-right: 1rem;
   margin-top: 13%;
   position: relative;
-  z-index: 10;
   padding: 10px;
   border: 1px solid grey;
   background: #f1f1f1;
+  height: 40px;
 }
 
 .products-container {
   min-height: 300px;
-  margin-left: 20px;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
 }
@@ -22,15 +23,21 @@
 .shop-card {
   margin: 10px;
   width: 350px;
-  height: 500px;
+  height: 310px;
   background: #f5f5f5;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   padding: 20px;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
+  transition: 1s;
 }
-
+.shop-card:hover {
+  cursor: pointer;
+}
+.shop-card:hover > .desc {
+  display: none;
+}
 .shop-card .title {
   font-weight: 900;
   text-transform: uppercase;
@@ -38,20 +45,39 @@
   color: #23211f;
   margin-bottom: 5px;
 }
-
+.shop-card .title .ondertitel {
+  font-size: 20px;
+}
 .shop-card .desc {
   font-size: 15px;
   opacity: 0.8;
-  margin-bottom: 3px;
   color: #23211f;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
-
+.shop-card .desc div {
+  width: 310px;
+}
+.shop-card .desc .solsleutel {
+  width: 15%;
+}
+.shop-card .desc .instrument {
+  width: 30%;
+}
+.onzichtbaar {
+  position: absolute;
+  color: transparent;
+}
 .product {
   margin: 10px 0;
 }
 
 .product img {
   width: 100%;
+  /*display: none;*/
+  object-fit: contain;
 }
 
 .dropbtn {
@@ -62,6 +88,10 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  margin-right: 1rem;
+}
+#filters {
+  margin-bottom: 1%;
 }
 
 .dropdown {
