@@ -37,7 +37,24 @@ session_start();
                 $conn,
                 "SELECT users_username FROM imslp_users where users_username = '$getUsername' "
             );
+            $uppercase = preg_match('@[A-Z]@', $getPassword);
+            $lowercase = preg_match('@[a-z]@', $getPassword);
+            $number = preg_match('@[0-9]@', $getPassword);
+            $specialChars = preg_match('@[^\w]@', $getPassword);
+
             if (
+                !$uppercase ||
+                !$lowercase ||
+                !$number ||
+                !$specialChars ||
+                strlen($getPassword) < 8
+            ) {
+                echo 'Password should have: <br> 
+                - 8 characters <br>
+                - one upper case letter <br>
+                - one number <br>
+                - one special character.';
+            } elseif (
                 mysqli_num_rows($check_email) > 0
             ) { ?><script>alert("User with this email already exists")</script><?php } elseif (
                 mysqli_num_rows($check_username) > 0

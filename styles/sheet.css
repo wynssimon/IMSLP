@@ -1,3 +1,6 @@
 .headerSheet {
   position: relative;
 }
+#osmdCanvas {
+  max-width: 99%;
+}

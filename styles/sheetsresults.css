@@ -36,7 +36,12 @@
   cursor: pointer;
 }
 .shop-card:hover > .desc {
-  display: none;
+  /*display: none;*/
+  opacity: 1%;
+}
+.shop-card:hover > .product img {
+  transform: scale(1.1);
+  margin-top: 5%;
 }
 .shop-card .title {
   font-weight: 900;
@@ -56,6 +61,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  transition: 1s;
 }
 .shop-card .desc div {
   width: 310px;
@@ -78,17 +84,18 @@
   width: 100%;
   /*display: none;*/
   object-fit: contain;
+  transition: 1s;
 }
 
 .dropbtn {
   background-color: #2a6496;
   color: white;
-  padding: 16px;
   font-size: 16px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  margin-right: 1rem;
+  margin: auto;
+  padding: 12px 16px 12px 16px;
 }
 #filters {
   margin-bottom: 1%;
@@ -97,6 +104,7 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-right: 1%;
 }
 
 .dropdown-content {
@@ -106,6 +114,7 @@
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 1;
+  width: 100%;
 }
 
 .dropdown-content input {
@@ -115,6 +124,7 @@
   display: block;
   border: none;
   width: 100%;
+  border-bottom: 1px solid #2a6496;
 }
 
 .dropdown input:hover {
@@ -126,4 +136,7 @@
 }
 .hide {
   display: none;
+}
+.active {
+  background-color: #2a6496;
 }
