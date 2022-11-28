@@ -47,5 +47,5 @@ include './config.php';
         </script>
     </main>
 </body>
-
+<script src="../scripts/fullscreen.js"></script>
 </html>

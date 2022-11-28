@@ -12,12 +12,13 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/sheetsresults.css" />
+    <link rel="stylesheet" href="styles/main.css" />
     <title>Sheetly</title>
   </head>
   <body>
     <?php include 'includes/headerHome.php'; ?>
+    <main class="main">
     <div id="filters">
       <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
       <div class="dropdown">
@@ -69,7 +70,6 @@ session_start();
         </div>
       </div>  
     </div>
-    <main>
       <div class='products-container'>
       <?php
       $query = 'SELECT * FROM `imslp_sheets`';
@@ -162,7 +162,7 @@ session_start();
       }
       ?>
     </div>
+    <script src="scripts/script.js"></script>
     </main>    
-  <script src="scripts/script.js"></script>
   </body>
 </html>

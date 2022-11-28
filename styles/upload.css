@@ -1,19 +1,41 @@
 .sheetImg {
   width: 25%;
+  margin: auto;
 }
 .inhoud {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  margin: 1%;
+  margin: 12px 1% 0 1%;
   border: 1px solid grey;
   padding: 1%;
 }
+h3 {
+  text-align: center;
+  text-decoration: underline;
+  font-weight: bold;
+}
 form {
   display: grid;
-  width: 25%;
-  grid-gap: 2%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  width: 80%;
   margin: auto;
-  margin-bottom: 5%;
-  margin-top: 3%;
+  position: relative;
+  gap: 5px;
+  border: 1px solid grey;
+  padding: 20px;
+}
+form h2 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+form input {
+  height: 25px;
+}
+form .submit {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  width: 50%;
+  margin: auto;
 }
