@@ -26,7 +26,7 @@ session_start();
             <h1>
                 <?php echo 'Hey ' . $_SESSION['users_name']; ?>
             </h1>
-            <p>Here you can change your profile.</p>
+            <p>Here you can change your password.</p>
             <p>Username:
                 <input type="text" value="<?php echo $_SESSION[
                     'users_username'

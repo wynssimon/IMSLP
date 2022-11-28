@@ -7,3 +7,10 @@ button {
   justify-content: center;
   gap: 2rem;
 }
+.links {
+  text-decoration: none;
+  text-align: center;
+}
+.main {
+  text-align: center;
+}
