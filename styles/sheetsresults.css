@@ -82,7 +82,6 @@
 
 .product img {
   width: 100%;
-  /*display: none;*/
   object-fit: contain;
   transition: 1s;
 }
@@ -112,9 +111,9 @@
   position: absolute;
   background-color: #f6f6f6;
   overflow: auto;
-  border: 1px solid #ddd;
   z-index: 1;
   width: 100%;
+  text-align: center;
 }
 
 .dropdown-content input {
@@ -125,6 +124,7 @@
   border: none;
   width: 100%;
   border-bottom: 1px solid #2a6496;
+  z-index: 10;
 }
 
 .dropdown input:hover {

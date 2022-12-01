@@ -24,56 +24,75 @@ session_start();
         <div class="dropdown">
           <button onclick="myFunction()" class="dropbtn">Genre</button>
           <div id="myDropdown" class="dropdown-content">
-            <input type="button" id='all' value='All'>
-            <?php
-            $query = 'SELECT * FROM `imslp_genre` WHERE 1';
-            $result = $conn->query($query);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $thisGenre = $row['imslp_genre'];
-                    echo "<input type='button' id='btn' value='$thisGenre'/>";
-                }
-            }
-            ?>
+          <form method="post">
+              <input type='submit' id='all' name='all' value='All'/>
+              <?php
+              $query = 'SELECT * FROM `imslp_genre` WHERE 1';
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      $thisGenre = $row['genre'];
+                      echo "<input type='submit' id='btn' name='genre' value='$thisGenre'/>";
+                  }
+              }
+              ?>
+          </form>
           </div>
         </div>
         <div class="dropdown">
           <button onclick="myFunction2()" class="dropbtn">Composer</button>
           <div id="myDropdown1" class="dropdown-content">
-            <input type="button" id='all' value='All'>
-            <?php
-            $query = 'SELECT * FROM `imslp_composers` WHERE 1';
-            $result = $conn->query($query);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $thisComposer = $row['imslp_composers'];
-                    echo "<input type='button' id='btn' value='$thisComposer'/>";
-                }
-            }
-            ?>
+          <form method="post">
+              <input type='submit' id='all' name='all' value='All'/>
+              <?php
+              $query = 'SELECT * FROM `imslp_composers` WHERE 1';
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      $thisComposer = $row['composers'];
+                      echo "<input type='submit' id='btn' name='composer' value='$thisComposer'/>";
+                  }
+              }
+              ?>
+          </form>
           </div>
         </div>   
         <div class="dropdown">
-          <button onclick="myFunction4()" class="dropbtn">Instruments</button>
+          <button onclick="myFunction4()" class="dropbtn">Instrument</button>
           <div id="myDropdown2" class="dropdown-content">
-            <input type="button" id='all' value='All'>
-            <?php
-            $query = 'SELECT * FROM `imslp_instruments` WHERE 1';
-            $result = $conn->query($query);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $thisInstrument = $row['imslp_instruments'];
-                    echo "<input type='button' id='btn' value='$thisInstrument'/>";
-                }
-            }
-            ?>
+            <form method="post">
+              <input type='submit' id='all' name='all' value='All'/>
+              <?php
+              $query = 'SELECT * FROM `imslp_instruments` WHERE 1';
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      $thisInstrument = $row['instruments'];
+                      echo "<input type='submit' id='btn' name='instrument' value='$thisInstrument'/>";
+                  }
+              }
+              ?>
+          </form>
           </div>
         </div>  
       </div>
         <div class='products-container'>
         <?php
-        $query = 'SELECT * FROM `imslp_sheets`';
+        $query = 'SELECT * FROM `imslp_sheets` ';
+        if (isset($_POST['instrument'])) {
+            $instrumentButton = $_POST['instrument'];
+            $query = "SELECT * FROM `imslp_sheets` WHERE sheets_instrument1 = '$instrumentButton' || sheets_instrument2 = '$instrumentButton'";
+        }
+        if (isset($_POST['composer'])) {
+            $composerButton = $_POST['composer'];
+            $query = "SELECT * FROM `imslp_sheets` WHERE sheets_composer='$composerButton'  ";
+        }
+        if (isset($_POST['genre'])) {
+            $genreButton = $_POST['genre'];
+            $query = "SELECT * FROM `imslp_sheets` WHERE sheets_genre='$genreButton'  ";
+        }
         $result = $conn->query($query);
+
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
 
@@ -113,9 +132,12 @@ session_start();
                           echo "<img class='instrument' src='img/saxophone.png'>";
                       } elseif ($thisInstrument1 == 'Trumpet') {
                           echo "<img class='instrument' src='img/trumpet.png'>";
+                      } elseif ($thisInstrument1 == 'Flute') {
+                          echo "<img class='instrument' src='img/flute.png'>";
+                      } elseif ($thisInstrument1 == 'Guitar') {
+                          echo "<img class='instrument' src='img/guitar.png'>";
                       } ?>
-                      <?php
-                      if ($thisInstrument2 == 'Accordion') {
+                      <?php if ($thisInstrument2 == 'Accordion') {
                           echo "<img class='instrument' src='img/accordeon.png'>";
                       } elseif ($thisInstrument2 == 'Violin') {
                           echo "<img class='instrument' src='img/violin.png'>";
@@ -125,10 +147,11 @@ session_start();
                           echo "<img class='instrument' src='img/saxophone.png'>";
                       } elseif ($thisInstrument2 == 'Trumpet') {
                           echo "<img class='instrument' src='img/trumpet.png'>";
-                      }
-                      echo "<p class='onzichtbaar'>$thisInstrument1$thisInstrument2</p>";
-                      ?>
-                      
+                      } elseif ($thisInstrument2 == 'Flute') {
+                          echo "<img class='instrument' src='img/flute.png'>";
+                      } elseif ($thisInstrument2 == 'Guitar') {
+                          echo "<img class='instrument' src='img/guitar.png'>";
+                      } ?>       
                     </div>
                     <div>
                       <?php echo "$thisArrangement"; ?>
@@ -157,6 +180,7 @@ session_start();
                   </div>
 
                 </div>
+
         <?php
             }
         }

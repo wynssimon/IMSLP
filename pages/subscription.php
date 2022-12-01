@@ -19,8 +19,9 @@ session_start();
   </head>
   <body>
   <?php include '../includes/header.php'; ?>
-    <main class="main">
-      <?php if ($_SESSION['users_permissions'] == '1') { ?>
+    <main class="main">   
+    <?php if (isset($_SESSION['users_username'])) {
+        if ($_SESSION['users_permissions'] == '1') { ?>
         <p>You have a subscription for one month, enjoy your premium Sheetly days!</p>
         <?php } elseif ($_SESSION['users_permissions'] == '2') { ?>
         <p>You have a subscription for one year, enjoy your premium Sheetly days!</p>
@@ -30,14 +31,18 @@ session_start();
         <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want.</p>
       <div class="subscribe">
         <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=W77KRHZ4HH84J"><button>Subscribe for one month</button></a>    
-        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A"><button>Subscribe for one year</button></a>    
+        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A"><button>Subscribe for one year</button></a>
       </div>
-      <?php } else { ?>
+    <?php } ?>  
+<?php
+    } else {
+         ?>
         <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want. <br>Log in or register so that you can take your subscription right now.</p>
         <a class="links" href="./login.php">Log in</a>
         <a class="links" href="./register.php">Register</a>
         <p>Sheetly is a free accessible platform for everyone. To continue to exist we need the money from the subscriptions to reimburse our expenses.</p>
-        <?php } ?>
+        <?php
+    } ?>
 
     </main>
   </body>

@@ -39,7 +39,7 @@ function liveSearch() {
 document.getElementById('myInput').oninput = liveSearch;
 
 //buttons filter
-let knop = document.querySelectorAll('#btn');
+/*let knop = document.querySelectorAll('#btn');
 
 knop.forEach((btn) =>
   btn.addEventListener('click', (e) => {
@@ -70,3 +70,4 @@ function liveSearch3(button) {
     sheets[i].classList.remove('is-hidden');
   }
 }
+*/
