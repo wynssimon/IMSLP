@@ -23,7 +23,7 @@ session_start();
     $_SESSION['users_ID'];
     ?>
     <main class="main">
-        <p>Confirm your subscription for one month</p>
+        <p>Confirm your subscription for one month. After that logout and log back in to activate your subscription.</p>
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['action'] == 'update') {
                 $thisPermissions = $_POST['permissie'];

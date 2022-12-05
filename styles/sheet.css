@@ -7,7 +7,15 @@
 .headerSheet {
   position: relative;
 }
-
+.details {
+  position: absolute;
+  z-index: 10;
+}
+.tekst {
+  text-align: center;
+  z-index: 10;
+  margin-top: 2%;
+}
 /*fullscreen maken*/
 :fullscreen .headerSheet {
   display: none;

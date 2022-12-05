@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-include 'pages/config.php';
+include './pages/config.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -14,12 +14,34 @@ session_start();
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/sheetsresults.css" />
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="effetest.css" />
     <title>Sheetly</title>
   </head>
-  <body>
-    <?php include 'includes/headerHome.php'; ?>
+  <body>   
+  <script src="effetest.js"></script>
+  <div id="header">Header</div>
+
     <main class="main">
-        <?php  ?>
+        <form action="#" method="post">
+            <input type="checkbox" name="check_list[]" value="Piano"><label>Piano</label><br/>
+            <input type="checkbox" name="check_list[]" value="Accordion"><label>Accordion</label><br/>
+            <input type="checkbox" name="check_list[]" value="Violin"><label>Violin</label><br/>
+            <input type="submit" name="submit" value="Submit"/>
+        </form>
+        <?php if (isset($_POST['submit'])) {
+            if ($_POST['check_list']) {
+                foreach ($_POST['check_list'] as $selected) {
+                    echo $selected . '</br>';
+                }
+            }
+            if ($selected == 'Accordion') {
+                echo 'hoooooi';
+
+                if (!empty($genre)) {
+                    $query .= " AND `sheets_genre` = '$genre'";
+                }
+            }
+        } ?>
         <form id="filters" method="post">
             <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
             <select name="genre">
@@ -68,48 +90,17 @@ session_start();
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $thisArrangement = $row['arrangement'];
+                        $thisArrangement = $row['composers'];
                         echo "<option value='$thisArrangement'>$thisArrangement</option>";
-                    }
-                }
-                ?>
-            </select>
-            <select name="difficulty">
-                <option value="">Difficulty</option>
-                <?php
-                $query = 'SELECT * FROM `imslp_difficulty` WHERE 1';
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $thisDifficulty = $row['difficulty'];
-                        $thisDifficultyId = $row['difficulty_ID'];
-                        echo "<option value='$thisDifficultyId'>$thisDifficulty</option>";
                     }
                 }
                 ?>
             </select>
             <button type="submit">Filter</button>
         </form>
-
-        <!-- oorspronkelijke dropdown zien of mogelijk is met de selection en options -->
-        <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Genre</button>
-        <div id="myDropdown" class="dropdown-content">
-          <input type="button" id='all' value='All'>
-          <?php
-          $query = 'SELECT * FROM `imslp_genre` WHERE 1';
-          $result = $conn->query($query);
-          if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                  $thisGenre = $row['genre'];
-                  echo "<input type='button' id='btn' value='$thisGenre'/>";
-              }
-          }
-          ?>
-        </div>
         <?php
         $query =
-            'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`,`sheets_instrument2`, `sheets_arrangement`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id` FROM `imslp_sheets`,`imslp_genre` WHERE `sheets_genre_ID`=`genre_ID`';
+            'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`,`sheets_instrument2`, `sheets_arrangement`, `sheets_difficulty`, `sheets_img`, `sheets_xml` FROM `imslp_sheets`,`imslp_genre` WHERE `sheets_genre_ID`=`genre_ID`';
         $genre = filter_input(
             INPUT_POST,
             'genre',
@@ -125,17 +116,6 @@ session_start();
             'composer',
             FILTER_SANITIZE_SPECIAL_CHARS
         );
-        $arrangement = filter_input(
-            INPUT_POST,
-            'arrangement',
-            FILTER_SANITIZE_SPECIAL_CHARS
-        );
-        $difficulty = filter_input(
-            INPUT_POST,
-            'difficulty',
-            FILTER_SANITIZE_SPECIAL_CHARS
-        );
-
         if (!empty($genre)) {
             $query .= " AND `sheets_genre` = '$genre'";
         }
@@ -146,13 +126,11 @@ session_start();
         if (!empty($composer)) {
             $query .= " AND `sheets_composer` = '$composer'";
         }
-        if (!empty($arrangement)) {
-            $query .= " AND `sheets_arrangement` = '$arrangement'";
-        }
-        if (!empty($difficulty)) {
-            $query .= " AND `sheets_difficulty` = '$difficulty'";
-        }
+        echo "$query";
         $result = $conn->query($query);
+        ?>
+        <div class='products-container'>
+        <?php
         if (!empty($genre || $instrument || $composer)) {
             echo 'Filters:<br>';
             if (!empty($genre)) {
@@ -164,16 +142,8 @@ session_start();
             if (!empty($composer)) {
                 echo "$composer";
             }
-            if (!empty($arrangement)) {
-                echo "$arrangement";
-            }
-            if (!empty($difficulty)) {
-                echo "$difficulty";
-            }
         }
-        ?>
-        <div class='products-container'>
-        <?php if ($result->num_rows > 0) {
+        if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
 
                 $thisTitle = $row['sheets_title'];
@@ -188,12 +158,11 @@ session_start();
                 $thisDifficulty = $row['sheets_difficulty'];
                 $thisSheet = $row['sheets_img'];
                 $thisSheetXml = $row['sheets_xml'];
-                $thisSheetID = $row['sheets_id'];
 
-                if (strlen($thisTitle) > 19) {
-                    $thisTitle = substr($thisTitle, 0, 19) . '...';
+                if (strlen($thisComposer) > 23) {
+                    $thisComposer = substr($thisComposer, 0, 23) . '...';
                 }
-                ?>  <div onclick="window.location='./pages/sheet.php?id=<?php echo $thisSheetID; ?>'" class='shop-card'>
+                ?>  <div onclick="window.location='./pages/sheet.php?sheet=<?php echo $thisSheetXml; ?>'" class='shop-card'>
                         <div class="title">
                             <?php echo "$thisTitle"; ?> <br> 
                             <div class="ondertitel"><?php echo "$thisComposer"; ?></div>      
@@ -220,8 +189,6 @@ session_start();
                                 echo "<img class='instrument' src='img/flute.png'>";
                             } elseif ($thisInstrument1 == 'Guitar') {
                                 echo "<img class='instrument' src='img/guitar.png'>";
-                            } elseif ($thisInstrument1 == 'Horn') {
-                                echo "<img class='instrument' src='img/french-horn.png'>";
                             } ?>
                             <?php if ($thisInstrument2 == 'Accordion') {
                                 echo "<img class='instrument' src='img/accordeon.png'>";
@@ -237,8 +204,6 @@ session_start();
                                 echo "<img class='instrument' src='img/flute.png'>";
                             } elseif ($thisInstrument2 == 'Guitar') {
                                 echo "<img class='instrument' src='img/guitar.png'>";
-                            } elseif ($thisInstrument2 == 'Horn') {
-                                echo "<img class='instrument' src='img/french-horn.png'>";
                             } ?>       
                             </div>
                             <div>
@@ -269,7 +234,8 @@ session_start();
                     </div>
         <?php
             }
-        } ?>
+        }
+        ?>
         </div>
   </main>
   </body>
