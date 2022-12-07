@@ -26,7 +26,7 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
     } elseif (empty($users_password)) {
         $error = 'Incorect User name or password';
     } else {
-        $query = "SELECT `users_username`, `users_password`, `users_permissions`, `users_name`, `users_email`, `users_ID`, `users_watched` FROM imslp_users WHERE users_username='$users_username' AND users_password='$users_password'";
+        $query = "SELECT `users_username`, `users_password`, `users_permissions`, `users_name`, `users_email`, `users_ID` FROM imslp_users WHERE users_username='$users_username' AND users_password='$users_password'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
@@ -40,7 +40,6 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
                 $_SESSION['users_password'] = $row['users_password'];
                 $_SESSION['users_email'] = $row['users_email'];
                 $_SESSION['users_ID'] = $row['users_ID'];
-                $_SESSION['users_watched'] = $row['users_watched'];
                 echo $_SESSION['users_username'] . ' Logged in!';
                 header('Location: ../index.php?' . $row['users_username']);
             } else {

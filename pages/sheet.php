@@ -19,34 +19,26 @@ include './config.php';
 <body>
     <?php include '../includes/headerSheet.php'; ?>
     <main>
-        <?php if ($_SESSION['users_permissions'] == 0) {
-            if (isset($_SESSION['users_watched'])) {
-                $_SESSION['users_watched']++;
-                $result = $conn->query(
-                    "SELECT users_watched, users_ID FROM imslp_users WHERE users_ID = {$_SESSION['users_ID']}"
-                );
-                $row = $result->fetch_assoc();
-                $users_watched = $row['users_watched'];
+        <?php
+        $query = "INSERT INTO imslp_watched (id, watched_ID, watched) VALUES (NULL, {$_SESSION['users_ID']}, NOW() )";
+        $result = mysqli_query($conn, $query);
+        ?>
 
-                $users_watched++;
-                $conn->query(
-                    "UPDATE `imslp_users` SET users_watched = $users_watched WHERE users_ID = {$_SESSION['users_ID']}"
-                );
-            } else {
-                $_SESSION['users_watched'] = 1;
-            }
-            echo 'You have visited this page ' .
-                $_SESSION['users_watched'] .
-                ' times.';
-        } ?>
+        <?php
+        $currentDate = date('Y-m-d');
+        $query2 = "SELECT `watched_ID`, `watched` FROM imslp_watched WHERE watched_ID = {$_SESSION['users_ID']} && watched = '$currentDate'";
+        $result2 = mysqli_query($conn, $query2);
+        $row = mysqli_fetch_assoc($result2);
+        $watched = $row['watched'];
 
+        $query3 = "SELECT COUNT(*) FROM imslp_watched WHERE watched_ID = {$_SESSION['users_ID']} && watched = '$currentDate'";
+        $result3 = mysqli_query($conn, $query3);
+        $count = mysqli_fetch_row($result3)[0];
 
-        <?php if ($_SESSION['users_watched'] >= 6) {
+        //echo "Number of items with ID {$_SESSION['users_ID']}: $count";
+        if ($count >= 6) {
             echo '<div class="tekst"><p></p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
-        } elseif (
-            $_SESSION['users_watched'] < 6 ||
-            $_SESSION['users_watched'] == null
-        ) { ?>
+        } elseif ($count < 6 || $count == null) { ?>
             <script src="../scripts/opensheetmusicdisplay.min.js"></script>
             <div class="details">
             <?php
@@ -103,7 +95,8 @@ include './config.php';
                     osmd.render();
                     });   
             </script>
-      <?php } ?>
+      <?php }
+        ?>
      
     </main>
 </body>
