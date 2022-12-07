@@ -19,7 +19,36 @@ session_start();
   <body>
     <?php include 'includes/headerHome.php'; ?>
     <main class="main">
-        <?php  ?>
+        <?php if (isset($_SESSION['users_permissions'])) {
+            if ($_SESSION['users_permissions'] == 1) {
+                $current_date = time();
+                $one_month = 30 * 24 * 60 * 60;
+                echo $_SESSION['users_permissions_start'];
+
+                if (
+                    $current_date -
+                        strtotime($_SESSION['users_permissions_start']) >
+                    $one_month
+                ) {
+                    echo 'je bent ouder dan een maand';
+                } else {
+                }
+            } elseif ($_SESSION['users_permissions'] == 2) {
+                $elementTimestamp = strtotime(
+                    $_SESSION['users_permissions_start']
+                );
+                $currentTimestamp = time();
+                echo $_SESSION['users_permissions_start'] . "\n";
+
+                if (
+                    $currentTimestamp - $elementTimestamp >=
+                    365 * 24 * 60 * 60
+                ) {
+                    echo 'je bent ouder dan een jaar';
+                } else {
+                }
+            }
+        } ?>
         <form id="filters" method="post">
             <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
             <select name="genre">

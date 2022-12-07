@@ -20,13 +20,17 @@ include './config.php';
     <?php include '../includes/headerSheet.php'; ?>
     <main>
         
-        <?php
-        $query = "INSERT INTO imslp_watched (id, watched_ID, watched) VALUES (NULL, {$_SESSION['users_ID']}, NOW() )";
-        $result = mysqli_query($conn, $query);
-        $currentDate = date('Y-m-d');
-        $query4 = "DELETE FROM imslp_watched WHERE watched != '$currentDate'";
-        $result4 = mysqli_query($conn, $query4);
-        ?>
+        <?php if (isset($_SESSION['users_ID'])) {
+
+            echo $_SESSION['users_ID'];
+            // if ($_SESSION['users_permissions'] == 0) {
+
+            $query = "INSERT INTO imslp_watched (id, watched_ID, watched) VALUES (NULL, {$_SESSION['users_ID']}, NOW() )";
+            $result = mysqli_query($conn, $query);
+            $currentDate = date('Y-m-d');
+            $query4 = "DELETE FROM imslp_watched WHERE watched != '$currentDate'";
+            $result4 = mysqli_query($conn, $query4);
+            ?>
 
         <?php
         $currentDate = date('Y-m-d');
@@ -39,14 +43,11 @@ include './config.php';
         $result3 = mysqli_query($conn, $query3);
         $count = mysqli_fetch_row($result3)[0];
         $users_permissions = $_SESSION['users_permissions'];
+        echo 'HOOOOOOOOOOI';
 
-        //echo "Number of items with ID {$_SESSION['users_ID']}: $count";
-        if ($count >= 6 && $users_permissions < 1) {
+        if (($count >= 6) & ($users_permissions == 0)) {
             echo '<div class="tekst"><p></p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
-        } elseif (
-            ($users_permissions >= 1 && $count < 6) ||
-            $count == null
-        ) { ?>
+        } elseif ($count < 6 || $count == null || $users_permissions > 0) { ?>
             <script src="../scripts/opensheetmusicdisplay.min.js"></script>
             <div class="details">
             <?php
@@ -86,7 +87,13 @@ include './config.php';
                     }
                 }
             }
-            ?>
+            }
+
+        // }
+
+        } else {
+            echo 'make an account to watch the sheets';
+        } ?>
             </div>
             <div id="osmdCanvas"></div>
             <script >    
@@ -103,8 +110,7 @@ include './config.php';
                     osmd.render();
                     });   
             </script>
-      <?php }
-        ?>
+      <?php  ?>
      
     </main>
 </body>

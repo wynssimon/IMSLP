@@ -28,8 +28,9 @@ session_start();
             if ($_POST['action'] == 'update') {
                 $thisPermissions = $_POST['permissie'];
                 $thisUsersID = $_SESSION['users_ID'];
+                $currentDate = date('Y-m-d');
                 echo '<strong>updated your permissions. Now you can download as many sheets as you want for one year long. </strong><br>';
-                $query = "UPDATE `imslp_users`SET users_permissions='$thisPermissions' where users_ID = $thisUsersID ";
+                $query = "UPDATE `imslp_users`SET users_permissions='$thisPermissions', user_permissions_start='$currentDate' where users_ID = $thisUsersID ";
                 $result = $conn->query($query);
             }
         } ?>
