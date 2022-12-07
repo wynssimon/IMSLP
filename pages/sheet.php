@@ -19,21 +19,28 @@ include './config.php';
 <body>
     <?php include '../includes/headerSheet.php'; ?>
     <main>
-        
         <?php if ($_SESSION['users_permissions'] == 0) {
-            /* $id = $_SESSION['users_ID'];
-            $query = "SELECT * FROM imslp_users WHERE users_ID = '$id'";
-            $result = mysqli_query($conn, $query);
+            if (isset($_SESSION['users_watched'])) {
+                $_SESSION['users_watched']++;
+                $result = $conn->query(
+                    "SELECT users_watched, users_ID FROM imslp_users WHERE users_ID = {$_SESSION['users_ID']}"
+                );
+                $row = $result->fetch_assoc();
+                $users_watched = $row['users_watched'];
 
-            $sql = "UPDATE SET users_watched = users_watched+1 WHERE users_ID = $id";*/
-            $_SESSION['users_watched'] = $_SESSION['users_watched']
-                ? $_SESSION['users_watched'] + 1
-                : 1; ?>
-            <!--<h3>Watched: <?php
-            /*echo $_SESSION['users_watched']++; */
-            ?></h3>-->
-   <?php
+                $users_watched++;
+                $conn->query(
+                    "UPDATE `imslp_users` SET users_watched = $users_watched WHERE users_ID = {$_SESSION['users_ID']}"
+                );
+            } else {
+                $_SESSION['users_watched'] = 1;
+            }
+            echo 'You have visited this page ' .
+                $_SESSION['users_watched'] .
+                ' times.';
         } ?>
+
+
         <?php if ($_SESSION['users_watched'] >= 6) {
             echo '<div class="tekst"><p></p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
         } elseif (
@@ -47,7 +54,6 @@ include './config.php';
             $url_components = parse_url($url);
             parse_str($url_components['query'], $params);
             $id = $params['id'];
-            //echo $id;
 
             $query =
                 'SELECT * FROM `imslp_sheets`, `imslp_difficulty` WHERE `sheets_difficulty`=`difficulty_id`';
@@ -95,7 +101,7 @@ include './config.php';
     
                     osmd.load('../xml/' + xml).then(function () {
                     osmd.render();
-                    });       
+                    });   
             </script>
       <?php } ?>
      
