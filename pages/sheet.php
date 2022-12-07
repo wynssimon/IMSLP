@@ -38,11 +38,15 @@ include './config.php';
         $query3 = "SELECT COUNT(*) FROM imslp_watched WHERE watched_ID = {$_SESSION['users_ID']} && watched = '$currentDate'";
         $result3 = mysqli_query($conn, $query3);
         $count = mysqli_fetch_row($result3)[0];
+        $users_permissions = $_SESSION['users_permissions'];
 
         //echo "Number of items with ID {$_SESSION['users_ID']}: $count";
-        if ($count >= 6) {
+        if ($count >= 6 && $users_permissions < 1) {
             echo '<div class="tekst"><p></p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
-        } elseif ($count < 6 || $count == null) { ?>
+        } elseif (
+            ($users_permissions >= 1 && $count < 6) ||
+            $count == null
+        ) { ?>
             <script src="../scripts/opensheetmusicdisplay.min.js"></script>
             <div class="details">
             <?php
