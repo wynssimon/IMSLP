@@ -19,9 +19,13 @@ include './config.php';
 <body>
     <?php include '../includes/headerSheet.php'; ?>
     <main>
+        
         <?php
         $query = "INSERT INTO imslp_watched (id, watched_ID, watched) VALUES (NULL, {$_SESSION['users_ID']}, NOW() )";
         $result = mysqli_query($conn, $query);
+        $currentDate = date('Y-m-d');
+        $query4 = "DELETE FROM imslp_watched WHERE watched != '$currentDate'";
+        $result4 = mysqli_query($conn, $query4);
         ?>
 
         <?php
