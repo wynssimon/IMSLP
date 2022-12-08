@@ -23,6 +23,15 @@ session_start();
     $_SESSION['users_ID'];
     ?>
     <main class="main">
+    <?php if (
+        (isset($_SESSION['users_permissions']) &&
+            $_SESSION['users_permissions'] == 1) ||
+        (isset($_SESSION['users_permissions']) &&
+            $_SESSION['users_permissions'] == 2)
+    ) {
+        echo 'You already have a subscription, Come back when it expires.';
+    } else {
+         ?>
         <p>Confirm your subscription for one month. After that logout and log back in to activate your subscription.</p>
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['action'] == 'update') {
@@ -39,5 +48,7 @@ session_start();
             <input type="hidden" value="2" name="permissie">
             <input type="submit" name="submit" value="confirm">
         </form>
+        <?php
+    } ?>
     </main>
 </body>

@@ -7,3 +7,8 @@ p {
 h1 {
   margin-bottom: 2%;
 }
+
+#showpasswordbtn {
+  height: 20px;
+  cursor: pointer;
+}

@@ -23,6 +23,16 @@ session_start();
     $_SESSION['users_ID'];
     ?>
     <main class="main">
+        <?php if (
+            (isset($_SESSION['users_permissions']) &&
+                $_SESSION['users_permissions'] == 1) ||
+            (isset($_SESSION['users_permissions']) &&
+                $_SESSION['users_permissions'] == 2)
+        ) {
+            echo 'You already have a subscription, Come back when it expires.';
+        } else {
+             ?>
+        
         <p>Confirm your subscription for one month. After that logout and log back in to activate your subscription.</p>
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['action'] == 'update') {
@@ -30,7 +40,8 @@ session_start();
                 $thisUsersID = $_SESSION['users_ID'];
                 $currentDate = date('Y-m-d');
                 echo '<strong>updated your permissions. Now you can download as many sheets as you want for one month long. </strong><br>';
-                $query = "UPDATE `imslp_users`SET users_permissions='$thisPermissions', users_permissions_start='$currentDate' where users_ID = $thisUsersID ";
+
+                $query = "UPDATE `imslp_users`SET users_permissions='$thisPermissions', users_permissions_start='$currentDate' WHERE users_ID = $thisUsersID ";
                 $result = $conn->query($query);
             }
         } ?>
@@ -39,5 +50,7 @@ session_start();
             <input type="hidden" value="1" name="permissie">
             <input type="submit" name="submit" value="confirm">
         </form>
+        <?php
+        } ?>
     </main>
 </body>

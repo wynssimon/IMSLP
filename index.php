@@ -21,28 +21,24 @@ session_start();
     <main class="main">
         <?php if (isset($_SESSION['users_permissions'])) {
             if ($_SESSION['users_permissions'] == 1) {
-                $current_date = time();
-                $one_month = 30 * 24 * 60 * 60;
+                $current_date_timestamp = strtotime(date('Y-m-d'));
+                $permissions_start_timestamp = strtotime(
+                    $_SESSION['users_permissions_start']
+                );
+                $diff = $current_date_timestamp - $permissions_start_timestamp;
 
-                if (
-                    $current_date -
-                        strtotime($_SESSION['users_permissions_start']) >
-                    $one_month
-                ) {
+                if ($diff > 2592000) {
                     $query = "UPDATE imslp_users SET users_permissions = 0, users_permissions_start = DEFAULT WHERE users_ID = {$_SESSION['users_ID']}";
                     $result = mysqli_query($conn, $query);
                 } else {
                 }
             } elseif ($_SESSION['users_permissions'] == 2) {
-                $elementTimestamp = strtotime(
+                $current_date_timestamp = strtotime(date('Y-m-d'));
+                $permissions_start_timestamp = strtotime(
                     $_SESSION['users_permissions_start']
                 );
-                $currentTimestamp = time();
-
-                if (
-                    $currentTimestamp - $elementTimestamp >=
-                    365 * 24 * 60 * 60
-                ) {
+                $diff2 = $current_date_timestamp - $permissions_start_timestamp;
+                if ($diff2 > 31536000) {
                     $query = "UPDATE imslp_users SET users_permissions = 0, users_permissions_start = DEFAULT WHERE users_ID = {$_SESSION['users_ID']}";
                     $result = mysqli_query($conn, $query);
                 } else {

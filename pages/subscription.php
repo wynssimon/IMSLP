@@ -22,9 +22,33 @@ session_start();
     <main class="main">   
     <?php if (isset($_SESSION['users_username'])) {
         if ($_SESSION['users_permissions'] == '1') { ?>
-        <p>You have a subscription for one month, enjoy your premium Sheetly days!</p>
+        <?php
+        $permissionsStart = $_SESSION['users_permissions_start'];
+        $einddatum = date('Y-m-d', strtotime($permissionsStart . ' + 30 days'));
+        $new_date = date('d-m-Y', strtotime($einddatum));
+
+        $new_dateee = DateTime::createFromFormat('d-m-Y', $new_date);
+        $new_dateee_str = $new_dateee->format('d-m-Y');
+        $current_date = new DateTime();
+        $difference = $current_date->diff($new_dateee);
+        ?>
+        <p>Your subscription expires on <?php echo $new_date; ?>. Enjoy your last <?php echo $difference->days; ?> premium Sheetly days!</p>
+        
         <?php } elseif ($_SESSION['users_permissions'] == '2') { ?>
-        <p>You have a subscription for one year, enjoy your premium Sheetly days!</p>
+          <?php
+          $permissionsStart = $_SESSION['users_permissions_start'];
+          $einddatum = date(
+              'Y-m-d',
+              strtotime($permissionsStart . ' + 365 days')
+          );
+          $new_date = date('d-m-Y', strtotime($einddatum));
+
+          $new_dateee = DateTime::createFromFormat('d-m-Y', $new_date);
+          $new_dateee_str = $new_dateee->format('d-m-Y');
+          $current_date = new DateTime();
+          $difference = $current_date->diff($new_dateee);
+          ?>
+        <p>Your subscription expires on <?php echo $einddatum; ?>. Enjoy your last <?php echo $difference->days; ?> premium Sheetly days!</p>
       <?php } elseif ($_SESSION['users_permissions'] == '3') { ?>
         <p>You are an admin!!! You can download as many sheets as you want</p>
       <?php } elseif ($_SESSION['users_permissions'] == '0') { ?>
