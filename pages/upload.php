@@ -44,6 +44,10 @@ include 'config.php';
             <label for="xmlSheet">Music XML file</label>
             <input type="file" name='xmlSheet' accept='.musicxml'>
           </div>
+          <div>
+            <label for="pdfSheet">PDF file</label>
+            <input type="file" name='pdfSheet' accept='.pdf'>
+          </div>
           <input type='submit' name='submit' value='Add' class="submit">
         </form>
       </div>
@@ -104,15 +108,36 @@ include 'config.php';
              $location = '../img/' . $getImgSheet;
              $getSheet = $_FILES['xmlSheet']['name'];
              $location2 = '../xml/' . $getSheet;
+             $getPdfSheet = $_FILES['pdfSheet']['name'];
+             $location3 = '../pdf/' . $getPdfSheet;
+
+             $check_xml = mysqli_query(
+                 $conn,
+                 "SELECT * FROM imslp_sheets where sheets_xml = '$getSheet' "
+             );
+             $check_img = mysqli_query(
+                 $conn,
+                 "SELECT * FROM imslp_sheets where sheets_img = '$getImgSheet' "
+             );
+             $check_pdf = mysqli_query(
+                 $conn,
+                 "SELECT * FROM imslp_sheets where sheets_pdf = '$getPdfSheet' "
+             );
 
              if (
+                 mysqli_num_rows($check_xml) > 0
+             ) { ?><script>alert("File with this name already exists, change the name")</script><?php } elseif (
+                 mysqli_num_rows($check_img) > 0
+             ) { ?><script>alert("Image with this name already exists, change the name")</script><?php } elseif (
+                 mysqli_num_rows($check_pdf) > 0
+             ) { ?><script>alert("Pdf with this name already exists, change the name")</script><?php } elseif (
                  move_uploaded_file(
                      $_FILES['pngSheet']['tmp_name'],
                      $location
                  ) and
                  move_uploaded_file($_FILES['xmlSheet']['tmp_name'], $location2)
              ) {
-                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`,`sheets_arrangement`,`sheets_difficulty`, `sheets_img`,`sheets_xml`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5','$getArrangement','$getDifficulty', '$getImgSheet','$getSheet')";
+                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`,`sheets_arrangement`,`sheets_difficulty`, `sheets_img`,`sheets_xml`, `sheets_pdf`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5','$getArrangement','$getDifficulty', '$getImgSheet','$getSheet', '$getPdfSheet')";
                  $result = $conn->query($query);
                  echo 'gelukt';
              } else {

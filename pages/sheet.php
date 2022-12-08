@@ -42,11 +42,16 @@ include './config.php';
         $result3 = mysqli_query($conn, $query3);
         $count = mysqli_fetch_row($result3)[0];
         $users_permissions = $_SESSION['users_permissions'];
-        echo 'HOOOOOOOOOOI';
 
         if (($count >= 6) & ($users_permissions == 0)) {
             echo '<div class="tekst"><p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
-        } elseif ($count < 6 || $count == null) { ?>
+        } elseif (
+            $count < 6 ||
+            $count == null ||
+            $users_permissions == 1 ||
+            $users_permissions == 2 ||
+            $users_permissions == 3
+        ) { ?>
             <script src="../scripts/opensheetmusicdisplay.min.js"></script>
             <div class="details">
             <?php
@@ -66,6 +71,11 @@ include './config.php';
                     $thisComposer = $row['sheets_composer'];
                     $thisDifficulty = $row['difficulty'];
                     $thisId = $row['sheets_ID'];
+                    $thisPdfSheet = $str = str_replace(
+                        'musicxml',
+                        'pdf',
+                        $thisXmlSheet
+                    );
                     if ($thisId === $id) {
 
                         echo 'Genre: ' . $thisGenre . '</br>';
@@ -73,11 +83,16 @@ include './config.php';
                         echo 'Composer: ' . $thisComposer . '</br>';
                         echo 'Difficulty: ' . $thisDifficulty . '</br>';
                         echo 'Genre: ' . $thisGenre . '</br>';
-                        echo '<button href=' .
+                        echo '<button class="hier">
+                        <a href="../xml/' .
                             $thisXmlSheet .
-                            '>' .
-                            $thisXmlSheet .
-                            '</button></br>';
+                            '" download>Download Music XML</a>
+                      </button>';
+                        echo '<button class="hier">
+                        <a href="../pdf/' .
+                            $thisPdfSheet .
+                            '" download>Download PDF</a>
+                      </button>';
                         ?>
                         <script> 
                             var xml='<?php echo $thisXmlSheet; ?>';

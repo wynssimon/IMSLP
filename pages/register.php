@@ -27,6 +27,7 @@ session_start();
             $getUsername = $_POST['users_username'];
             $getPassword = $_POST['users_password'];
             $getName = $_POST['users_name'];
+            $getName = ucwords($getName);
             $getEmail = $_POST['users_email'];
 
             $check_email = mysqli_query(

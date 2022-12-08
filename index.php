@@ -234,6 +234,8 @@ session_start();
                                 echo "<img class='instrument' src='img/guitar.png'>";
                             } elseif ($thisInstrument1 == 'Horn') {
                                 echo "<img class='instrument' src='img/french-horn.png'>";
+                            } elseif ($thisInstrument1 == 'Clarinet') {
+                                echo "<img class='instrument' src='img/clarinet.png'>";
                             } ?>
                             <?php if ($thisInstrument2 == 'Accordion') {
                                 echo "<img class='instrument' src='img/accordeon.png'>";
@@ -251,6 +253,8 @@ session_start();
                                 echo "<img class='instrument' src='img/guitar.png'>";
                             } elseif ($thisInstrument2 == 'Horn') {
                                 echo "<img class='instrument' src='img/french-horn.png'>";
+                            } elseif ($thisInstrument2 == 'Clarinet') {
+                                echo "<img class='instrument' src='img/clarinet.png'>";
                             } ?>       
                             </div>
                             <div>

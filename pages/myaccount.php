@@ -23,27 +23,16 @@ session_start();
     <?php include '../includes/header.php'; ?>
     <main class="main">
         <div>
-            <h1>
-                <?php echo 'Hey ' . $_SESSION['users_name']; ?>
-            </h1>
-            <p>Here you can change your password.</p>
-            <p>Username:
-                <input type="text" value="<?php echo $_SESSION[
-                    'users_username'
-                ]; ?>">
-            </p>
-            <p>Name:
-                <input type="text" value="<?php echo $_SESSION[
-                    'users_name'
-                ]; ?>">
-            </p>
+            <p>Here you can change your password and email.</p>
+            <p>Username: <?php echo $_SESSION['users_username']; ?></p>
+            <p>Name: <?php echo $_SESSION['users_name']; ?></p>         
             <p>Password:
                 <input type="password" value="<?php echo $_SESSION[
                     'users_password'
                 ]; ?>">
             </p>
             <p>Email:
-                <input type="text" value="<?php echo $_SESSION[
+                <input type="email" value="<?php echo $_SESSION[
                     'users_email'
                 ]; ?>">
             </p>
