@@ -22,8 +22,7 @@ include './config.php';
         
         <?php if (isset($_SESSION['users_ID'])) {
 
-            echo $_SESSION['users_ID'];
-            // if ($_SESSION['users_permissions'] == 0) {
+            //echo $_SESSION['users_ID'];
 
             $query = "INSERT INTO imslp_watched (id, watched_ID, watched) VALUES (NULL, {$_SESSION['users_ID']}, NOW() )";
             $result = mysqli_query($conn, $query);
@@ -46,8 +45,8 @@ include './config.php';
         echo 'HOOOOOOOOOOI';
 
         if (($count >= 6) & ($users_permissions == 0)) {
-            echo '<div class="tekst"><p></p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
-        } elseif ($count < 6 || $count == null || $users_permissions > 0) { ?>
+            echo '<div class="tekst"><p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
+        } elseif ($count < 6 || $count == null) { ?>
             <script src="../scripts/opensheetmusicdisplay.min.js"></script>
             <div class="details">
             <?php
@@ -83,16 +82,15 @@ include './config.php';
                         <script> 
                             var xml='<?php echo $thisXmlSheet; ?>';
                         </script>
+                        <script src="../scripts/fullscreen.js"></script>
                         <?php
                     }
                 }
             }
             }
 
-        // }
-
         } else {
-            echo 'make an account to watch the sheets';
+            echo '<div class="tekst"><p>Make an account to watch the sheets</p></div>';
         } ?>
             </div>
             <div id="osmdCanvas"></div>
@@ -114,5 +112,4 @@ include './config.php';
      
     </main>
 </body>
-<script src="../scripts/fullscreen.js"></script>
 </html>

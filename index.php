@@ -23,14 +23,14 @@ session_start();
             if ($_SESSION['users_permissions'] == 1) {
                 $current_date = time();
                 $one_month = 30 * 24 * 60 * 60;
-                echo $_SESSION['users_permissions_start'];
 
                 if (
                     $current_date -
                         strtotime($_SESSION['users_permissions_start']) >
                     $one_month
                 ) {
-                    echo 'je bent ouder dan een maand';
+                    $query = "UPDATE imslp_users SET users_permissions = 0, users_permissions_start = DEFAULT WHERE users_ID = {$_SESSION['users_ID']}";
+                    $result = mysqli_query($conn, $query);
                 } else {
                 }
             } elseif ($_SESSION['users_permissions'] == 2) {
@@ -38,13 +38,13 @@ session_start();
                     $_SESSION['users_permissions_start']
                 );
                 $currentTimestamp = time();
-                echo $_SESSION['users_permissions_start'] . "\n";
 
                 if (
                     $currentTimestamp - $elementTimestamp >=
                     365 * 24 * 60 * 60
                 ) {
-                    echo 'je bent ouder dan een jaar';
+                    $query = "UPDATE imslp_users SET users_permissions = 0, users_permissions_start = DEFAULT WHERE users_ID = {$_SESSION['users_ID']}";
+                    $result = mysqli_query($conn, $query);
                 } else {
                 }
             }
@@ -119,23 +119,6 @@ session_start();
             </select>
             <button type="submit">Filter</button>
         </form>
-
-        <!-- oorspronkelijke dropdown zien of mogelijk is met de selection en options -->
-        <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Genre</button>
-        <div id="myDropdown" class="dropdown-content">
-          <input type="button" id='all' value='All'>
-          <?php
-          $query = 'SELECT * FROM `imslp_genre` WHERE 1';
-          $result = $conn->query($query);
-          if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                  $thisGenre = $row['genre'];
-                  echo "<input type='button' id='btn' value='$thisGenre'/>";
-              }
-          }
-          ?>
-        </div>
         <?php
         $query =
             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`,`sheets_instrument2`, `sheets_arrangement`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id` FROM `imslp_sheets`,`imslp_genre` WHERE `sheets_genre_ID`=`genre_ID`';
