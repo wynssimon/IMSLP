@@ -180,7 +180,7 @@ session_start();
             }
         }
         ?>
-        <div class='products-container'>
+        <div class='products-container grid' id="alles">
         <?php if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
 

@@ -21,7 +21,8 @@ include './config.php';
   <?php include '../includes/header.php'; ?>
     <main class="main">
       <h2>About</h2>
-      <p>Sheetly is the biggest music library in the world. With sheets from the biggest universities in the world we try to make your music experience even better, every day again.</p>
+      <p>Welcome to Sheetly! Here, you can find a wide variety of music sheets for all levels of musicians. Our collection includes popular songs as well as classical pieces, so there's something for everyone. Whether you're a beginner just starting out or an experienced musician, you'll be sure to find something that suits your needs. Our website is easy to navigate and user-friendly, so finding the perfect piece of music is a breeze. Thank you for visiting our site, and happy music-making!
+      </p>
     </main>
   </body>
 </html>

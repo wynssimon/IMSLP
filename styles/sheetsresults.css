@@ -12,12 +12,17 @@
   background: #f1f1f1;
   height: 40px;
 }
-
-.products-container {
+#alles {
   min-height: 300px;
   justify-content: center;
+}
+.grid {
   display: flex;
   flex-wrap: wrap;
+}
+.list {
+  background-color: red;
+  padding: 20px;
 }
 
 .shop-card {

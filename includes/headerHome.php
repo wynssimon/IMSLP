@@ -1,5 +1,5 @@
 <header>
-        <h1>Sheetly</h1>
+    <h1 onclick="location.href='../index.php'">Sheetly</h1>
         <?php if (isset($_SESSION['users_username'])) { ?>
             <a class='myaccount' href='pages/myaccount.php?update'>My account</a>
             <?php } ?>

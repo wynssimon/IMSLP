@@ -6,7 +6,7 @@ body {
 }
 header {
   width: 100%;
-  height: 200px;
+  height: 180px;
   background-color: #2a6496;
   text-align: center;
   position: fixed;
@@ -20,6 +20,7 @@ header h1 {
   color: #fff;
   line-height: 130px;
   font-weight: 100;
+  cursor: pointer;
 }
 header nav {
   position: absolute;
