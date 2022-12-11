@@ -86,19 +86,19 @@ session_start();
                 }
                 ?>
             </select>
-           <!-- <select name="arrangement">
+           <select name="arrangement">
                 <option value="">Arrangement</option>
                 <?php
-/* $query = 'SELECT * FROM `imslp_arrangements` WHERE 1';
+                $query = 'SELECT * FROM `imslp_arrangements` WHERE 1';
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $thisArrangement = $row['arrangement'];
                         echo "<option value='$thisArrangement'>$thisArrangement</option>";
                     }
-                }*/
-?>
-            </select>--> 
+                }
+                ?>
+            </select>
             <select name="difficulty">
                 <option value="">Difficulty</option>
                 <?php
@@ -117,7 +117,7 @@ session_start();
         </form>
         <?php
         $query =
-            'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`,`sheets_genre_ID`, `sheets_instrument1`,`sheets_instrument2`, `sheets_instrument`, `sheets_arrangement`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id`, `difficulty`, `genre` FROM `imslp_sheets`,`imslp_genre`, `imslp_difficulty` WHERE `sheets_genre_ID`=`genre_ID` AND `sheets_difficulty`=`difficulty_ID`';
+            'SELECT `sheets_title`,`sheets_genre_ID`, `sheets_instrument1`,`sheets_instrument2`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id`, `difficulty`, `genre`, `arrangement`, `composers`, `instruments`, `instruments2`, `instruments3`, `instruments4`, `instruments5` FROM `imslp_sheets`,`imslp_genre`, `imslp_difficulty`, `imslp_arrangements`, `imslp_composers`, `imslp_instruments`, `imslp_instruments2`, `imslp_instruments3`, `imslp_instruments4`, `imslp_instruments5` WHERE `sheets_genre_ID`=`genre_ID` AND `sheets_difficulty`=`difficulty_ID` AND `sheets_arrangement_ID`=`arrangement_ID` AND`sheets_composer_ID`=`composers_ID` AND `sheets_instrument1`=`instruments_ID` AND `sheets_instrument2`=`instruments2_ID` AND `sheets_instrument3`=`instruments3_ID`AND `sheets_instrument4`=`instruments4_ID`AND `sheets_instrument5`=`instruments5_ID`';
         $genre = filter_input(
             INPUT_POST,
             'genre',
@@ -149,13 +149,13 @@ session_start();
         }
 
         if (!empty($instrument)) {
-            $query .= " AND `sheets_instrument1` = '$instrument'";
+            $query .= " AND `instruments` = '$instrument'";
         }
         if (!empty($composer)) {
-            $query .= " AND `sheets_composer` = '$composer'";
+            $query .= " AND `composers` = '$composer'";
         }
         if (!empty($arrangement)) {
-            $query .= " AND `sheets_arrangement` = '$arrangement'";
+            $query .= " AND `arrangement` = '$arrangement'";
         }
         if (!empty($difficulty)) {
             $query .= " AND `difficulty_ID` = '$difficulty'";
@@ -186,16 +186,18 @@ session_start();
             while ($row = $result->fetch_assoc()) {
 
                 $thisTitle = $row['sheets_title'];
-                $thisComposer = $row['sheets_composer'];
+                $thisComposer = $row['composers'];
                 $thisGenre = $row['genre'];
-                $thisInstrument1 = $row['sheets_instrument1'];
-                $thisInstrument2 = $row['sheets_instrument2'];
-                $thisArrangement = $row['sheets_arrangement'];
+                $thisInstrument = $row['instruments'];
+                $thisInstrument2 = $row['instruments2'];
+                $thisInstrument3 = $row['instruments3'];
+                $thisInstrument4 = $row['instruments4'];
+                $thisInstrument5 = $row['instruments5'];
+                $thisArrangement = $row['arrangement'];
                 $thisDifficulty = $row['difficulty'];
                 $thisSheet = $row['sheets_img'];
                 $thisSheetXml = $row['sheets_xml'];
                 $thisSheetID = $row['sheets_id'];
-                $thisInstruments = $row['sheets_instrument'];
 
                 if (strlen($thisTitle) > 19) {
                     $thisTitle = substr($thisTitle, 0, 19) . '...';
@@ -213,79 +215,23 @@ session_start();
                             <?php echo "$thisGenre"; ?>
                             </div>
                             <div>
-                            <?php
-                            if (
-                                in_array(', 2', [$thisInstruments]) ||
-                                in_array('2', [$thisInstruments])
-                            ) {
+                            <?php if ($thisInstrument == 'Accordion') {
                                 echo "<img class='instrument' src='img/accordeon.png'>";
-                            }
-                            if (
-                                in_array(', 6', [$thisInstruments]) ||
-                                in_array('6', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Violin') {
                                 echo "<img class='instrument' src='img/violin.png'>";
-                            }
-                            if (
-                                in_array(', 1', [$thisInstruments]) ||
-                                in_array('1', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Piano') {
                                 echo "<img class='instrument' src='img/piano.png'>";
-                            }
-                            if (
-                                in_array(', 7', [$thisInstruments]) ||
-                                in_array('7', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Saxophone') {
                                 echo "<img class='instrument' src='img/saxophone.png'>";
-                            }
-                            if (
-                                in_array(', 3', [$thisInstruments]) ||
-                                in_array('3', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Trumpet') {
                                 echo "<img class='instrument' src='img/trumpet.png'>";
-                            }
-                            if (
-                                in_array(', 4', [$thisInstruments]) ||
-                                in_array('4', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Flute') {
                                 echo "<img class='instrument' src='img/flute.png'>";
-                            }
-                            if (
-                                in_array(', 5', [$thisInstruments]) ||
-                                in_array('5', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Guitar') {
                                 echo "<img class='instrument' src='img/guitar.png'>";
-                            }
-                            if (
-                                in_array(', 9', [$thisInstruments]) ||
-                                in_array('9', [$thisInstruments])
-                            ) {
+                            } elseif ($thisInstrument == 'Horn') {
                                 echo "<img class='instrument' src='img/french-horn.png'>";
-                            }
-                            if (
-                                in_array(', 8', [$thisInstruments]) ||
-                                in_array('8', [$thisInstruments])
-                            ) {
-                                echo "<img class='instrument' src='img/clarinet.png'>";
-                            }
-                            ?>
-                            <?php if ($thisInstrument1 == 'Accordion') {
-                                echo "<img class='instrument' src='img/accordeon.png'>";
-                            } elseif ($thisInstrument1 == 'Violin') {
-                                echo "<img class='instrument' src='img/violin.png'>";
-                            } elseif ($thisInstrument1 == 'Piano') {
-                                echo "<img class='instrument' src='img/piano.png'>";
-                            } elseif ($thisInstrument1 == 'Saxophone') {
-                                echo "<img class='instrument' src='img/saxophone.png'>";
-                            } elseif ($thisInstrument1 == 'Trumpet') {
-                                echo "<img class='instrument' src='img/trumpet.png'>";
-                            } elseif ($thisInstrument1 == 'Flute') {
-                                echo "<img class='instrument' src='img/flute.png'>";
-                            } elseif ($thisInstrument1 == 'Guitar') {
-                                echo "<img class='instrument' src='img/guitar.png'>";
-                            } elseif ($thisInstrument1 == 'Horn') {
-                                echo "<img class='instrument' src='img/french-horn.png'>";
-                            } elseif ($thisInstrument1 == 'Clarinet') {
+                            } elseif ($thisInstrument == 'Clarinet') {
                                 echo "<img class='instrument' src='img/clarinet.png'>";
                             } ?>       
                             <?php if ($thisInstrument2 == 'Accordion') {
@@ -305,6 +251,63 @@ session_start();
                             } elseif ($thisInstrument2 == 'Horn') {
                                 echo "<img class='instrument' src='img/french-horn.png'>";
                             } elseif ($thisInstrument2 == 'Clarinet') {
+                                echo "<img class='instrument' src='img/clarinet.png'>";
+                            } ?>       
+                            <?php if ($thisInstrument3 == 'Accordion') {
+                                echo "<img class='instrument' src='img/accordeon.png'>";
+                            } elseif ($thisInstrument3 == 'Violin') {
+                                echo "<img class='instrument' src='img/violin.png'>";
+                            } elseif ($thisInstrument3 == 'Piano') {
+                                echo "<img class='instrument' src='img/piano.png'>";
+                            } elseif ($thisInstrument3 == 'Saxophone') {
+                                echo "<img class='instrument' src='img/saxophone.png'>";
+                            } elseif ($thisInstrument3 == 'Trumpet') {
+                                echo "<img class='instrument' src='img/trumpet.png'>";
+                            } elseif ($thisInstrument3 == 'Flute') {
+                                echo "<img class='instrument' src='img/flute.png'>";
+                            } elseif ($thisInstrument3 == 'Guitar') {
+                                echo "<img class='instrument' src='img/guitar.png'>";
+                            } elseif ($thisInstrument3 == 'Horn') {
+                                echo "<img class='instrument' src='img/french-horn.png'>";
+                            } elseif ($thisInstrument3 == 'Clarinet') {
+                                echo "<img class='instrument' src='img/clarinet.png'>";
+                            } ?>       
+                            <?php if ($thisInstrument4 == 'Accordion') {
+                                echo "<img class='instrument' src='img/accordeon.png'>";
+                            } elseif ($thisInstrument4 == 'Violin') {
+                                echo "<img class='instrument' src='img/violin.png'>";
+                            } elseif ($thisInstrument4 == 'Piano') {
+                                echo "<img class='instrument' src='img/piano.png'>";
+                            } elseif ($thisInstrument4 == 'Saxophone') {
+                                echo "<img class='instrument' src='img/saxophone.png'>";
+                            } elseif ($thisInstrument4 == 'Trumpet') {
+                                echo "<img class='instrument' src='img/trumpet.png'>";
+                            } elseif ($thisInstrument4 == 'Flute') {
+                                echo "<img class='instrument' src='img/flute.png'>";
+                            } elseif ($thisInstrument4 == 'Guitar') {
+                                echo "<img class='instrument' src='img/guitar.png'>";
+                            } elseif ($thisInstrument4 == 'Horn') {
+                                echo "<img class='instrument' src='img/french-horn.png'>";
+                            } elseif ($thisInstrument4 == 'Clarinet') {
+                                echo "<img class='instrument' src='img/clarinet.png'>";
+                            } ?>       
+                            <?php if ($thisInstrument5 == 'Accordion') {
+                                echo "<img class='instrument' src='img/accordeon.png'>";
+                            } elseif ($thisInstrument5 == 'Violin') {
+                                echo "<img class='instrument' src='img/violin.png'>";
+                            } elseif ($thisInstrument5 == 'Piano') {
+                                echo "<img class='instrument' src='img/piano.png'>";
+                            } elseif ($thisInstrument5 == 'Saxophone') {
+                                echo "<img class='instrument' src='img/saxophone.png'>";
+                            } elseif ($thisInstrument5 == 'Trumpet') {
+                                echo "<img class='instrument' src='img/trumpet.png'>";
+                            } elseif ($thisInstrument5 == 'Flute') {
+                                echo "<img class='instrument' src='img/flute.png'>";
+                            } elseif ($thisInstrument5 == 'Guitar') {
+                                echo "<img class='instrument' src='img/guitar.png'>";
+                            } elseif ($thisInstrument5 == 'Horn') {
+                                echo "<img class='instrument' src='img/french-horn.png'>";
+                            } elseif ($thisInstrument5 == 'Clarinet') {
                                 echo "<img class='instrument' src='img/clarinet.png'>";
                             } ?>       
                             </div>

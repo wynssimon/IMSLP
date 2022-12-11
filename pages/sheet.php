@@ -61,14 +61,14 @@ include './config.php';
             $id = $params['id'];
 
             $query =
-                'SELECT * FROM `imslp_sheets`, `imslp_difficulty` WHERE `sheets_difficulty`=`difficulty_id`';
+                'SELECT * FROM `imslp_sheets`, `imslp_difficulty`, `imslp_genre`, `imslp_composers` WHERE `sheets_difficulty`=`difficulty_id` AND `sheets_genre_ID`=`genre_ID` AND `sheets_composer_ID`=`composers_ID`';
             $result = $conn->query($query);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $thisXmlSheet = $row['sheets_xml'];
-                    $thisGenre = $row['sheets_genre'];
+                    $thisGenre = $row['genre'];
                     $thisTitle = $row['sheets_title'];
-                    $thisComposer = $row['sheets_composer'];
+                    $thisComposer = $row['composers'];
                     $thisDifficulty = $row['difficulty'];
                     $thisId = $row['sheets_ID'];
                     $thisPdfSheet = $str = str_replace(
