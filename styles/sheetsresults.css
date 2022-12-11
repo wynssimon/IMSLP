@@ -21,8 +21,7 @@
   flex-wrap: wrap;
 }
 .list {
-  background-color: red;
-  padding: 20px;
+  display: list-item;
 }
 
 .shop-card {

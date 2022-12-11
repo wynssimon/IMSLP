@@ -86,19 +86,19 @@ session_start();
                 }
                 ?>
             </select>
-            <select name="arrangement">
+           <!-- <select name="arrangement">
                 <option value="">Arrangement</option>
                 <?php
-                $query = 'SELECT * FROM `imslp_arrangements` WHERE 1';
+/* $query = 'SELECT * FROM `imslp_arrangements` WHERE 1';
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $thisArrangement = $row['arrangement'];
                         echo "<option value='$thisArrangement'>$thisArrangement</option>";
                     }
-                }
-                ?>
-            </select>
+                }*/
+?>
+            </select>--> 
             <select name="difficulty">
                 <option value="">Difficulty</option>
                 <?php
@@ -112,12 +112,12 @@ session_start();
                     }
                 }
                 ?>
-            </select>
+            </select>   
             <button type="submit">Filter</button>
         </form>
         <?php
         $query =
-            'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`,`sheets_instrument2`, `sheets_arrangement`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id` FROM `imslp_sheets`,`imslp_genre` WHERE `sheets_genre_ID`=`genre_ID`';
+            'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`,`sheets_genre_ID`, `sheets_instrument1`,`sheets_instrument2`, `sheets_instrument`, `sheets_arrangement`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id`, `difficulty`, `genre` FROM `imslp_sheets`,`imslp_genre`, `imslp_difficulty` WHERE `sheets_genre_ID`=`genre_ID` AND `sheets_difficulty`=`difficulty_ID`';
         $genre = filter_input(
             INPUT_POST,
             'genre',
@@ -145,7 +145,7 @@ session_start();
         );
 
         if (!empty($genre)) {
-            $query .= " AND `sheets_genre` = '$genre'";
+            $query .= " AND `genre` = '$genre'";
         }
 
         if (!empty($instrument)) {
@@ -158,7 +158,7 @@ session_start();
             $query .= " AND `sheets_arrangement` = '$arrangement'";
         }
         if (!empty($difficulty)) {
-            $query .= " AND `sheets_difficulty` = '$difficulty'";
+            $query .= " AND `difficulty_ID` = '$difficulty'";
         }
         $result = $conn->query($query);
         if (!empty($genre || $instrument || $composer)) {
@@ -180,23 +180,22 @@ session_start();
             }
         }
         ?>
+        <button id="changeDisplay">Change display</button>    
         <div class='products-container grid' id="alles">
         <?php if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
 
                 $thisTitle = $row['sheets_title'];
                 $thisComposer = $row['sheets_composer'];
-                $thisGenre = $row['sheets_genre'];
+                $thisGenre = $row['genre'];
                 $thisInstrument1 = $row['sheets_instrument1'];
                 $thisInstrument2 = $row['sheets_instrument2'];
-                /*$thisInstrument3 = $row['sheets_instrument3'];
-                $thisInstrument4 = $row['sheets_instrument4'];
-                $thisInstrument5 = $row['sheets_instrument5'];*/
                 $thisArrangement = $row['sheets_arrangement'];
-                $thisDifficulty = $row['sheets_difficulty'];
+                $thisDifficulty = $row['difficulty'];
                 $thisSheet = $row['sheets_img'];
                 $thisSheetXml = $row['sheets_xml'];
                 $thisSheetID = $row['sheets_id'];
+                $thisInstruments = $row['sheets_instrument'];
 
                 if (strlen($thisTitle) > 19) {
                     $thisTitle = substr($thisTitle, 0, 19) . '...';
@@ -214,6 +213,62 @@ session_start();
                             <?php echo "$thisGenre"; ?>
                             </div>
                             <div>
+                            <?php
+                            if (
+                                in_array(', 2', [$thisInstruments]) ||
+                                in_array('2', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/accordeon.png'>";
+                            }
+                            if (
+                                in_array(', 6', [$thisInstruments]) ||
+                                in_array('6', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/violin.png'>";
+                            }
+                            if (
+                                in_array(', 1', [$thisInstruments]) ||
+                                in_array('1', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/piano.png'>";
+                            }
+                            if (
+                                in_array(', 7', [$thisInstruments]) ||
+                                in_array('7', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/saxophone.png'>";
+                            }
+                            if (
+                                in_array(', 3', [$thisInstruments]) ||
+                                in_array('3', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/trumpet.png'>";
+                            }
+                            if (
+                                in_array(', 4', [$thisInstruments]) ||
+                                in_array('4', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/flute.png'>";
+                            }
+                            if (
+                                in_array(', 5', [$thisInstruments]) ||
+                                in_array('5', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/guitar.png'>";
+                            }
+                            if (
+                                in_array(', 9', [$thisInstruments]) ||
+                                in_array('9', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/french-horn.png'>";
+                            }
+                            if (
+                                in_array(', 8', [$thisInstruments]) ||
+                                in_array('8', [$thisInstruments])
+                            ) {
+                                echo "<img class='instrument' src='img/clarinet.png'>";
+                            }
+                            ?>
                             <?php if ($thisInstrument1 == 'Accordion') {
                                 echo "<img class='instrument' src='img/accordeon.png'>";
                             } elseif ($thisInstrument1 == 'Violin') {
@@ -232,7 +287,7 @@ session_start();
                                 echo "<img class='instrument' src='img/french-horn.png'>";
                             } elseif ($thisInstrument1 == 'Clarinet') {
                                 echo "<img class='instrument' src='img/clarinet.png'>";
-                            } ?>
+                            } ?>       
                             <?php if ($thisInstrument2 == 'Accordion') {
                                 echo "<img class='instrument' src='img/accordeon.png'>";
                             } elseif ($thisInstrument2 == 'Violin') {
@@ -257,20 +312,27 @@ session_start();
                             <?php echo "$thisArrangement"; ?>
                             </div>
                             <div>
-                            <?php if ($thisDifficulty == '1') {
+                            <?php if ($thisDifficulty == 'Beginner') {
                                 echo "<img class='solsleutel' src='img/solsleutel.png'>";
-                            } elseif ($thisDifficulty == '2') {
+                            } elseif ($thisDifficulty == 'Amateur') {
                                 echo "
                                 <img class='solsleutel' src='img/solsleutel.png'>
                                 <img class='solsleutel' src='img/solsleutel.png'>
                                 ";
-                            } elseif ($thisDifficulty == '3') {
+                            } elseif ($thisDifficulty == 'Intermediate') {
                                 echo "
                                 <img class='solsleutel' src='img/solsleutel.png'>
                                 <img class='solsleutel' src='img/solsleutel.png'>
                                 <img class='solsleutel' src='img/solsleutel.png'>";
-                            } elseif ($thisDifficulty == '4') {
+                            } elseif ($thisDifficulty == 'Advanced') {
                                 echo "
+                                <img class='solsleutel' src='img/solsleutel.png'>
+                                <img class='solsleutel' src='img/solsleutel.png'>
+                                <img class='solsleutel' src='img/solsleutel.png'>
+                                <img class='solsleutel' src='img/solsleutel.png'>";
+                            } elseif ($thisDifficulty == 'Expert') {
+                                echo "
+                                <img class='solsleutel' src='img/solsleutel.png'>
                                 <img class='solsleutel' src='img/solsleutel.png'>
                                 <img class='solsleutel' src='img/solsleutel.png'>
                                 <img class='solsleutel' src='img/solsleutel.png'>
@@ -285,5 +347,21 @@ session_start();
         </div>
   </main>
   </body>
+  <script>
+            let changeDisplay = document.getElementById('changeDisplay');
+            let alles = document.getElementById('alles');
+
+            changeDisplay.addEventListener("click", () => {
+
+                if (alles.classList.contains("grid")) {
+                    alles.classList.add("list");
+                    alles.classList.remove("grid");
+                }
+                else if (alles.classList.contains("list")) {
+                    alles.classList.add("grid");
+                    alles.classList.remove("list");
+                }      
+            });
+        </script>
   <script src="scripts/script.js"></script>
 </html>

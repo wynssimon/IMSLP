@@ -77,23 +77,32 @@ include './config.php';
                         $thisXmlSheet
                     );
                     if ($thisId === $id) {
-
-                        echo 'Genre: ' . $thisGenre . '</br>';
-                        echo 'Title: ' . $thisTitle . '</br>';
-                        echo 'Composer: ' . $thisComposer . '</br>';
-                        echo 'Difficulty: ' . $thisDifficulty . '</br>';
-                        echo 'Genre: ' . $thisGenre . '</br>';
-                        echo '<button class="hier">
-                        <a href="../xml/' .
+                        echo '<p>Genre: ' .
+                            $thisGenre .
+                            '</br>
+                        Title: ' .
+                            $thisTitle .
+                            '</br>
+                        Composer: ' .
+                            $thisComposer .
+                            '</br>
+                        Difficulty: ' .
+                            $thisDifficulty .
+                            '</br>
+                        Genre: ' .
+                            $thisGenre .
+                            '</p></br>                         
+                        <div class="wrapper">
+                            <a href="../xml/' .
                             $thisXmlSheet .
-                            '" download>Download Music XML</a>
-                      </button>';
-                        echo '<button class="hier">
-                        <a href="../pdf/' .
+                            '" download><span>Download XML</span></a>
+                        </div>
+                        <div class="wrapper">
+                            <a href="../pdf/' .
                             $thisPdfSheet .
-                            '" download>Download PDF</a>
-                      </button>';
-                        ?>
+                            '" download><span>Download PDF</span></a>
+                        </div>
+                         '; ?>
                         <script> 
                             var xml='<?php echo $thisXmlSheet; ?>';
                         </script>
@@ -124,7 +133,6 @@ include './config.php';
                     });   
             </script>
       <?php  ?>
-     
     </main>
 </body>
 </html>

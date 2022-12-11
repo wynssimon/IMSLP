@@ -32,9 +32,6 @@ include 'config.php';
           <input type='text' name='arrangement' class='textInput' placeholder='arrangement'>
           <input type='text' name='instrument1' class='textInput' placeholder='instrument1'>
           <input type='text' name='instrument2' class='textInput' placeholder='instrument2'>
-          <input type='text' name='instrument3' class='textInput' placeholder='instrument3'>
-          <input type='text' name='instrument4' class='textInput' placeholder='instrument4'>
-          <input type='text' name='instrument5' class='textInput' placeholder='instrument5'>
           <input type='text' name='difficulty' class='textInput' placeholder='difficulty'>
           <div>
             <label for="pngSheet">Image PNG file</label>
@@ -61,7 +58,7 @@ include 'config.php';
                     <h3>png</h3>
          <?php
          $query =
-             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`,`sheets_arrangement`,`sheets_difficulty`, `sheets_img` FROM `imslp_sheets` WHERE 1';
+             'SELECT `sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`,`sheets_arrangement`,`sheets_difficulty`, `sheets_img` FROM `imslp_sheets` WHERE 1';
          $result = $conn->query($query);
          if ($result->num_rows > 0) {
              while ($row = $result->fetch_assoc()) {
@@ -70,9 +67,6 @@ include 'config.php';
                  $thisGenre = $row['sheets_genre'];
                  $thisInstrument1 = $row['sheets_instrument1'];
                  $thisInstrument2 = $row['sheets_instrument2'];
-                 $thisInstrument3 = $row['sheets_instrument3'];
-                 $thisInstrument4 = $row['sheets_instrument4'];
-                 $thisInstrument5 = $row['sheets_instrument5'];
                  $thisArrangement = $row['sheets_arrangement'];
                  $thisDifficulty = $row['sheets_difficulty'];
                  $thisSheet = $row['sheets_img'];
@@ -82,7 +76,7 @@ include 'config.php';
                     <p>$thisTitle</p>
                     <p>$thisGenre</p>
                     <p>$thisDifficulty</p>
-                    <p>$thisInstrument1 $thisInstrument2 $thisInstrument3 $thisInstrument4 $thisInstrument5 </p>
+                    <p>$thisInstrument1 $thisInstrument2</p>
                     <p>$thisArrangement</p>
                     <img class='sheetImg' src='../img/$thisSheet'></img>
                 
@@ -99,9 +93,6 @@ include 'config.php';
              $getGenre = $_POST['genre'];
              $getInstrument1 = $_POST['instrument1'];
              $getInstrument2 = $_POST['instrument2'];
-             $getInstrument3 = $_POST['instrument3'];
-             $getInstrument4 = $_POST['instrument4'];
-             $getInstrument5 = $_POST['instrument5'];
              $getDifficulty = $_POST['difficulty'];
              $getArrangement = $_POST['arrangement'];
              $getImgSheet = $_FILES['pngSheet']['name'];
@@ -137,7 +128,7 @@ include 'config.php';
                  ) and
                  move_uploaded_file($_FILES['xmlSheet']['tmp_name'], $location2)
              ) {
-                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`, `sheets_instrument3`, `sheets_instrument4`, `sheets_instrument5`,`sheets_arrangement`,`sheets_difficulty`, `sheets_img`,`sheets_xml`, `sheets_pdf`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3','$getInstrument4', '$getInstrument5','$getArrangement','$getDifficulty', '$getImgSheet','$getSheet', '$getPdfSheet')";
+                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer`, `sheets_genre`, `sheets_instrument1`, `sheets_instrument2`,`sheets_arrangement`,`sheets_difficulty`, `sheets_img`,`sheets_xml`, `sheets_pdf`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2','$getArrangement','$getDifficulty', '$getImgSheet','$getSheet', '$getPdfSheet')";
                  $result = $conn->query($query);
                  echo 'gelukt';
              } else {

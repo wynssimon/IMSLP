@@ -1,37 +1,19 @@
-<button onclick="toggleGrid()">Toggle Grid</button>
-<button onclick="toggleList()">Toggle List</button>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include 'pages/config.php';
+session_start();
 
-<style>
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background-color:red;
-  }
+$query =
+    'SELECT * FROM imslp_sheets JOIN imslp_instruments ON imslp_sheets.sheets_instrument = imslp_instruments.instruments_ID';
+$result = mysqli_query($conn, $query);
 
-  .list {
-    display: list-item;
-    grid-template-rows: 1fr 1fr 1fr;
-    background-color:blue;
-  }
-</style>
-
-<div id="container">
-    <div>Item 1</div>
-    <div>Item 2</div>
-    <div>Item 3</div>
-</div>
-
-<script>
-  function toggleGrid() {
-    var container = document.getElementById('container');
-    container.classList.toggle('grid');
-    container.classList.remove('list');
-
-  }
-
-  function toggleList() {
-    var container = document.getElementById('container');
-    container.classList.toggle('list');
-    container.classList.remove('grid');
-  }
-</script>
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $title = $row['sheets_title'];
+        $composer = $row['sheets_composer'];
+        $instrument = $row['instruments'];
+        echo $title . ' - ' . $composer . ' - ' . $instrument . '<br>';
+    }
+}
+?>
