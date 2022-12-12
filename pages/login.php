@@ -54,21 +54,16 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
 }
 ?>
 <form action="login.php" method="post">
-        <h2>LOGIN</h2>
         <?php if (isset($error)) { ?>
             <p class="error"><?php echo $error; ?></p>
         <?php } ?>
-        <div>
-            <label>User Name</label>
-            <input type="text" name="users_username" placeholder="User Name"><br>
-        </div>
-        <div>
-            <label>Password</label>
-            <input type="password" name="users_password" placeholder="Password"><br>
-        </div>
+        <input type="text" name="users_username" placeholder="User Name"><br>
+        <input type="password" name="users_password" placeholder="Password"><br>
         <div class="logreg">
-            <button type="submit">Login</button>
-            <a href="register.php">Registreren</a>
+            <div class="wrapper">
+                <button type="submit"><span>Login</span></button>
+            </div>
+            <a href="register.php">Registreren</a> 
         </div>
 </form>
 </main>

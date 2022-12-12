@@ -88,7 +88,8 @@ include './config.php';
                             '</br>
                         Genre: ' .
                             $thisGenre .
-                            '</p></br>                         
+                            '</p></br>  
+                        <div class="buttons">                       
                         <div class="wrapper">
                             <a href="../xml/' .
                             $thisXmlSheet .
@@ -98,7 +99,7 @@ include './config.php';
                             <a href="../pdf/' .
                             $thisPdfSheet .
                             '" download><span>Download PDF</span></a>
-                        </div>
+                        </div></div>
                          '; ?>
                         <script> 
                             var xml='<?php echo $thisXmlSheet; ?>';
@@ -111,7 +112,7 @@ include './config.php';
             }
 
         } else {
-            echo '<div class="tekst"><p>Make an account to watch the sheets</p></div>';
+            echo '<div class="tekst"><p>Make an account or log in to watch the sheets</p></div>';
         } ?>
             </div>
             <div id="osmdCanvas"></div>

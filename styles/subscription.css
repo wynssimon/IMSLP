@@ -14,3 +14,50 @@ button {
 .main {
   text-align: center;
 }
+
+.wrapper {
+  position: relative;
+  width: 200px;
+  margin: auto;
+  margin-bottom: 1%;
+}
+
+.wrapper a {
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #2a6496;
+  border: 2px solid #2a6496;
+  letter-spacing: 2px;
+  text-align: center;
+  transition: all 0.35s;
+  margin: auto;
+}
+
+.wrapper a span {
+  position: relative;
+  z-index: 2;
+}
+
+.wrapper a:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #2a6496;
+  transition: all 0.35s;
+}
+
+.wrapper a:hover {
+  color: #fff;
+}
+
+.wrapper a:hover:after {
+  width: 200px;
+}

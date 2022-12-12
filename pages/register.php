@@ -68,24 +68,21 @@ session_start();
     ?>
     <form class="registreer" action="register.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="register">
-        <h2>REGISTER</h2>
         <div>
-            <label>User Name</label>
             <input type="text" name="users_username" placeholder="User Name" required><br>
         </div>
         <div>
-            <label>Password</label>
             <input type="password" name="users_password" placeholder="Password" required><br>
         </div>
         <div>
-            <label>Name</label>
             <input type="text" name="users_name" placeholder="Name" required><br>
         </div>
         <div>
-            <label>Email</label>
             <input type="email" name="users_email" placeholder="Email" required><br>
         </div>
-        <button type="submit">Register</button>
+        <div class="wrapper">
+                <button type="submit"><span>Register</span></button>
+        </div>
     </form>
 </main>
 </body>

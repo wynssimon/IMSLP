@@ -27,8 +27,15 @@
 :fullscreen .hier {
   display: none;
 }
+.buttons {
+  display: flex;
+  margin-left: 1%;
+}
 .wrapper {
   position: relative;
+  width: 200px;
+  margin: auto;
+  margin-right: 1%;
 }
 
 .wrapper a {
@@ -44,6 +51,7 @@
   letter-spacing: 2px;
   text-align: center;
   transition: all 0.35s;
+  margin: auto;
 }
 
 .wrapper a span {
@@ -69,6 +77,7 @@
 .wrapper a:hover:after {
   width: 200px;
 }
+
 img {
   width: 25px;
   cursor: pointer;

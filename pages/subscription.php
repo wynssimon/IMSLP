@@ -53,17 +53,23 @@ session_start();
         <p>You are an admin!!! You can download as many sheets as you want</p>
       <?php } elseif ($_SESSION['users_permissions'] == '0') { ?>
         <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want.</p>
-      <div class="subscribe">
-        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=W77KRHZ4HH84J"><button>Subscribe for one month</button></a>    
-        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A"><button>Subscribe for one year</button></a>
+      <div class="wrapper">
+        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=W77KRHZ4HH84J"><span>One month</span></a>   
+      </div>
+      <div class="wrapper"> 
+        <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A"><span>One year</span></a>
       </div>
     <?php } ?>  
 <?php
     } else {
          ?>
         <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want. <br>Log in or register so that you can take your subscription right now.</p>
-        <a class="links" href="./login.php">Log in</a>
-        <a class="links" href="./register.php">Register</a>
+        <div class="wrapper">
+          <a href="./login.php"><span>Log in</span></a>
+        </div>
+        <div class="wrapper">
+          <a href="./register.php"><span>Register</span></a>
+        </div>
         <p>Sheetly is a free accessible platform for everyone. To continue to exist we need the money from the subscriptions to reimburse our expenses.</p>
         <?php
     } ?>
