@@ -77,10 +77,7 @@ include './config.php';
                         $thisXmlSheet
                     );
                     if ($thisId === $id) {
-                        echo '<p>Genre: ' .
-                            $thisGenre .
-                            '</br>
-                        Title: ' .
+                        echo 'Title: ' .
                             $thisTitle .
                             '</br>
                         Composer: ' .

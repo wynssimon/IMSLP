@@ -199,13 +199,18 @@ session_start();
                 $thisSheetXml = $row['sheets_xml'];
                 $thisSheetID = $row['sheets_id'];
 
-                if (strlen($thisTitle) > 19) {
-                    $thisTitle = substr($thisTitle, 0, 19) . '...';
+                if (strlen($thisTitle) > 17) {
+                    $thisTitle = substr($thisTitle, 0, 17) . '...';
                 }
                 ?>  <div onclick="window.location='./pages/sheet.php?id=<?php echo $thisSheetID; ?>'" class='shop-card'>
                         <div class="title">
                             <?php echo "$thisTitle"; ?> <br> 
-                            <div class="ondertitel"><?php echo "$thisComposer"; ?></div>      
+                            <div class="ondertitel"><?php
+                            echo "$thisComposer";
+                            if (strlen($thisComposer) < 1) {
+                                echo '<br>';
+                            }
+                            ?></div>      
                         </div>
                         <div class="product">
                             <img src="img/<?php echo "$thisSheet"; ?>"></img>
