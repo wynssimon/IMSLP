@@ -10,7 +10,7 @@ session_start();
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../styles/reset.css" />
-        <link rel="stylesheet" href="../styles/header.css" />
+        <link rel="stylesheet" href="../styles/headers.css" />
         <link rel="stylesheet" href="../styles/main.css" />
         <link rel="stylesheet" href="../styles/text.css" />
         <link rel="stylesheet" href="../styles/myaccount.css" />

@@ -11,13 +11,14 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/headers.css" />
     <link rel="stylesheet" href="styles/sheetsresults.css" />
     <link rel="stylesheet" href="styles/main.css" />
     <title>Sheetly</title>
   </head>
   <body>
     <?php include 'includes/headerHome.php'; ?>
+
     <main class="main">
         <?php if (isset($_SESSION['users_permissions'])) {
             if ($_SESSION['users_permissions'] == 1) {
@@ -112,6 +113,21 @@ session_start();
                     }
                 }
                 ?>
+            </select>   
+            <select name="amount">
+                <option value="">Amount of instruments</option>
+                <?php
+/*
+                $query = 'SELECT * FROM `imslp_difficulty` WHERE 1';
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $thisDifficulty = $row['difficulty'];
+                        $thisDifficultyId = $row['difficulty_ID'];
+                        echo "<option value='$thisDifficultyId'>$thisDifficulty</option>";
+                    }
+                }*/
+?>
             </select>   
             <button type="submit">Filter</button>
         </form>

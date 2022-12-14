@@ -12,7 +12,7 @@ include './config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sheetly</title>
     <link rel="stylesheet" href="../styles/reset.css" />
-    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/sheet.css" />
 </head>
@@ -77,7 +77,7 @@ include './config.php';
                         $thisXmlSheet
                     );
                     if ($thisId === $id) {
-                        echo 'Title: ' .
+                        /*echo '<p>Title: ' .
                             $thisTitle .
                             '</br>
                         Composer: ' .
@@ -88,18 +88,20 @@ include './config.php';
                             '</br>
                         Genre: ' .
                             $thisGenre .
-                            '</p></br>  
-                        <div class="buttons">                       
-                        <div class="wrapper">
-                            <a href="../xml/' .
+                            '</p></br>  */
+                        echo '
+                            <div class="beide">
+                            <div class="wrapper">
+                                <a href="../xml/' .
                             $thisXmlSheet .
                             '" download><span>Download XML</span></a>
-                        </div>
-                        <div class="wrapper">
-                            <a href="../pdf/' .
+                             </div>
+                            <div class="wrapper">
+                                <a href="../pdf/' .
                             $thisPdfSheet .
                             '" download><span>Download PDF</span></a>
-                        </div></div>
+                            </div>
+                            </div>
                          '; ?>
                         <script> 
                             var xml='<?php echo $thisXmlSheet; ?>';

@@ -3,17 +3,18 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include 'pages/config.php';
 session_start();
-
-$query =
-    'SELECT * FROM imslp_sheets JOIN imslp_instruments ON imslp_sheets.sheets_instrument = imslp_instruments.instruments_ID';
-$result = mysqli_query($conn, $query);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $title = $row['sheets_title'];
-        $composer = $row['sheets_composer'];
-        $instrument = $row['instruments'];
-        echo $title . ' - ' . $composer . ' - ' . $instrument . '<br>';
-    }
-}
 ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/headers.css" />
+    <title>Sheetly</title>
+  </head>
+  <body>
+    <?php include 'includes/headerTest.php'; ?>
+  </body>
+</html>

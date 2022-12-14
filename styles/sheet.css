@@ -4,36 +4,30 @@
 #osmdCanvas {
   max-width: 99%;
 }
-.headerSheet {
-  position: relative;
-}
 .details {
   position: absolute;
   z-index: 10;
 }
-.tekst {
-  text-align: center;
-  z-index: 10;
-  margin-top: 2%;
-}
+
 /*fullscreen maken*/
 :fullscreen .headerSheet {
+  display: none;
+}
+:fullscreen .wrapper {
   display: none;
 }
 :fullscreen p {
   display: none;
 }
-
-:fullscreen .hier {
-  display: none;
-}
-.buttons {
+.beide {
+  width: 420px;
   display: flex;
-  margin-left: 1%;
+  margin: 24px 0 0 12%;
 }
 .wrapper {
   position: relative;
   width: 200px;
+  margin-left: 20px;
   margin: auto;
   margin-right: 1%;
 }
@@ -76,13 +70,6 @@
 
 .wrapper a:hover:after {
   width: 200px;
-}
-
-img {
-  width: 25px;
-  cursor: pointer;
-  position: absolute;
-  z-index: 10;
 }
 
 #fullscreen-button {

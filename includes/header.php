@@ -1,21 +1,54 @@
 <header>
-        <h1 onclick="location.href='../index.php'">Sheetly</h1>
-        <?php if (isset($_SESSION['users_username'])) { ?>
-            <a class='myaccount' href='../pages/myaccount.php?update'>My account</a>
-            <?php } ?>
-        <nav>        
-            <a href="../index.php">Sheets</a>
-            <a href="../pages/subscription.php">Subscription</a>
-            <a href="../pages/about.php">About</a>
-            <?php if (isset($_SESSION['users_username'])) { ?>
-            <a href='../pages/logout.php?action=logout'>Logout</a>
-            <?php } else { ?>
-            <a href="../pages/login.php">Login</a>
-            <?php } ?>
-            <?php if ($_SESSION['users_permissions'] == '3') { ?>
-                <a href='../pages/upload.php?action=add'>Insert</a>
-            <?php } ?>
+    <div class="logo">
+    <img src="https://see.fontimg.com/api/renderfont4/BWpx/eyJyIjoiZnMiLCJoIjo5OCwidyI6MTUwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/c2hlZXRseQ/the-score-normal.png" />
+    </div>
+    <div class="nav">
+        <ul>
+            <?php
+            $server = $_SERVER['PHP_SELF'];
+            $server = str_replace('/Website/', '', $server);
+            $server2 = str_replace('pages/', '', $server);
+            if ($server == 'index.php') {
+                echo '<li><a class="underline" href="../index.php">Sheets</a></li>';
+            } else {
+                echo '<li><a href="../index.php">Sheets</a></li>';
+            }
+            if ($server == 'pages/subscription.php') {
+                echo '<li><a class="underline" href="subscription.php">Subscription</a></li>';
+            } else {
+                echo '<li><a href="subscription.php">Subscription</a></li>';
+            }
+            if ($server == 'pages/about.php') {
+                echo '<li><a class="underline" href="about.php">About</a></li>';
+            } else {
+                echo '<li><a href="about.php">About</a></li>';
+            }
+            ?>           
+            <?php if (isset($_SESSION['users_username'])) {
+                if ($server == 'pages/myaccount.php') {
+                    echo '<li><a class="underline" href="myaccount.php">My Account</a></li>
+                    <li><a href="logout.php?action=logout">Logout</a></li>
+                    ';
+                } else {
+                    echo '<li><a href="myaccount.php">My Account</a></li>
+                    <li><a href="logout.php?action=logout">Logout</a></li>
+                    ';
+                } ?>
+            <?php
+            } else {
+                if ($server == 'pages/login.php') {
+                    echo '<li><a class="underline" href="login.php">Login</a></li>';
+                } else {
+                    echo '<li><a href="login.php">Login</a></li>';
+                } ?>
 
-        </nav>
+            <?php
+            } ?>
+            <?php if (isset($_SESSION['users_permissions'])) {
+                if ($_SESSION['users_permissions'] == '3') { ?>
+                <li><a href='upload.php?action=add'>Insert</a></li>
+            <?php } else {}
+            } ?>
+        </ul>
+    </div>
 </header>
-

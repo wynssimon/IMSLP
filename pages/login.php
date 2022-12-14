@@ -8,7 +8,7 @@ session_start(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sheetly</title>
     <link rel="stylesheet" href="../styles/reset.css" />
-    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/text.css" />
     <link rel="stylesheet" href="../styles/form.css" />
@@ -57,6 +57,7 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
         <?php if (isset($error)) { ?>
             <p class="error"><?php echo $error; ?></p>
         <?php } ?>
+        <h1>Login</h1>
         <input type="text" name="users_username" placeholder="User Name"><br>
         <input type="password" name="users_password" placeholder="Password"><br>
         <div class="logreg">

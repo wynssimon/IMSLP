@@ -1,5 +1,5 @@
 form {
-  width: 50%;
+  width: 30%;
   height: 500px;
   margin: auto;
   align-items: center;
@@ -11,17 +11,29 @@ form {
   border-radius: 5px;
   padding: 20px;
 }
+.registreer {
+  height: 650px;
+}
 input {
-  width: 20rem;
-  height: 3rem;
-  position: relative;
+  width: 70%;
+  height: 70px;
+  background: #e0dede;
+  justify-content: center;
+  display: flex;
   margin: auto;
-  border-radius: 10px;
+  padding: 10px;
   border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 20px;
+}
+form h1 {
+  text-align: center;
+  font-size: 30px;
 }
 .logreg {
   display: flex;
-  width: 50%;
+  width: 100%;
   align-items: center;
   margin: auto;
 }

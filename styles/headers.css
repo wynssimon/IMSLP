@@ -1,0 +1,55 @@
+body {
+  background-color: #f1f1f5;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  background-color: white;
+  /*padding: 4vh 0 0 0;*/
+  min-height: 10vh;
+  border-bottom: 1px solid lightgrey;
+}
+.logo {
+  grid-column: 1 / 2;
+  padding: 3% 2.5% 2.5% 10%;
+}
+.logo img {
+  width: 20%;
+}
+.nav {
+  grid-column: 2 / 3;
+  position: relative;
+  margin: 0 0 0 10%;
+  /*background-color: green;*/
+}
+.nav ul {
+  display: inline-block;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.nav ul li {
+  display: inline;
+  padding: 0 0 0 6%;
+}
+.nav ul li a {
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1.1rem;
+  font-family: 'Varela Round', sans-serif;
+}
+.underline {
+  border-bottom: 2px solid black;
+}
+.nav ul li a:hover {
+  border-bottom: 2px solid black;
+}
+.loginbutton {
+  margin: 0 0 0 10%;
+}

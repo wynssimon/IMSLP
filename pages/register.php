@@ -10,7 +10,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css" />
-    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/text.css" />
     <link rel="stylesheet" href="../styles/form.css" />
@@ -68,6 +68,7 @@ session_start();
     ?>
     <form class="registreer" action="register.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="register">
+        <h1>Register</h1>
         <div>
             <input type="text" name="users_username" placeholder="User Name" required><br>
         </div>
@@ -80,8 +81,11 @@ session_start();
         <div>
             <input type="email" name="users_email" placeholder="Email" required><br>
         </div>
-        <div class="wrapper">
-                <button type="submit"><span>Register</span></button>
+        <div class="logreg">            
+            <div class="wrapper">
+                    <button type="submit"><span>Register</span></button>
+            </div>
+            <a href="login.php">Login</a> 
         </div>
     </form>
 </main>

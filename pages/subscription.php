@@ -11,7 +11,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/reset.css" />
-    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/subscription.css" />
     <link rel="stylesheet" href="../styles/text.css" />
@@ -25,6 +25,7 @@ session_start();
         <?php
         $permissionsStart = $_SESSION['users_permissions_start'];
         $einddatum = date('Y-m-d', strtotime($permissionsStart . ' + 30 days'));
+        $enddate = date('d-m-Y', strtotime($permissionsStart . ' + 30 days'));
         $new_date = date('d-m-Y', strtotime($einddatum));
 
         $new_dateee = DateTime::createFromFormat('d-m-Y', $new_date);
@@ -41,6 +42,10 @@ session_start();
               'Y-m-d',
               strtotime($permissionsStart . ' + 365 days')
           );
+          $enddate = date(
+              'd-m-Y',
+              strtotime($permissionsStart . ' + 365 days')
+          );
           $new_date = date('d-m-Y', strtotime($einddatum));
 
           $new_dateee = DateTime::createFromFormat('d-m-Y', $new_date);
@@ -48,7 +53,7 @@ session_start();
           $current_date = new DateTime();
           $difference = $current_date->diff($new_dateee);
           ?>
-        <p>Your subscription expires on <?php echo $einddatum; ?>. Enjoy your last <?php echo $difference->days; ?> premium Sheetly days!</p>
+        <p>Your subscription expires on <?php echo $enddate; ?>. Enjoy your last <?php echo $difference->days; ?> premium Sheetly days!</p>
       <?php } elseif ($_SESSION['users_permissions'] == '3') { ?>
         <p>You are an admin!!! You can download as many sheets as you want</p>
       <?php } elseif ($_SESSION['users_permissions'] == '0') { ?>
@@ -64,6 +69,7 @@ session_start();
     } else {
          ?>
         <p>Wanna be able to download as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want. <br>Log in or register so that you can take your subscription right now.</p>
+        <br>
         <div class="wrapper">
           <a href="./login.php"><span>Log in</span></a>
         </div>
