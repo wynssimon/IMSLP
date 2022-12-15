@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel&display=swap');
 body {
   background-color: #f1f1f5;
 }
-
 header {
   display: grid;
   grid-template-columns: 60% 40%;
@@ -14,13 +14,18 @@ header {
   grid-column: 1 / 2;
   padding: 3% 2.5% 2.5% 10%;
 }
-.logo img {
-  width: 20%;
+.logo a {
+  font-size: 2.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-family: 'Martel', serif;
+  font-weight: 700;
 }
 .nav {
   grid-column: 2 / 3;
   position: relative;
-  margin: 0 0 0 10%;
+  margin: 0 0 0 0%;
   /*background-color: green;*/
 }
 .nav ul {
@@ -33,7 +38,8 @@ header {
 }
 .nav ul li {
   display: inline;
-  padding: 0 0 0 6%;
+  padding: 0 0 0 0%;
+  margin-left: 4%;
 }
 .nav ul li a {
   position: relative;
@@ -45,11 +51,28 @@ header {
   font-family: 'Varela Round', sans-serif;
 }
 .underline {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #2a6496;
 }
 .nav ul li a:hover {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #2a6496;
 }
-.loginbutton {
+.nav ul .loginbutton {
   margin: 0 0 0 10%;
+  background-color: #2a6496;
+  text-align: center;
+  padding: 2%;
+  border: 2px solid transparent;
+}
+.nav ul .loginbutton:hover {
+  background-color: white;
+  border: 2px solid #2a6496;
+}
+.nav ul .loginbutton:hover > a {
+  color: #2a6496;
+  border: none;
+}
+
+.nav ul .loginbutton a {
+  color: white;
+  padding: 0;
 }

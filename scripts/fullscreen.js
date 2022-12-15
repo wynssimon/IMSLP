@@ -8,6 +8,8 @@ if (
 }
 function create_fullscreen_button() {
   let fullscreen_button = document.createElement('button');
+  let existingDiv = document.getElementById('main');
+  existingDiv.appendChild(fullscreen_button);
   fullscreen_button.setAttribute('id', 'fullscreen-button');
   fullscreen_button.addEventListener('click', toggle_fullscreen);
   fullscreen_button.innerHTML = `
@@ -16,7 +18,7 @@ function create_fullscreen_button() {
     <span></span>
     <span></span>
   `;
-  document.body.appendChild(fullscreen_button);
+  // document.main.appendChild(fullscreen_button);
 }
 
 function toggle_fullscreen() {

@@ -8,6 +8,9 @@
   position: absolute;
   z-index: 10;
 }
+p {
+  text-align: center;
+}
 
 /*fullscreen maken*/
 :fullscreen .headerSheet {
@@ -74,7 +77,7 @@
 
 #fullscreen-button {
   position: absolute;
-  top: 221px;
+  top: 0px;
   right: 20px;
   background: rgba(0, 0, 0, 0.05);
   border: 0;
@@ -150,6 +153,9 @@
 [fullscreen] #fullscreen-button {
   margin-top: 0;
   position: absolute;
+}
+[fullscreen] header {
+  display: none;
 }
 
 /* Dark Style

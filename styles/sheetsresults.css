@@ -1,6 +1,66 @@
 .is-hidden {
   display: none;
 }
+
+#filters {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#filters input[type='text'] {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+#filters select {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+#filters button {
+  width: 20%;
+  background-color: #2a6496;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#filters .checkboxen {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#filters .checkboxen > div {
+  display: inline-block;
+}
+
+#filters .checkboxen input[type='checkbox'] {
+  margin: 8px 0;
+}
+.allefilters {
+  display: flex;
+  border: 1px solid red;
+  width: 100%;
+}
+.checkbox-items {
+  border: 1px solid green;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 40%;
+}
 #myInput {
   width: 30%;
   margin-left: 15%;
@@ -28,13 +88,14 @@
   margin: 10px;
   width: 350px;
   height: 310px;
-  background: #f5f5f5;
+  background: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 20px;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   transition: 1s;
+  /*border: 1.5px solid #2a6496;*/
 }
 .shop-card:hover {
   cursor: pointer;
@@ -88,9 +149,6 @@
   transition: 1s;
 }
 
-#filters {
-  margin-bottom: 1%;
-}
 .show {
   display: block;
 }

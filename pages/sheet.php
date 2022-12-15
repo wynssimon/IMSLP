@@ -17,9 +17,8 @@ include './config.php';
     <link rel="stylesheet" href="../styles/sheet.css" />
 </head>
 <body>
-    <?php include '../includes/headerSheet.php'; ?>
-    <main>
-        
+    <?php include '../includes/header.php'; ?>
+    <main class="main" id="main">
         <?php if (isset($_SESSION['users_ID'])) {
 
             //echo $_SESSION['users_ID'];
