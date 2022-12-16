@@ -1,11 +1,8 @@
-.main {
-  width: 50%;
-  margin-left: 25%;
-}
 h2 {
   text-align: left;
   font-size: 2.3rem;
   margin-bottom: 2%;
+  font-family: 'Varela Round', sans-serif;
 }
 p,
 a,
@@ -14,4 +11,11 @@ span {
   font-size: 1.1rem;
   line-height: 1.4rem;
   margin-bottom: 2%;
+  font-family: 'Varela Round', sans-serif;
+  line-height: 2rem;
+}
+#contentAbout {
+  width: 50%;
+  margin: auto;
+  margin-top: 2%;
 }

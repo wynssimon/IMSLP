@@ -2,21 +2,50 @@
   display: none;
 }
 
+#inputenbuttons {
+  display: flex;
+  align-items: center;
+  /*border: 1px solid red;*/
+  margin: 2% 10% 2% 10%;
+}
+#inputenbuttons button img {
+  height: 40px;
+}
+
+#changeDisplay,
+#showfilters {
+  margin-right: 10px;
+}
+#inputenbuttons button {
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+#resetfilters {
+  background-color: #2a6496;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 10px 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#myInput {
+  position: relative;
+  background: #f1f1f1;
+  height: 40px;
+  width: 60%;
+  padding: 12px 20px;
+  margin: auto;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+}
 #filters {
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
-
-#filters input[type='text'] {
-  width: 60%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-}
-
 #filters select {
   width: 20%;
   padding: 12px 20px;
@@ -24,17 +53,6 @@
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
-}
-
-#filters button {
-  width: 20%;
-  background-color: #2a6496;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 #filters .checkboxen {
@@ -56,22 +74,10 @@
   width: 100%;
 }
 .checkbox-items {
-  border: 1px solid green;
   text-align: left;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 40%;
-}
-#myInput {
-  width: 30%;
-  margin-left: 15%;
-  margin-right: 1rem;
-  margin-top: 10px;
-  position: relative;
-  padding: 10px;
-  border: 1px solid grey;
-  background: #f1f1f1;
-  height: 40px;
 }
 #alles {
   min-height: 300px;
@@ -83,8 +89,9 @@
 }
 .list {
   display: list-item;
+  list-style-type: none;
+  margin: 0 2% 0 2%;
 }
-
 .shop-card {
   margin: 10px;
   width: 350px;

@@ -93,13 +93,21 @@ session_start();
             unset($_SESSION['arrangement']);
         }
         ?>
-        <button id='showfilters'>Filters</button>
+        <div id="inputenbuttons">    
+            <button id="changeDisplay"><img id='row' src='./img/row.png'></button>    
+            <button id='showfilters'><img src='./img/filter.png'></button>
+            <form method="post">
+                <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
+            </form>
+            <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
+        </div>
         <script>
             window.onload = function() {
                 const filtersDiv = document.getElementById("allefilters");
                 const showfilters = document.getElementById("showfilters");
 
                 showfilters.addEventListener("click", function() {
+                    console.log('hoi');
                     if (filtersDiv.style.display === "none") {
                     filtersDiv.style.display = "flex";
                     } else {
@@ -109,7 +117,6 @@ session_start();
             };
         </script>
         <form id="filters" method="post">
-            <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
             <div id="allefilters">
                 <div class="checkboxen" >
                     <p>Genre</p>
@@ -120,7 +127,7 @@ session_start();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $thisGenre = $row['genre'];
-                            echo "<input onchange='this.form.submit()' name='genre' type='checkbox' value='$thisGenre'>$thisGenre";
+                            echo "<input onchange='this.form.submit()' name='genre' type='checkbox' value='$thisGenre'><p>$thisGenre</p>";
                         }
                     }
                     ?>
@@ -135,7 +142,7 @@ session_start();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $thisInstrument = $row['instruments'];
-                            echo "<input onchange='this.form.submit()' name='instrument' type='checkbox' value='$thisInstrument'>$thisInstrument";
+                            echo "<input onchange='this.form.submit()' name='instrument' type='checkbox' value='$thisInstrument'>$thisInstrument</p>";
                         }
                     }
                     ?>
@@ -151,7 +158,7 @@ session_start();
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $thisComposer = $row['composers'];
-                        echo "<input onchange='this.form.submit()' name='composer' value='$thisComposer' type='checkbox'>$thisComposer</input>";
+                        echo "<input onchange='this.form.submit()' name='composer' value='$thisComposer' type='checkbox'><p>$thisComposer</p></input>";
                     }
                 }
                 ?>
@@ -166,7 +173,7 @@ session_start();
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $thisArrangement = $row['arrangement'];
-                        echo "<input onchange='this.form.submit()' name='arrangement' value='$thisArrangement' type='checkbox'>$thisArrangement</input>";
+                        echo "<input onchange='this.form.submit()' name='arrangement' value='$thisArrangement' type='checkbox'><p>$thisArrangement</p></input>";
                     }
                 }
                 ?>
@@ -182,13 +189,12 @@ session_start();
                     while ($row = $result->fetch_assoc()) {
                         $thisDifficulty = $row['difficulty'];
                         $thisDifficultyId = $row['difficulty_ID'];
-                        echo "<input onchange='this.form.submit()' name='difficulty' value='$thisDifficultyId' type='checkbox'>$thisDifficulty</input>";
+                        echo "<input onchange='this.form.submit()' name='difficulty' value='$thisDifficultyId' type='checkbox'><p>$thisDifficulty</p></input>";
                     }
                 }
                 ?>
                 </div>
                 </div>
-            <button type="submit" name="reset" value="Reset">Reset</button> 
            <!-- <select name="amount">
                 <option value="">Amount of instruments</option>
                 <?php
@@ -198,7 +204,7 @@ session_start();
                     while ($row = $result->fetch_assoc()) {
                         $thisDifficulty = $row['difficulty'];
                         $thisDifficultyId = $row['difficulty_ID'];
-                        echo "<option value='$thisDifficultyId'>$thisDifficulty</option>";
+                        echo "<option value='$thisDifficultyId'><p>$thisDifficulty</p></option>";
                     }
                 }*/
 ?>
@@ -326,7 +332,6 @@ session_start();
             }
         }
         ?>
-        <button id="changeDisplay">Change display</button>    
         <div class='products-container grid' id="alles">
         <?php if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -509,16 +514,19 @@ session_start();
   <script>
             let changeDisplay = document.getElementById('changeDisplay');
             let alles = document.getElementById('alles');
+            let row = document.getElementById('row');
 
             changeDisplay.addEventListener("click", () => {
 
                 if (alles.classList.contains("grid")) {
                     alles.classList.add("list");
                     alles.classList.remove("grid");
-                }
+                    row.src = "./img/menu.png";
+                    }
                 else if (alles.classList.contains("list")) {
                     alles.classList.add("grid");
                     alles.classList.remove("list");
+                    row.src = './img/row.png';
                 }      
             });
         </script>

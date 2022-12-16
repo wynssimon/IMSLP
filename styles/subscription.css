@@ -14,7 +14,15 @@ button {
 .main {
   text-align: center;
 }
-
+p {
+  font-family: 'Varela Round', sans-serif;
+  line-height: 2rem;
+}
+#contentSubscription {
+  width: 50%;
+  margin: auto;
+  margin-top: 2%;
+}
 .wrapper {
   position: relative;
   width: 200px;
@@ -36,6 +44,8 @@ button {
   text-align: center;
   transition: all 0.35s;
   margin: auto;
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 600;
 }
 
 .wrapper a span {

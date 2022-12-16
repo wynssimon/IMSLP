@@ -6,7 +6,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head> 
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,7 +22,8 @@ session_start();
 <body>
     <?php include '../includes/header.php'; ?>
     <main class="main">
-        <div>
+        <div id="contentAccount">
+            <h2>My Account</h2>
             <p>Here you can change your password and email.</p>
             <p>Username: <?php echo $_SESSION['users_username']; ?></p>
             <p>Name: <?php echo $_SESSION['users_name']; ?></p> 
