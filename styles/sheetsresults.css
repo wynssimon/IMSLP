@@ -49,8 +49,9 @@
 #filters .checkboxen input[type='checkbox'] {
   margin: 8px 0;
 }
-.allefilters {
-  display: flex;
+#allefilters {
+  /*display: flex;*/
+  display: none;
   border: 1px solid red;
   width: 100%;
 }

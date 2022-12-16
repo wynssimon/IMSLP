@@ -93,10 +93,24 @@ session_start();
             unset($_SESSION['arrangement']);
         }
         ?>
-     
+        <button id='showfilters'>Filters</button>
+        <script>
+            window.onload = function() {
+                const filtersDiv = document.getElementById("allefilters");
+                const showfilters = document.getElementById("showfilters");
+
+                showfilters.addEventListener("click", function() {
+                    if (filtersDiv.style.display === "none") {
+                    filtersDiv.style.display = "flex";
+                    } else {
+                    filtersDiv.style.display = "none";
+                    }
+                });
+            };
+        </script>
         <form id="filters" method="post">
             <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
-                <div class="allefilters">
+            <div id="allefilters">
                 <div class="checkboxen" >
                     <p>Genre</p>
                     <div class="checkbox-items">
@@ -227,7 +241,7 @@ session_start();
         // Check if an instrument session variable has been set
         if (isset($_SESSION['instrument']) && !empty($_SESSION['instrument'])) {
             $instrument = $_SESSION['instrument'];
-            $query .= " AND `instruments` = '$instrument'";
+            $query .= " AND (`instruments` = '$instrument' OR `instruments2` = '$instrument' OR `instruments3` = '$instrument' OR `instruments4` = '$instrument' OR `instruments5` = '$instrument')";
         }
 
         // Check if an amount of instruments session variable has been set
@@ -331,7 +345,8 @@ session_start();
                 $thisSheetXml = $row['sheets_xml'];
                 $thisSheetID = $row['sheets_id'];
 
-                if (strlen($thisTitle) > 17) {
+                if (is_null($thisComposer) && strlen($thisTitle) > 17) {
+                } elseif (strlen($thisTitle) > 17) {
                     $thisTitle = substr($thisTitle, 0, 17) . '...';
                 }
                 ?>  <div onclick="window.location='./pages/sheet.php?id=<?php echo $thisSheetID; ?>'" class='shop-card'>
@@ -339,7 +354,11 @@ session_start();
                             <?php echo "$thisTitle"; ?> <br> 
                             <div class="ondertitel"><?php
                             echo "$thisComposer";
-                            if (is_null($thisComposer)) {
+                            if (
+                                is_null($thisComposer) &&
+                                strlen($thisTitle) > 17
+                            ) {
+                            } elseif (is_null($thisComposer)) {
                                 echo '<br>';
                             }
                             ?></div>      
