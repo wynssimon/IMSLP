@@ -1,17 +1,29 @@
 body {
   font-family: 'Varela Round', sans-serif;
   background-color: #f1f1f5;
+  justify-content: center;
+  align-items: center;
 }
 .container {
   max-width: 900px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
 }
 #wrongUsernamePassword,
 #userExists,
 #emailExists,
 #passwordMatch,
-#passwordShould,
+#passwordShould {
+  display: none;
+  color: red;
+}
 #newUser {
   display: none;
+  color: black;
 }
 
 a {
@@ -57,7 +69,9 @@ section#formHolder {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+  /*link: https://unsplash.com/photos/2zHGVCrdxHw*/
   z-index: -1;
 }
 .brand a.logo {
@@ -221,7 +235,7 @@ section#formHolder {
   display: none;
 }
 .form form input[type='password'] {
-  color: #f95959;
+  color: #2a6496;
 }
 .form form .CTA {
   margin-top: 30px;

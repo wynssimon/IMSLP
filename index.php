@@ -14,10 +14,15 @@ session_start();
     <link rel="stylesheet" href="styles/headers.css" />
     <link rel="stylesheet" href="styles/sheetsresults.css" />
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <!--<link rel="stylesheet" href="styles/cursor.css" />-->
     <title>Sheetly</title>
   </head>
   <body>
     <?php include 'includes/headerHome.php'; ?>
+    <?php
+/* include 'includes/cursor.php'; */
+?>
     <main class="main">
         <?php
         if (isset($_SESSION['users_permissions'])) {
@@ -94,16 +99,16 @@ session_start();
         }
         ?>
         <div id="inputenbuttons">    
-            <button id="changeDisplay"><img id='row' src='./img/row.png'></button>    
             <button id='showfilters'><img src='./img/filter.png'></button>
             <form method="post">
                 <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
             </form>
-            <input type="text" id="myInput" placeholder="Search for music..." title="Type in a name" />  
+            <input type="text" id="myInput" placeholder="Search for music with a specific title..." />  
+            <button id="changeDisplay"><img id='row' src='./img/row.png'></button>    
         </div>
         <script>
             window.onload = function() {
-                const filtersDiv = document.getElementById("allefilters");
+                const filtersDiv = document.getElementById("filters");
                 const showfilters = document.getElementById("showfilters");
 
                 showfilters.addEventListener("click", function() {
@@ -127,7 +132,7 @@ session_start();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $thisGenre = $row['genre'];
-                            echo "<input onchange='this.form.submit()' name='genre' type='checkbox' value='$thisGenre'><p>$thisGenre</p>";
+                            echo "<div class='item'><input onchange='this.form.submit()' name='genre' type='checkbox' value='$thisGenre'><p>$thisGenre</p></div>";
                         }
                     }
                     ?>
@@ -135,14 +140,14 @@ session_start();
                 </div>
                 <div class="checkboxen">
                     <p>Instruments</p>
-                    <div>
+                    <div class="checkbox-items">
                     <?php
                     $query = 'SELECT * FROM `imslp_instruments` WHERE 1';
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $thisInstrument = $row['instruments'];
-                            echo "<input onchange='this.form.submit()' name='instrument' type='checkbox' value='$thisInstrument'>$thisInstrument</p>";
+                            echo "<div class='item'><input onchange='this.form.submit()' name='instrument' type='checkbox' value='$thisInstrument'>$thisInstrument</p></div>";
                         }
                     }
                     ?>
@@ -150,7 +155,7 @@ session_start();
                 </div>
                 <div class="checkboxen">
                 <p>Composers</p>
-                <div>
+                <div class="checkbox-items">
                 <?php
                 $query =
                     'SELECT * FROM `imslp_composers` WHERE `composers` IS NOT NULL';
@@ -158,7 +163,7 @@ session_start();
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $thisComposer = $row['composers'];
-                        echo "<input onchange='this.form.submit()' name='composer' value='$thisComposer' type='checkbox'><p>$thisComposer</p></input>";
+                        echo "<div class='item'><input onchange='this.form.submit()' name='composer' value='$thisComposer' type='checkbox'><p>$thisComposer</p></input></div>";
                     }
                 }
                 ?>
@@ -166,34 +171,34 @@ session_start();
                 </div>
                 <div class="checkboxen">
                 <p>Arrangement</p>
-                <div>
+                <div class="checkbox-items">
                 <?php
                 $query = 'SELECT * FROM `imslp_arrangements` WHERE 1';
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $thisArrangement = $row['arrangement'];
-                        echo "<input onchange='this.form.submit()' name='arrangement' value='$thisArrangement' type='checkbox'><p>$thisArrangement</p></input>";
+                        echo "<div class='item'><input onchange='this.form.submit()' name='arrangement' value='$thisArrangement' type='checkbox'><p>$thisArrangement</p></input></div>";
                     }
                 }
                 ?>
                 </div>
                 </div>
                 <div class="checkboxen">
-                <p>Difficulty</p>
-                <div>
-                <?php
-                $query = 'SELECT * FROM `imslp_difficulty` WHERE 1';
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $thisDifficulty = $row['difficulty'];
-                        $thisDifficultyId = $row['difficulty_ID'];
-                        echo "<input onchange='this.form.submit()' name='difficulty' value='$thisDifficultyId' type='checkbox'><p>$thisDifficulty</p></input>";
+                    <p>Difficulty</p>
+                    <div class="checkbox-items">
+                    <?php
+                    $query = 'SELECT * FROM `imslp_difficulty` WHERE 1';
+                    $result = $conn->query($query);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $thisDifficulty = $row['difficulty'];
+                            $thisDifficultyId = $row['difficulty_ID'];
+                            echo "<div class='item'><input onchange='this.form.submit()' name='difficulty' value='$thisDifficultyId' type='checkbox'><p>$thisDifficulty</p></input></div>";
+                        }
                     }
-                }
-                ?>
-                </div>
+                    ?>
+                    </div>
                 </div>
            <!-- <select name="amount">
                 <option value="">Amount of instruments</option>
@@ -530,5 +535,7 @@ session_start();
                 }      
             });
         </script>
-  <script src="scripts/script.js"></script>
+        <?php include './includes/footer.php'; ?>
+  <script src="scripts/livesearch.js"></script>
+  <script src="scripts/cursor.js"></script>
 </html>

@@ -79,7 +79,7 @@ session_start();
                     } else {
                         $query = "UPDATE `imslp_users` SET users_password='$thisPassword', users_email='$thisEmail' WHERE users_ID = '{$_SESSION['users_ID']}'";
                         $result = $conn->query($query);
-                        echo '<br> Succesfully updated your profile. To check your use your new data log back in.';
+                        echo '<br> Succesfully updated your profile. To check your new data log back in.';
                     }
                 }
             } ?>
