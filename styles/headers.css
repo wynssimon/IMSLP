@@ -10,6 +10,11 @@ header {
   min-height: 10vh;
   border-bottom: 1px solid lightgrey;
 }
+#onopvallend {
+  z-index: -1;
+  width: 100%;
+  position: absolute;
+}
 .logo {
   grid-column: 1 / 2;
   padding: 3% 2.5% 2.5% 10%;

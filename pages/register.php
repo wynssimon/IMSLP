@@ -3,25 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/reset.css" />
-    <link rel="stylesheet" href="../styles/headers.css" />
-    <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/text.css" />
-    <link rel="stylesheet" href="../styles/form.css" />
-    <title>Sheetly</title>
-</head>
-<body>
-<?php include '../includes/header.php'; ?>
- <main class="main">
+
     <?php
     include 'config.php';
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['action'] == 'register') {
             $getUsername = $_POST['users_username'];
@@ -61,33 +45,100 @@ session_start();
                 mysqli_num_rows($check_username) > 0
             ) { ?><script>alert("User with this username already exists")</script><?php } else {$query = "INSERT INTO `imslp_users` (`users_ID`, `users_username`, `users_password`, `users_name`, `users_email`,`users_permissions`) VALUES (NULL, '$getUsername', '$getPassword', '$getName','$getEmail',0)";
                 $result = $conn->query($query);
-                echo '<p>account made, log in now</p>';
-                header('location: login.php');}
+                header('location: login.php');
+                echo '<p>account made, log in now</p>';}
         }
     }
     ?>
-    <form class="registreer" action="register.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="register">
-        <h1>Register</h1>
-        <div>
-            <input type="text" name="users_username" placeholder="User Name" required><br>
-        </div>
-        <div>
-            <input type="password" name="users_password" placeholder="Password" required><br>
-        </div>
-        <div>
-            <input type="text" name="users_name" placeholder="Name" required><br>
-        </div>
-        <div>
-            <input type="email" name="users_email" placeholder="Email" required><br>
-        </div>
-        <div class="logreg">            
-            <div class="wrapper">
-                    <button type="submit"><span>Register</span></button>
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel="stylesheet" href="../styles/loginRegister.css">
+
+<div class="container">
+   <section id="formHolder">
+
+      <div class="row">
+
+         <!-- Brand Box -->
+         <div class="col-sm-6 brand">
+            <a href="../index.php" class="logo">Home</a>
+
+            <div class="heading">
+               <h2>Sheetly</h2>
+               <p>Your number one music sheets library</p>
             </div>
-            <a href="login.php">Login</a> 
-        </div>
-    </form>
-</main>
-</body>
-</html>
+
+            <div class="success-msg">
+               <p>Great! You are one of our members now</p>
+               <a href="#" class="profile">Your Profile</a>
+            </div>
+         </div>
+
+
+         <!-- Form Box -->
+         <div class="col-sm-6 form">
+            <!-- Login Form -->
+            <div class="login form-peice switched">
+               <form class="login-form " action="login.php" method="post">
+                  <div class="form-group">
+                     <label for="loginemail">Email</label>
+                     <input type="text" name="users_username" id="loginemail" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="loginPassword">Password</label>
+                     <input type="password" name="users_password" id="loginPassword" required>
+                  </div>
+
+                  <div class="CTA">
+                     <input type="submit" value="Login">
+                     <a href="register.php" class="switch">I'm New</a>
+                  </div>
+               </form>
+            </div><!-- End Login Form -->
+
+            <!-- Signup Form -->
+            <div class="signup form-peice">
+               <form class="signup-form" action="register.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="register">
+                  <div class="form-group">
+                     <label for="users_name">Full Name</label>
+                     <input type="text" name="users_name" id="name" class="name"required>
+                     <span class="error"></span>
+                  </div>
+                  <div class="form-group">
+                     <label for="users_username">Username</label>
+                     <input type="text" name="users_username" id="name" class="name" required>
+                     <span class="error"></span>
+                  </div>   
+                  <div class="form-group">
+                     <label for="users_email">Email </label>
+                     <input type="email" name="users_email" id="email" class="email" required>
+                     <span class="error"></span>
+                  </div>
+                  <div class="form-group">
+                     <label for="users_password">Password</label>
+                     <input type="password" name="users_password" id="password" class="pass" required>
+                     <span class="error"></span>
+                  </div>
+
+                  <!--<div class="form-group">
+                     <label for="users_passwordCon">Confirm Password</label>
+                     <input type="password" name="users_passwordCon" id="passwordCon" class="passConfirm">
+                     <span class="error"></span>
+                  </div>-->
+
+                  <div class="CTA">
+                     <input type="submit" value="Signup Now" id="submit">
+                     <a href="login.php" class="switch">I have an account</a>
+                  </div>
+               </form>
+            </div><!-- End Signup Form -->
+         </div>
+      </div>
+
+   </section>
+</div>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script  src="../scripts/formAnimation.js"></script>
