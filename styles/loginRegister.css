@@ -5,6 +5,14 @@ body {
 .container {
   max-width: 900px;
 }
+#wrongUsernamePassword,
+#userExists,
+#emailExists,
+#passwordMatch,
+#passwordShould,
+#newUser {
+  display: none;
+}
 
 a {
   display: inline-block;
@@ -227,8 +235,14 @@ section#formHolder {
   color: #fff;
   /* border-radius: 30px;*/
   margin-right: 20px;
-  border: none;
+  border: 1px solid transparent;
+  transition: 0.2s;
   font-family: 'Varela Round', sans-serif;
+}
+.form form .CTA input:hover {
+  background-color: #fff;
+  color: #2a6496;
+  border: 1px solid #2a6496;
 }
 .form form .CTA a.switch {
   font-size: 13px;
