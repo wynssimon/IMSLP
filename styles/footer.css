@@ -5,11 +5,11 @@ footer {
   border-top: 1px solid lightgrey;
   background-color: white;
   font-family: 'Varela Round', sans-serif;
-  position: relative;
-  bottom: 0;
+  position: sticky;
+  top: 100vh;
+  margin-top: 30px;
   padding: 10px;
   width: 100%;
-  margin-top: 12px;
 }
 
 footer a {

@@ -1,7 +1,9 @@
 .is-hidden {
   display: none;
 }
-
+body {
+  /*cursor: url(../img/curosr_simon.png), auto;*/
+}
 #inputenbuttons {
   display: flex;
   align-items: center;
@@ -169,4 +171,7 @@
 }
 .active {
   background-color: rgb(185, 185, 185);
+}
+#toegepasteFilters {
+  display: flex;
 }

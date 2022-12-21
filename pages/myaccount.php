@@ -13,15 +13,16 @@ session_start();
         <link rel="stylesheet" href="../styles/reset.css" />
         <link rel="stylesheet" href="../styles/headers.css" />
         <link rel="stylesheet" href="../styles/main.css" />
-        <link rel="stylesheet" href="../styles/text.css" />
         <link rel="stylesheet" href="../styles/myaccount.css" />
+        <link rel="stylesheet" href="../styles/footer.css" />
         <title>
             <?php echo 'Profile ' . $_SESSION['users_name']; ?>
         </title>
-    </head>
+    </head> 
 <body>
     <?php include '../includes/header.php'; ?>
     <main class="main">
+        <?php if (isset($_SESSION['users_username'])) { ?>
         <div id="contentAccount">
             <h2>My Account</h2>
             <p>Here you can change your password and email.</p>
@@ -79,10 +80,12 @@ session_start();
                     } else {
                         $query = "UPDATE `imslp_users` SET users_password='$thisPassword', users_email='$thisEmail' WHERE users_ID = '{$_SESSION['users_ID']}'";
                         $result = $conn->query($query);
-                        echo '<br> Succesfully updated your profile. To check your new data log back in.';
+                        echo '<br> <p>Succesfully updated your profile. To check your new data log back in.</p>';
                     }
                 }
             } ?>
         </div>
+        <?php } else {echo "<p>You're not logged in!</p>";} ?>
     </main>
+    <?php include '../includes/footer.php'; ?>
 </body>

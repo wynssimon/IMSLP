@@ -8,7 +8,7 @@
          <div class="row">
 
             <div class="col-sm-6 brand">
-               <a href="../index.php" class="logo">Home</a>
+               <a href="../index.php" class="logo">Back</a>
 
                <div class="heading">
                   <h2>Sheetly</h2>

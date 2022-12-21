@@ -14,6 +14,7 @@ include './config.php';
     <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/about.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
     <title>Sheetly</title>
   </head>
   <body>
@@ -34,5 +35,6 @@ include './config.php';
         </div>
       </div>
     </main>
+    <?php include '../includes/footer.php'; ?>
   </body>
 </html>

@@ -75,7 +75,7 @@ section#formHolder {
   z-index: -1;
 }
 .brand a.logo {
-  color: #2a6496;
+  color: white;
   font-size: 20px;
   font-weight: 700;
   text-decoration: none;
@@ -244,13 +244,12 @@ section#formHolder {
   text-transform: uppercase;
   padding: 5px 30px;
   background: #2a6496;
-  /*background-color: white;
-  border: 2px solid #2a6496;*/
+  border-radius: 4px;
   color: #fff;
-  /* border-radius: 30px;*/
   margin-right: 20px;
   border: 1px solid transparent;
   transition: 0.2s;
+  height: 40px;
   font-family: 'Varela Round', sans-serif;
 }
 .form form .CTA input:hover {

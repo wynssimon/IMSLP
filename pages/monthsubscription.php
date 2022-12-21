@@ -13,25 +13,25 @@ session_start();
         <link rel="stylesheet" href="../styles/headers.css" />
         <link rel="stylesheet" href="../styles/main.css" />
         <link rel="stylesheet" href="../styles/text.css" />
-        <link rel="stylesheet" href="../styles/myaccount.css" />
+        <link rel="stylesheet" href="../styles/footer.css" />
         <title>1 Month Subscription</title>
     </head>
 <body>
     <?php
     include '../includes/header.php';
     include 'config.php';
-    $_SESSION['users_ID'];
     ?>
     <main class="main">
-        <?php if (
-            (isset($_SESSION['users_permissions']) &&
-                $_SESSION['users_permissions'] == 1) ||
-            (isset($_SESSION['users_permissions']) &&
-                $_SESSION['users_permissions'] == 2)
-        ) {
-            echo 'You already have a subscription, Come back when it expires.';
-        } else {
-             ?>
+        <?php if (isset($_SESSION['users_permissions'])) {
+            if (
+                (isset($_SESSION['users_permissions']) &&
+                    $_SESSION['users_permissions'] == 1) ||
+                (isset($_SESSION['users_permissions']) &&
+                    $_SESSION['users_permissions'] == 2)
+            ) {
+                echo '<p>You already have a subscription, Come back when it expires.</p>';
+            } else {
+                 ?>
         
         <p>Confirm your subscription for one month. After that logout and log back in to activate your subscription.</p>
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -39,7 +39,7 @@ session_start();
                 $thisPermissions = $_POST['permissie'];
                 $thisUsersID = $_SESSION['users_ID'];
                 $currentDate = date('Y-m-d');
-                echo '<strong>updated your permissions. Now you can download as many sheets as you want for one month long. </strong><br>';
+                header('location:./confirmed.php');
 
                 $query = "UPDATE `imslp_users`SET users_permissions='$thisPermissions', users_permissions_start='$currentDate' WHERE users_ID = $thisUsersID ";
                 $result = $conn->query($query);
@@ -51,6 +51,10 @@ session_start();
             <input type="submit" name="submit" value="confirm">
         </form>
         <?php
+            }
+        } else {
+            echo '<p>You have nothing to search here!</p>';
         } ?>
     </main>
+    <?php include '../includes/footer.php'; ?>
 </body>

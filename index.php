@@ -15,14 +15,10 @@ session_start();
     <link rel="stylesheet" href="styles/sheetsresults.css" />
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/footer.css" />
-    <!--<link rel="stylesheet" href="styles/cursor.css" />-->
     <title>Sheetly</title>
   </head>
   <body>
     <?php include 'includes/headerHome.php'; ?>
-    <?php
-/* include 'includes/cursor.php'; */
-?>
     <main class="main">
         <?php
         if (isset($_SESSION['users_permissions'])) {
@@ -291,32 +287,32 @@ session_start();
                     $difficulty
             )
         ) {
-            echo 'Filters:<br>';
+            echo '<div id="toegepasteFilters">Filters:<br>';
             if (!empty($genre)) {
-                echo "$genre<br>
+                echo "<div>$genre<br>
                 <form method='post'>
                     <button type='submit' name='resetgenre' value='Reset Genre'>Reset genre</button>
-                </form>
+                </form></div>
                 ";
             }
             if (!empty($instrument)) {
-                echo "$instrument<br>
+                echo "<div>$instrument<br>
                 <form method='post'>
                     <button type='submit' name='resetinstrument' value='Reset Instrument'>Reset instrument</button>
-                </form>
+                </form></div>
             ";
             }
             if (!empty($composer)) {
-                echo "$composer <br>
+                echo "<div>$composer <br>
                 <form method='post'>
                     <button type='submit' name='resetcomposer' value='Reset composer'>Reset composer</button>
-                </form>";
+                </form></div>";
             }
             if (!empty($arrangement)) {
-                echo "$arrangement <br>
+                echo "<div>$arrangement <br>
                 <form method='post'>
                     <button type='submit' name='resetarrangement' value='Reset Arrangement'>Reset arrangement</button>
-                </form>";
+                </form></div>";
             }
             if (!empty($difficulty)) {
                 if ($difficulty == 1) {
@@ -335,6 +331,7 @@ session_start();
                     <button type='submit' name='resetdifficulty' value='Reset Difficulty'>Reset difficulty</button>
                 </form>";
             }
+            echo '</div>';
         }
         ?>
         <div class='products-container grid' id="alles">

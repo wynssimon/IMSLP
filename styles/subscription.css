@@ -12,11 +12,12 @@ button {
   text-align: center;
 }
 .main {
-  text-align: center;
+  text-align: left;
 }
 p {
   font-family: 'Varela Round', sans-serif;
   line-height: 2rem;
+  text-align: left;
 }
 #contentSubscription {
   width: 50%;
@@ -28,6 +29,7 @@ p {
   width: 200px;
   margin: auto;
   margin-bottom: 1%;
+  margin-right: 1%;
 }
 
 .wrapper a {
@@ -40,6 +42,7 @@ p {
   text-decoration: none;
   color: #2a6496;
   border: 2px solid #2a6496;
+  border-radius: 4px;
   letter-spacing: 2px;
   text-align: center;
   transition: all 0.35s;
@@ -62,6 +65,7 @@ p {
   height: 100%;
   background: #2a6496;
   transition: all 0.35s;
+  border-radius: 4px;
 }
 
 .wrapper a:hover {
@@ -70,4 +74,10 @@ p {
 
 .wrapper a:hover:after {
   width: 200px;
+}
+#wrapperAlign {
+  display: flex;
+  align-items: center;
+  margin: 1% 0 1% 0;
+  width: 50%;
 }

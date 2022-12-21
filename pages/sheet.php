@@ -15,6 +15,7 @@ include './config.php';
     <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/sheet.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
 </head>
 <body>
     <?php include '../includes/header.php'; ?>
@@ -113,7 +114,7 @@ include './config.php';
             }
 
         } else {
-            echo '<div class="tekst"><p>Make an account or log in to watch the sheets</p></div>';
+            echo '<p>Make an account or log in to watch the sheets!</p>';
         } ?>
             </div>
             <div id="osmdCanvas"></div>
@@ -131,7 +132,7 @@ include './config.php';
                     osmd.render();
                     });   
             </script>
-      <?php  ?>
     </main>
+    <?php include '../includes/footer.php'; ?>
 </body>
 </html>
