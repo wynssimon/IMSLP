@@ -96,9 +96,6 @@ session_start();
         ?>
         <div id="inputenbuttons">    
             <button id='showfilters'><img src='./img/filter.png'></button>
-            <form method="post">
-                <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
-            </form>
             <input type="text" id="myInput" placeholder="Search for music with a specific title..." />  
             <button id="changeDisplay"><img id='row' src='./img/row.png'></button>    
         </div>
@@ -108,11 +105,10 @@ session_start();
                 const showfilters = document.getElementById("showfilters");
 
                 showfilters.addEventListener("click", function() {
-                    console.log('hoi');
-                    if (filtersDiv.style.display === "none") {
-                    filtersDiv.style.display = "flex";
-                    } else {
+                    if (filtersDiv.style.display === "block") {
                     filtersDiv.style.display = "none";
+                    } else {
+                    filtersDiv.style.display = "block";
                     }
                 });
             };
@@ -127,8 +123,15 @@ session_start();
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $thisGenre = $row['genre'];
-                            echo "<div class='item'><input onchange='this.form.submit()' name='genre' type='checkbox' value='$thisGenre'><p>$thisGenre</p></div>";
+                            $thisGenre = $row['genre']; ?>
+                            <input onchange='this.form.submit()' name='genre' type='checkbox' value='<?php echo $thisGenre; ?>'<?php if (
+    isset($_SESSION['genre']) &&
+    $_SESSION['genre'] == $thisGenre
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisGenre; ?></p>
+                            <?php
                         }
                     }
                     ?>
@@ -142,8 +145,15 @@ session_start();
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $thisInstrument = $row['instruments'];
-                            echo "<div class='item'><input onchange='this.form.submit()' name='instrument' type='checkbox' value='$thisInstrument'>$thisInstrument</p></div>";
+                            $thisInstrument = $row['instruments']; ?>
+                            <input onchange='this.form.submit()' name='instrument' type='checkbox' value='<?php echo $thisInstrument; ?>'<?php if (
+    isset($_SESSION['instrument']) &&
+    $_SESSION['instrument'] == $thisInstrument
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisInstrument; ?></p>
+                            <?php
                         }
                     }
                     ?>
@@ -158,8 +168,15 @@ session_start();
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $thisComposer = $row['composers'];
-                        echo "<div class='item'><input onchange='this.form.submit()' name='composer' value='$thisComposer' type='checkbox'><p>$thisComposer</p></input></div>";
+                        $thisComposer = $row['composers']; ?>
+                        <input onchange='this.form.submit()' name='composer' type='checkbox' value='<?php echo $thisComposer; ?>'<?php if (
+    isset($_SESSION['composer']) &&
+    $_SESSION['composer'] == $thisComposer
+) {
+    echo 'checked';
+} ?>>
+                        <p><?php echo $thisComposer; ?></p>
+                        <?php
                     }
                 }
                 ?>
@@ -173,8 +190,15 @@ session_start();
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $thisArrangement = $row['arrangement'];
-                        echo "<div class='item'><input onchange='this.form.submit()' name='arrangement' value='$thisArrangement' type='checkbox'><p>$thisArrangement</p></input></div>";
+                        $thisArrangement = $row['arrangement']; ?>
+                        <input onchange='this.form.submit()' name='arrangement' type='checkbox' value='<?php echo $thisArrangement; ?>'<?php if (
+    isset($_SESSION['arrangement']) &&
+    $_SESSION['arrangement'] == $thisArrangement
+) {
+    echo 'checked';
+} ?>>
+                        <p><?php echo $thisArrangement; ?></p>
+                        <?php
                     }
                 }
                 ?>
@@ -188,9 +212,18 @@ session_start();
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+
                             $thisDifficulty = $row['difficulty'];
                             $thisDifficultyId = $row['difficulty_ID'];
-                            echo "<div class='item'><input onchange='this.form.submit()' name='difficulty' value='$thisDifficultyId' type='checkbox'><p>$thisDifficulty</p></input></div>";
+                            ?>
+                            <input onchange='this.form.submit()' name='difficulty' type='checkbox' value='<?php echo $thisDifficultyId; ?>'<?php if (
+    isset($_SESSION['difficulty']) &&
+    $_SESSION['difficulty'] == $thisDifficultyId
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisDifficulty; ?></p>
+                            <?php
                         }
                     }
                     ?>
@@ -210,6 +243,7 @@ session_start();
                 }*/
 ?>
             </select>   -->
+                <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
             </div>
         </form>
         <?php

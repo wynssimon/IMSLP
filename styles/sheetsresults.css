@@ -1,13 +1,10 @@
 .is-hidden {
   display: none;
 }
-body {
-  /*cursor: url(../img/curosr_simon.png), auto;*/
-}
+
 #inputenbuttons {
   display: flex;
   align-items: center;
-  /*border: 1px solid red;*/
   margin: 2% 10% 2% 10%;
 }
 #inputenbuttons button img {
@@ -18,6 +15,7 @@ body {
 #showfilters {
   margin-right: 10px;
 }
+#filters button,
 #inputenbuttons button {
   height: 40px;
   border: none;
@@ -45,11 +43,13 @@ body {
 }
 #filters {
   width: 100%;
-  display: none;
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
   font-family: 'Varela Round', sans-serif;
+  display: none;
+  position: absolute;
+  z-index: 10;
 }
+
 #filters select {
   width: 20%;
   padding: 12px 20px;
@@ -58,33 +58,34 @@ body {
   border: 2px solid #ccc;
   border-radius: 4px;
 }
-
+.show {
+  display: flex;
+}
 #filters .checkboxen {
   display: inline-block;
   width: 15%;
 }
 
-#filters .checkboxen input[type='checkbox'] {
+.checkbox-items input[type='checkbox'] {
   height: 20px;
 }
+.checkboxen p:nth-child(1) {
+  font-weight: bold;
+}
+
 #allefilters {
-  border: 1px solid red;
   width: 100%;
+  background-color: white;
+  padding: 2%;
+  padding-left: 8%;
+  text-align: left;
 }
 .checkbox-items {
   text-align: left;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid red;
   width: 100%;
-}
-.item {
-  border: 1px solid green;
-  background-color: yellow;
-  height: 3rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+  justify-content: left;
 }
 #alles {
   min-height: 300px;
