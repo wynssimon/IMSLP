@@ -14,7 +14,7 @@ button {
 .main {
   text-align: left;
 }
-p {
+#contentSubscription p {
   font-family: 'Varela Round', sans-serif;
   line-height: 2rem;
   text-align: left;

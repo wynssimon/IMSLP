@@ -72,7 +72,10 @@
 .checkboxen p:nth-child(1) {
   font-weight: bold;
 }
-
+#verberg {
+  position: absolute;
+  visibility: hidden;
+}
 #allefilters {
   width: 100%;
   background-color: white;

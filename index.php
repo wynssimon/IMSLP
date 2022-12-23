@@ -96,7 +96,7 @@ session_start();
         ?>
         <div id="inputenbuttons">    
             <button id='showfilters'><img src='./img/filter.png'></button>
-            <input type="text" id="myInput" placeholder="Search for music with a specific title..." />  
+            <input type="text" id="myInput" placeholder="Search for music with a specific title, composer, genre, instrument,..." />  
             <button id="changeDisplay"><img id='row' src='./img/row.png'></button>    
         </div>
         <script>
@@ -410,6 +410,12 @@ session_start();
                         <div class="desc">
                             <div>
                             <?php echo "$thisGenre"; ?>
+                            <?php echo "<div id='verberg'>$thisDifficulty</div>"; ?>
+                            <?php echo "<div id='verberg'>$thisInstrument</div>"; ?>
+                            <?php echo "<div id='verberg'>$thisInstrument2</div>"; ?>
+                            <?php echo "<div id='verberg'>$thisInstrument3</div>"; ?>
+                            <?php echo "<div id='verberg'>$thisInstrument4</div>"; ?>
+                            <?php echo "<div id='verberg'>$thisInstrument5</div>"; ?>
                             </div>
                             <div>
                             <?php if ($thisInstrument == 'Accordion') {
@@ -548,25 +554,35 @@ session_start();
   </main>
   </body>
   <script>
-            let changeDisplay = document.getElementById('changeDisplay');
-            let alles = document.getElementById('alles');
-            let row = document.getElementById('row');
+        let changeDisplay = document.getElementById('changeDisplay');
+        let alles = document.getElementById('alles');
+        let row = document.getElementById('row');
 
-            changeDisplay.addEventListener("click", () => {
+        if (sessionStorage.getItem('displayMode') === 'list') {
+            alles.classList.add('list');
+            alles.classList.remove('grid');
+            row.src = "./img/menu.png";
+        } else {
+            alles.classList.add('grid');
+            alles.classList.remove('list');
+            row.src = './img/row.png';
+        }
 
-                if (alles.classList.contains("grid")) {
-                    alles.classList.add("list");
-                    alles.classList.remove("grid");
-                    row.src = "./img/menu.png";
-                    }
-                else if (alles.classList.contains("list")) {
-                    alles.classList.add("grid");
-                    alles.classList.remove("list");
-                    row.src = './img/row.png';
-                }      
-            });
-        </script>
+        changeDisplay.addEventListener("click", () => {
+            if (alles.classList.contains("grid")) {
+                alles.classList.add("list");
+                alles.classList.remove("grid");
+                row.src = "./img/menu.png";
+                sessionStorage.setItem('displayMode', 'list');
+            } else if (alles.classList.contains("list")) {
+                alles.classList.add("grid");
+                alles.classList.remove("list");
+                row.src = './img/row.png';
+                sessionStorage.setItem('displayMode', 'grid');
+            }      
+        });
+    </script>
+
         <?php include './includes/footer.php'; ?>
   <script src="scripts/livesearch.js"></script>
-  <script src="scripts/cursor.js"></script>
 </html>

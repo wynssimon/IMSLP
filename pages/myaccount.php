@@ -31,11 +31,15 @@ session_start();
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <input type="hidden" name="action" value="update">
                 <p>Password:
-                    <input id="password-field" name="password" type="password" value="<?php echo $_SESSION[
-                        'users_password'
-                    ]; ?>">                
+                    <input id="password-field" name="password" type="password" value="<?php echo isset(
+                        $_POST['password']
+                    )
+                        ? $_POST['password']
+                        : $_SESSION['users_password']; ?>">                
                     <img id="showpasswordbtn" onclick="showPassword()" src='../img/view.png'/>
                 </p>
+                <div id='passwordShould'>Password should have at least :8 characters, one upper case letter, one number, one special character!</div>
+                <br>
                 <script>
                 function showPassword() {
                     var passwordField = document.getElementById("password-field");
@@ -50,10 +54,14 @@ session_start();
                 }
                 </script>
                 <p>Email:
-                    <input name="email" type="email" value="<?php echo $_SESSION[
-                        'users_email'
-                    ]; ?>">
+                    <input name="email" type="email" value="<?php echo isset(
+                        $_POST['email']
+                    )
+                        ? $_POST['email']
+                        : $_SESSION['users_email']; ?>">
                 </p>
+                <div id='emailExists'>User with this email already exists!</div>
+                <br>
                 <input type="submit" name="submit" value="save">
             </form>
             <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -64,6 +72,10 @@ session_start();
                     $lowercase = preg_match('@[a-z]@', $thisPassword);
                     $number = preg_match('@[0-9]@', $thisPassword);
                     $specialChars = preg_match('@[^\w]@', $thisPassword);
+                    $check_email = mysqli_query(
+                        $conn,
+                        "SELECT users_email FROM imslp_users where users_email = '$thisEmail' "
+                    );
 
                     if (
                         !$uppercase ||
@@ -72,15 +84,15 @@ session_start();
                         !$specialChars ||
                         strlen($thisPassword) < 8
                     ) {
-                        echo 'Password should have: <br> 
-                                - 8 characters <br>
-                                - one upper case letter <br>
-                                - one number <br>
-                                - one special character.';
+                        echo '<script>document.getElementById("passwordShould").style.display = "block";</script>';
+                    } elseif (mysqli_num_rows($check_email) > 0) {
+                        echo '<script>document.getElementById("emailExists").style.display = "block";</script>';
                     } else {
                         $query = "UPDATE `imslp_users` SET users_password='$thisPassword', users_email='$thisEmail' WHERE users_ID = '{$_SESSION['users_ID']}'";
                         $result = $conn->query($query);
-                        echo '<br> <p>Succesfully updated your profile. To check your new data log back in.</p>';
+                        echo '<br> <p>Succesfully updated your profile.</p>';
+                        $_SESSION['users_password'] = $thisPassword;
+                        $_SESSION['users_email'] = $thisEmail;
                     }
                 }
             } ?>

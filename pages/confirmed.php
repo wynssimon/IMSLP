@@ -22,6 +22,9 @@ session_destroy();
         include '../includes/header.php';
         include 'config.php';
         ?>
-        <p>Updated your permissions. Log back in and enjoy your premium profile!</p>
+        <main class="main">
+            <p>Updated your permissions. Log back in and enjoy your premium profile!</p>
+        </main>
     </body>
+    <?php include '../includes/footer.php'; ?>
 </html>

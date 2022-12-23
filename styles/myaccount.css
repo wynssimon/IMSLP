@@ -1,9 +1,9 @@
-p {
+#contentAccount p {
   font-family: 'Varela Round', sans-serif;
   line-height: 2rem;
   text-align: left;
 }
-h2 {
+#contentAccount h2 {
   text-align: left;
   font-size: 2.3rem;
   margin-bottom: 2%;
@@ -18,4 +18,12 @@ h2 {
   width: 50%;
   margin: auto;
   margin-top: 2%;
+}
+#wrongUsernamePassword,
+#userExists,
+#emailExists,
+#passwordMatch,
+#passwordShould {
+  display: none;
+  color: red;
 }

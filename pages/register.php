@@ -64,7 +64,6 @@ ob_start();
                      </div>
                      <div id='passwordMatch'>Passwords do not match!</div>
                      <div id='passwordShould'>Password should have at least :8 characters, one upper case letter, one number, one special character!</div>
-
                      <div class='CTA'>
                         <input type='submit' value='Signup Now' id='submit'>
                         <a href='login.php' class='switch'>I have an account</a>

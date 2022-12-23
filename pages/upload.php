@@ -13,7 +13,6 @@ include 'config.php';
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/headers.css" />
     <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/text.css" />
     <link rel="stylesheet" href="../styles/upload.css" />
     <link rel="stylesheet" href="../styles/footer.css" />
     <title>Sheetly</title>

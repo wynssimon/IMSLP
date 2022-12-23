@@ -11,12 +11,12 @@
   padding: 1%;
   text-align: center;
 }
-h3 {
+.main h3 {
   text-align: center;
   text-decoration: underline;
   font-weight: bold;
 }
-form {
+.main form {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
