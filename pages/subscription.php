@@ -66,15 +66,76 @@ session_start();
           <?php } elseif ($_SESSION['users_permissions'] == '3') { ?>
             <p>You are an admin!!! You can download as many sheets as you want. We value your help to expand Sheelty with new sheets so that we can continue at delivering the best for our customers.</p>
           <?php } elseif ($_SESSION['users_permissions'] == '0') { ?>
-            <p>Want be able to download and view as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want.</p>
-          <div id="wrapperAlign">
+            <br>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <div class="wrapper">
-              <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=W77KRHZ4HH84J"><span>One month</span></a>   
-            </div>
-            <div class="wrapper"> 
-              <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A"><span>One year</span></a>
-            </div>
+          <div class="package brilliant">
+            <div class="name">Default</div>
+            <div class="price">Free</div>
+            <div class="trial">Forever</div>
+            <hr></hr>
+            <ul>
+            <li>
+              <strong>5</strong>
+              Sheets each day
+            </li>
+            </ul>
           </div>
+          <div class="package"  id="new-tab-div">
+          <script>
+            const newTabDiv = document.getElementById("new-tab-div");
+            newTabDiv.addEventListener("click", function() {
+              window.location.replace("https://www.paypal.com/donate/?hosted_button_id=W77KRHZ4HH84J");
+            });
+          </script>
+            <div class="name">Basic</div>
+            <div class="price">€2,99</div>
+            <div class="trial">For 30 days</div>
+            <hr></hr>
+            <ul>
+            <li>Watch
+              <strong>unlimited</strong>
+              sheets
+            </li>
+            <li>Download
+              <strong>unlimited</strong>
+              sheets
+            </li>
+            <li>For
+              <strong>30</strong>
+              days long
+            </li>
+            </ul>
+          </div>
+          <div class="package" id="new-tab-div2" >
+          <script>
+            const newTabDiv2 = document.getElementById("new-tab-div2");
+            newTabDiv2.addEventListener("click", function() {
+              window.location.replace("https://www.paypal.com/donate/?hosted_button_id=QNSK2WU8X7V9A");
+            });
+          </script>
+            <div class="name">Premium</div>
+            <div class="price">€30</div>
+            <div class="trial">For one year</div>
+            <hr></hr>
+            <ul>
+            <li>Watch
+              <strong>unlimited</strong>
+              sheets
+            </li>
+            <li>Download
+              <strong>unlimited</strong>
+              sheets
+            </li>
+            <li>For
+              <strong>1</strong>
+              year long
+            </li>
+            </ul>
+          </div>
+          </div>
+          <br>
+          <br>
           <p>Sheetly is dedicated to providing a platform that is accessible to everyone, regardless of their financial situation. We believe that everyone should have the opportunity to use music sheets, and that's why we offer Sheetly for free. However, running a platform like Sheetly requires a lot of resources and expenses, and we rely on the revenue from subscriptions to cover those costs. Without the support of our subscribers, we wouldn't be able to continue offering Sheetly as a free platform. By subscribing to Sheetly, you're not only getting access to infinite music sheets, you're also helping to keep the platform running and accessible to everyone. So if you find value in Sheetly and want to help us continue to provide this service to the community, we encourage you to consider subscribing. Your support is greatly appreciated!</p>
         <?php } ?>  
         <?php
@@ -82,10 +143,10 @@ session_start();
              ?>
             <p>Want be able to download and view as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want. <br>Log in or register so that you can take your subscription right now.</p>
             <div id="wrapperAlign">
-              <div class="wrapper">
+              <div class="wrapper2">
                 <a href="./login.php"><span>Log in</span></a>
               </div>
-              <div class="wrapper">
+              <div class="wrapper2">
                 <a href="./register.php"><span>Register</span></a>
               </div>
             </div>

@@ -29,3 +29,6 @@ footer h2 {
   margin-bottom: 10px;
   font-family: 'Martel', serif;
 }
+footer p:nth-child(1) {
+  font-weight: 700;
+}
