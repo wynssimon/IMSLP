@@ -178,4 +178,22 @@
 }
 #toegepasteFilters {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#toegepasteFilters p {
+  font-family: 'Varela Round', sans-serif;
+}
+#toegepasteFilters form {
+  display: flex;
+  align-items: center;
+}
+#toegepasteFilters button {
+  cursor: pointer;
+  background-color: #2a6496;
+  border: none;
+  color: white;
+  padding: 6px;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 4px;
 }

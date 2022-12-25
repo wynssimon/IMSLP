@@ -35,6 +35,7 @@ include 'config.php';
           <input requiredtype='text' value="10" name='instrument3' class='textInput' placeholder='instrument3'>
           <input required type='text' value="10" name='instrument4' class='textInput' placeholder='instrument4'>
           <input required type='text' value="10" name='instrument5' class='textInput' placeholder='instrument5'>
+          <input required type='text' name='amount' class='textInput' placeholder='amount of instruments'>
           <input required type='text' name='difficulty' class='textInput' placeholder='difficulty'>
           <div>
             <label for="pngSheet">Image PNG file</label>
@@ -102,6 +103,7 @@ include 'config.php';
              $getInstrument3 = $_POST['instrument3'];
              $getInstrument4 = $_POST['instrument4'];
              $getInstrument5 = $_POST['instrument5'];
+             $getAmount = $_POST['amount'];
              $getDifficulty = $_POST['difficulty'];
              $getArrangement = $_POST['arrangement'];
              $getImgSheet = $_FILES['pngSheet']['name'];
@@ -137,7 +139,7 @@ include 'config.php';
                  ) and
                  move_uploaded_file($_FILES['xmlSheet']['tmp_name'], $location2)
              ) {
-                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer_ID`, `sheets_genre_ID`, `sheets_instrument1`, `sheets_instrument2`,`sheets_instrument3`,`sheets_instrument4`,`sheets_instrument5`,`sheets_arrangement_ID`,`sheets_difficulty`, `sheets_img`,`sheets_xml`, `sheets_pdf`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3', '$getInstrument4', '$getInstrument5','$getArrangement','$getDifficulty', '$getImgSheet','$getSheet', '$getPdfSheet')";
+                 $query = "INSERT INTO `imslp_sheets`(`sheets_title`, `sheets_composer_ID`, `sheets_genre_ID`, `sheets_instrument1`, `sheets_instrument2`,`sheets_instrument3`,`sheets_instrument4`,`sheets_instrument5`,`sheets_arrangement_ID`,`sheets_difficulty`, `sheets_img`,`sheets_xml`, `sheets_pdf`, `sheets_amount`) VALUES ('$getTitle', '$getComposer', '$getGenre', '$getInstrument1', '$getInstrument2', '$getInstrument3', '$getInstrument4', '$getInstrument5','$getArrangement','$getDifficulty', '$getImgSheet','$getSheet', '$getPdfSheet', '$getAmount')";
                  $result = $conn->query($query);
                  echo 'gelukt';
              } else {

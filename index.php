@@ -55,9 +55,9 @@ session_start();
         if (isset($_POST['instrument']) && !empty($_POST['instrument'])) {
             $_SESSION['instrument'] = $_POST['instrument'];
         }
-        /* if (isset($_POST['amount']) && !empty($_POST['amount'])) {
+        if (isset($_POST['amount']) && !empty($_POST['amount'])) {
             $_SESSION['amount'] = $_POST['amount'];
-        }*/
+        }
         if (isset($_POST['difficulty']) && !empty($_POST['difficulty'])) {
             $_SESSION['difficulty'] = $_POST['difficulty'];
         }
@@ -70,7 +70,7 @@ session_start();
         if (isset($_POST['reset'])) {
             unset($_SESSION['genre']);
             unset($_SESSION['instrument']);
-            //  unset($_SESSION['amount']);
+            unset($_SESSION['amount']);
             unset($_SESSION['difficulty']);
             unset($_SESSION['composer']);
             unset($_SESSION['arrangement']);
@@ -81,9 +81,9 @@ session_start();
         if (isset($_POST['resetinstrument'])) {
             unset($_SESSION['instrument']);
         }
-        /* if (isset($_POST['resetamount'])) {
+        if (isset($_POST['resetamount'])) {
             unset($_SESSION['amount']);
-        }*/
+        }
         if (isset($_POST['resetdifficulty'])) {
             unset($_SESSION['difficulty']);
         }
@@ -229,26 +229,41 @@ session_start();
                     ?>
                     </div>
                 </div>
-           <!-- <select name="amount">
-                <option value="">Amount of instruments</option>
-                <?php
-/*  $query = 'SELECT * FROM `imslp_difficulty` WHERE 1';
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $thisDifficulty = $row['difficulty'];
-                        $thisDifficultyId = $row['difficulty_ID'];
-                        echo "<option value='$thisDifficultyId'><p>$thisDifficulty</p></option>";
-                    }
-                }*/
-?>
-            </select>   -->
+                <div class="checkboxen">
+                    <p>Amount</p>
+                    <div class="checkbox-items">
+                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="1" <?php if (
+                            isset($_SESSION['amount']) &&
+                            $_SESSION['amount'] == 1
+                        ) {
+                            echo 'checked';
+                        } ?>>Solo</input>
+                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="2"<?php if (
+                            isset($_SESSION['amount']) &&
+                            $_SESSION['amount'] == 2
+                        ) {
+                            echo 'checked';
+                        } ?>>Duo</input>
+                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="3" <?php if (
+                            isset($_SESSION['amount']) &&
+                            $_SESSION['amount'] == 3
+                        ) {
+                            echo 'checked';
+                        } ?>>Trio</input>
+                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="4" <?php if (
+                            isset($_SESSION['amount']) &&
+                            $_SESSION['amount'] == 4
+                        ) {
+                            echo 'checked';
+                        } ?>>Quatro</input>
+                    </div>
+                </div>       
                 <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
             </div>
         </form>
         <?php
         $query =
-            'SELECT `sheets_title`,`sheets_genre_ID`, `sheets_instrument1`,`sheets_instrument2`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id`, `difficulty`, `genre`, `arrangement`, `composers`, `instruments`, `instruments2`, `instruments3`, `instruments4`, `instruments5` FROM `imslp_sheets`,`imslp_genre`, `imslp_difficulty`, `imslp_arrangements`, `imslp_composers`, `imslp_instruments`, `imslp_instruments2`, `imslp_instruments3`, `imslp_instruments4`, `imslp_instruments5` WHERE `sheets_genre_ID`=`genre_ID` AND `sheets_difficulty`=`difficulty_ID` AND `sheets_arrangement_ID`=`arrangement_ID` AND`sheets_composer_ID`=`composers_ID` AND `sheets_instrument1`=`instruments_ID` AND `sheets_instrument2`=`instruments2_ID` AND `sheets_instrument3`=`instruments3_ID`AND `sheets_instrument4`=`instruments4_ID`AND `sheets_instrument5`=`instruments5_ID`';
+            'SELECT `sheets_title`,`sheets_genre_ID`, `sheets_instrument1`,`sheets_instrument2`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id`, `sheets_amount`,`difficulty`, `genre`, `arrangement`, `composers`, `instruments`, `instruments2`, `instruments3`, `instruments4`, `instruments5` FROM `imslp_sheets`,`imslp_genre`, `imslp_difficulty`, `imslp_arrangements`, `imslp_composers`, `imslp_instruments`, `imslp_instruments2`, `imslp_instruments3`, `imslp_instruments4`, `imslp_instruments5` WHERE `sheets_genre_ID`=`genre_ID` AND `sheets_difficulty`=`difficulty_ID` AND `sheets_arrangement_ID`=`arrangement_ID` AND`sheets_composer_ID`=`composers_ID` AND `sheets_instrument1`=`instruments_ID` AND `sheets_instrument2`=`instruments2_ID` AND `sheets_instrument3`=`instruments3_ID`AND `sheets_instrument4`=`instruments4_ID`AND `sheets_instrument5`=`instruments5_ID`';
         $genre = filter_input(
             INPUT_POST,
             'genre',
@@ -274,30 +289,34 @@ session_start();
             'difficulty',
             FILTER_SANITIZE_SPECIAL_CHARS
         );
+        $amount = filter_input(
+            INPUT_POST,
+            'amount',
+            FILTER_SANITIZE_SPECIAL_CHARS
+        );
 
         if (isset($_SESSION['genre']) && !empty($_SESSION['genre'])) {
             $genre = $_SESSION['genre'];
             $query .= " AND `genre` = '$genre'";
         }
-        // Check if an instrument session variable has been set
+        // controleren of instrument sessie is gestrart geweest
         if (isset($_SESSION['instrument']) && !empty($_SESSION['instrument'])) {
             $instrument = $_SESSION['instrument'];
             $query .= " AND (`instruments` = '$instrument' OR `instruments2` = '$instrument' OR `instruments3` = '$instrument' OR `instruments4` = '$instrument' OR `instruments5` = '$instrument')";
         }
 
-        // Check if an amount of instruments session variable has been set
-        /*  if (isset($_SESSION['amount']) && !empty($_SESSION['amount'])) {
+        // controleren of aantal instrumenten sessie is gestrart geweest
+        if (isset($_SESSION['amount']) && !empty($_SESSION['amount'])) {
             $amount = $_SESSION['amount'];
-            $query .= " AND `instruments` = '$amount'";
-        }*/
-
-        // Check if a difficulty session variable has been set
+            $query .= " AND `sheets_amount` = '$amount'";
+        }
+        // controleren of moeilijkheid sessie is gestrart geweest
         if (isset($_SESSION['difficulty']) && !empty($_SESSION['difficulty'])) {
             $difficulty = $_SESSION['difficulty'];
             $query .= " AND `difficulty_id` = '$difficulty'";
         }
 
-        // Check if a composers session variable has been set
+        // controleren of componist sessie is gestrart geweest
         if (isset($_SESSION['composer']) && !empty($_SESSION['composer'])) {
             $composer = $_SESSION['composer'];
             $query .= " AND `composers` = '$composer'";
@@ -309,7 +328,7 @@ session_start();
             $arrangement = $_SESSION['arrangement'];
             $query .= " AND `arrangement` = '$arrangement'";
         }
-
+        $query .= 'ORDER BY RAND()';
         $result = $conn->query($query);
 
         if (
@@ -318,54 +337,91 @@ session_start();
                     $instrument ||
                     $composer ||
                     $arrangement ||
-                    $difficulty
+                    $difficulty ||
+                    $amount
             )
         ) {
-            echo '<div id="toegepasteFilters">Filters:<br>';
-            if (!empty($genre)) {
-                echo "<div>$genre<br>
+            if (
+                isset($_SESSION['genre']) ||
+                isset($_SESSION['instrument']) ||
+                isset($_SESSION['composer']) ||
+                isset($_SESSION['arrangement']) ||
+                isset($_SESSION['difficulty']) ||
+                isset($_SESSION['amount'])
+            ) {
+                echo '<div id="toegepasteFilters">';
+                if (!empty($genre)) {
+                    echo "<div>
                 <form method='post'>
-                    <button type='submit' name='resetgenre' value='Reset Genre'>Reset genre</button>
+                    <p>$genre </p>
+                    <button type='submit' name='resetgenre' value='Reset Genre'>x</button>
                 </form></div>
                 ";
-            }
-            if (!empty($instrument)) {
-                echo "<div>$instrument<br>
+                }
+                if (!empty($instrument)) {
+                    echo "<div>
                 <form method='post'>
-                    <button type='submit' name='resetinstrument' value='Reset Instrument'>Reset instrument</button>
+                    <p>$instrument </p>        
+                    <button type='submit' name='resetinstrument' value='Reset Instrument'>x</button>
                 </form></div>
             ";
-            }
-            if (!empty($composer)) {
-                echo "<div>$composer <br>
-                <form method='post'>
-                    <button type='submit' name='resetcomposer' value='Reset composer'>Reset composer</button>
-                </form></div>";
-            }
-            if (!empty($arrangement)) {
-                echo "<div>$arrangement <br>
-                <form method='post'>
-                    <button type='submit' name='resetarrangement' value='Reset Arrangement'>Reset arrangement</button>
-                </form></div>";
-            }
-            if (!empty($difficulty)) {
-                if ($difficulty == 1) {
-                    echo 'Beginner';
-                } elseif ($difficulty == 2) {
-                    echo 'Amateur';
-                } elseif ($difficulty == 3) {
-                    echo 'Intermediate';
-                } elseif ($difficulty == 4) {
-                    echo 'Advanced';
-                } elseif ($difficulty == 5) {
-                    echo 'Expert';
                 }
-                echo "
+                if (!empty($composer)) {
+                    echo "<div>
                 <form method='post'>
-                    <button type='submit' name='resetdifficulty' value='Reset Difficulty'>Reset difficulty</button>
-                </form>";
+                    <p>$composer</p>
+                    <button type='submit' name='resetcomposer' value='Reset composer'>x</button>
+                </form></div>";
+                }
+                if (!empty($arrangement)) {
+                    echo "<div>
+                <form method='post'>
+                    <p>$arrangement</p>
+                    <button type='submit' name='resetarrangement' value='Reset Arrangement'>x</button>
+                </form></div>";
+                }
+                if (!empty($amount)) {
+                    echo "<div>
+                <form method='post'>
+                    <p>$amount</p>
+                    <button type='submit' name='resetamount' value='Reset Amount'>x</button>
+                </form></div>";
+                }
+                if (!empty($difficulty)) {
+                    if ($difficulty == 1) {
+                        echo "
+                        <form method='post'>
+                            <p>Beginner</p>
+                            <button type='submit' name='resetdifficulty' value='Reset Difficulty'>x</button>
+                        </form>";
+                    } elseif ($difficulty == 2) {
+                        echo "             
+                        <form method='post'>
+                            <p>Amateur</p>
+                            <button type='submit' name='resetdifficulty' value='Reset Difficulty'>x</button>
+                        </form>";
+                    } elseif ($difficulty == 3) {
+                        echo "
+                        <form method='post'>
+                            <p>Intermediate</p>
+                            <button type='submit' name='resetdifficulty' value='Reset Difficulty'>x</button>
+                        </form>";
+                    } elseif ($difficulty == 4) {
+                        echo " 
+                        <form method='post'>
+                            <p>Advanced</p>
+                            <button type='submit' name='resetdifficulty' value='Reset Difficulty'>x</button>
+                        </form>";
+                    } elseif ($difficulty == 5) {
+                        echo "   
+                        <form method='post'>
+                            <p>Expert</p>
+                            <button type='submit' name='resetdifficulty' value='Reset Difficulty'>x</button>
+                        </form>";
+                    }
+                }
+                echo '</div>';
             }
-            echo '</div>';
         }
         ?>
         <div class='products-container grid' id="alles">

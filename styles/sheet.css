@@ -8,10 +8,6 @@
   position: absolute;
   z-index: 10;
 }
-p {
-  text-align: center;
-  font-family: 'Varela Round', sans-serif;
-}
 
 /*fullscreen maken*/
 :fullscreen .wrapper {
