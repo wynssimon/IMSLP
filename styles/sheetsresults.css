@@ -5,7 +5,7 @@
 #inputenbuttons {
   display: flex;
   align-items: center;
-  margin: 2% 10% 2% 10%;
+  margin: 2% 10% 0% 10%;
 }
 #inputenbuttons button img {
   height: 20px;
@@ -24,11 +24,18 @@
 #resetfilters {
   background-color: #2a6496;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 10px 8px 0;
+  margin: 8px 10px 20px 0;
   border-radius: 4px;
   cursor: pointer;
+  text-transform: uppercase;
   font-family: 'Varela Round', sans-serif;
+  transition: 0.2s;
+  width: 60%;
+}
+#resetfilters:hover {
+  color: #2a6496;
+  background-color: transparent;
+  border: 2px solid #2a6496;
 }
 #myInput {
   position: relative;
@@ -42,35 +49,44 @@
   flex: 1;
 }
 #filters {
-  width: 100%;
-  display: flex;
+  width: 20%;
   font-family: 'Varela Round', sans-serif;
-  display: none;
-  position: absolute;
+  display: block;
+  position: fixed;
   z-index: 10;
+  background-color: #f1f1f5;
+  min-height: 80vh;
+  left: -20%;
+  transition: left 0.5s ease-in-out;
 }
 
-#filters select {
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-}
 .show {
   display: flex;
 }
 #filters .checkboxen {
   display: inline-block;
-  width: 15%;
+  margin-bottom: 20px;
 }
 
-.checkbox-items input[type='checkbox'] {
-  height: 20px;
+.checkbox-items div input[type='checkbox'] {
+  height: 25px;
+  width: 25px;
+  margin: 0 5px 0 0;
 }
+
 .checkboxen p:nth-child(1) {
-  font-weight: bold;
+  margin-bottom: 1%;
+  cursor: pointer;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid grey;
+}
+
+.checkboxen div div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 7px;
 }
 #verberg {
   position: absolute;
@@ -78,21 +94,24 @@
 }
 #allefilters {
   width: 100%;
-  background-color: white;
-  padding: 2%;
-  padding-left: 8%;
+  padding: 4% 8% 2% 8%;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f1f5;
+  min-height: 80vh;
 }
+
 .checkbox-items {
-  text-align: left;
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
-  justify-content: left;
+  flex-direction: column;
 }
+
 #alles {
   min-height: 300px;
   justify-content: center;
+  margin-top: 2%;
 }
 .grid {
   display: flex;
@@ -179,7 +198,13 @@
 #toegepasteFilters {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: right;
+  float: left;
+  margin: 0 0 0 10px;
+  position: absolute;
+}
+#toegepasteFilters form div {
+  width: 100%;
 }
 #toegepasteFilters p {
   font-family: 'Varela Round', sans-serif;
@@ -190,9 +215,9 @@
 }
 #toegepasteFilters button {
   cursor: pointer;
-  background-color: #2a6496;
+  background-color: transparent;
   border: none;
-  color: white;
+  color: #2a6496;
   padding: 6px;
   font-family: 'Varela Round', sans-serif;
   border-radius: 4px;

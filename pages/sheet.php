@@ -44,7 +44,7 @@ include './config.php';
         $users_permissions = $_SESSION['users_permissions'];
 
         if (($count >= 6) & ($users_permissions == 0)) {
-            echo '<div class="tekst"><p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
+            echo '<p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p>';
         } elseif (
             $count < 6 ||
             $count == null ||

@@ -100,167 +100,329 @@ session_start();
             <button id="changeDisplay"><img id='row' src='./img/row.png'></button>    
         </div>
         <script>
-            window.onload = function() {
-                const filtersDiv = document.getElementById("filters");
-                const showfilters = document.getElementById("showfilters");
+         window.onload = function() {
+            const filtersDiv = document.getElementById("filters");
+            const showfilters = document.getElementById("showfilters");
 
-                showfilters.addEventListener("click", function() {
-                    if (filtersDiv.style.display === "block") {
-                    filtersDiv.style.display = "none";
-                    } else {
-                    filtersDiv.style.display = "block";
-                    }
-                });
+            showfilters.addEventListener("click", function() {
+                if (filtersDiv.style.left === "0%") {
+                filtersDiv.style.left = "-20%";
+                filtersDiv.style.transition = "left 0.5s ease-in-out";
+                } else {
+                filtersDiv.style.left = "0%";
+                filtersDiv.style.transition = "left 0.5s ease-in-out";
+                }
+            });
             };
         </script>
         <form id="filters" method="post">
             <div id="allefilters">
+               <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
+                <!-- genre filters -->
                 <div class="checkboxen" >
-                    <p>Genre</p>
-                    <div class="checkbox-items">
-                    <?php
-                    $query = 'SELECT * FROM `imslp_genre` WHERE 1';
-                    $result = $conn->query($query);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $thisGenre = $row['genre']; ?>
-                            <input onchange='this.form.submit()' name='genre' type='checkbox' value='<?php echo $thisGenre; ?>'<?php if (
+                    <p onclick="toggleInstruments(event, '.checkbox-items-genre')">Genre ▼</p>
+                    <div class="checkbox-items2">
+                        <?php
+/*
+                        $query = 'SELECT * FROM `imslp_genre` WHERE 1 LIMIT 2';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisGenre = $row['genre']; ?>
+                            <div><input onchange='this.form.submit()' name='genre' type='checkbox' value='<?php echo $thisGenre; ?>'<?php if (
     isset($_SESSION['genre']) &&
     $_SESSION['genre'] == $thisGenre
 ) {
     echo 'checked';
 } ?>>
                             <p><?php echo $thisGenre; ?></p>
+                            </div>
                             <?php
-                        }
-                    }
-                    ?>
+                            }
+                        }*/
+?>
                     </div>
+                    <div class="checkbox-items checkbox-items-genre">
+                        <?php
+                        $query = 'SELECT * FROM `imslp_genre` WHERE 1 ';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisGenre = $row['genre']; ?>
+                            <div><input onchange='this.form.submit()' name='genre' type='checkbox' value='<?php echo $thisGenre; ?>'<?php if (
+    isset($_SESSION['genre']) &&
+    $_SESSION['genre'] == $thisGenre
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisGenre; ?></p>
+                            </div>
+                            <?php
+                            }
+                        }
+                        ?>
+                    
+                    </div>
+                    <!--<button id="closest" onclick="toggleInstruments(event, '.checkbox-items-genre')">▼Show all</button>    -->     
                 </div>
+                 <!-- einde genre filters -->
+                 <!-- instrument filters -->
                 <div class="checkboxen">
-                    <p>Instruments</p>
-                    <div class="checkbox-items">
-                    <?php
-                    $query = 'SELECT * FROM `imslp_instruments` WHERE 1';
-                    $result = $conn->query($query);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $thisInstrument = $row['instruments']; ?>
-                            <input onchange='this.form.submit()' name='instrument' type='checkbox' value='<?php echo $thisInstrument; ?>'<?php if (
+                    <p onclick="toggleInstruments(event, '.checkbox-items-instruments')">Instruments ▼</p>
+                    <div class="checkbox-items2">
+                        <?php
+/* $query =
+                            'SELECT * FROM `imslp_instruments` WHERE 1 LIMIT 2';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisInstrument = $row['instruments']; ?>
+                            <div><input onchange='this.form.submit()' name='instrument' type='checkbox' value='<?php echo $thisInstrument; ?>'<?php if (
     isset($_SESSION['instrument']) &&
     $_SESSION['instrument'] == $thisInstrument
 ) {
     echo 'checked';
 } ?>>
-                            <p><?php echo $thisInstrument; ?></p>
+                            <p><?php echo $thisInstrument; ?></p></div>
                             <?php
+                            }
+                        }*/
+?>
+                    </div>
+                    <div class="checkbox-items checkbox-items-instruments">
+                        <?php
+                        $query = 'SELECT * FROM `imslp_instruments` WHERE 1 ';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisInstrument = $row['instruments']; ?>
+                            <div><input onchange='this.form.submit()' name='instrument' type='checkbox' value='<?php echo $thisInstrument; ?>'<?php if (
+    isset($_SESSION['instrument']) &&
+    $_SESSION['instrument'] == $thisInstrument
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisInstrument; ?></p></div>
+                            <?php
+                            }
                         }
-                    }
-                    ?>
-                    </div>            
+                        ?>
+                    </div>  
+                    <!--<button onclick="toggleInstruments(event, '.checkbox-items-instruments')">▼Show all</button>    -->     
                 </div>
+                <!-- einde instrument filters -->
+                <!-- composers filters -->
                 <div class="checkboxen">
-                <p>Composers</p>
-                <div class="checkbox-items">
-                <?php
-                $query =
-                    'SELECT * FROM `imslp_composers` WHERE `composers` IS NOT NULL';
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $thisComposer = $row['composers']; ?>
-                        <input onchange='this.form.submit()' name='composer' type='checkbox' value='<?php echo $thisComposer; ?>'<?php if (
+                    <p onclick="toggleInstruments(event, '.checkbox-items-composers')">Composers ▼</p>
+                    <div class="checkbox-items2">
+                        <?php
+/* $query =
+                            'SELECT * FROM `imslp_composers` WHERE `composers` IS NOT NULL LIMIT 2';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisComposer = $row['composers']; ?>
+                            <div><input onchange='this.form.submit()' name='composer' type='checkbox' value='<?php echo $thisComposer; ?>'<?php if (
     isset($_SESSION['composer']) &&
     $_SESSION['composer'] == $thisComposer
 ) {
     echo 'checked';
 } ?>>
-                        <p><?php echo $thisComposer; ?></p>
+                            <p><?php echo $thisComposer; ?></p></div>
+                            <?php
+                            }
+                        }*/
+?>
+                    </div>
+                    <div class="checkbox-items checkbox-items-composers">
                         <?php
-                    }
-                }
-                ?>
+                        $query =
+                            'SELECT * FROM `imslp_composers` WHERE `composers` IS NOT NULL ';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisComposer = $row['composers']; ?>
+                            <div><input onchange='this.form.submit()' name='composer' type='checkbox' value='<?php echo $thisComposer; ?>'<?php if (
+    isset($_SESSION['composer']) &&
+    $_SESSION['composer'] == $thisComposer
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisComposer; ?></p></div>
+                            <?php
+                            }
+                        }
+                        ?>
+                    </div>  
+                    <!--<button onclick="toggleInstruments(event, '.checkbox-items-composers')">▼Show all</button>   -->      
                 </div>
-                </div>
+                <!-- einde composers filters -->
+                <!-- arrangement filters -->
                 <div class="checkboxen">
-                <p>Arrangement</p>
-                <div class="checkbox-items">
-                <?php
-                $query = 'SELECT * FROM `imslp_arrangements` WHERE 1';
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $thisArrangement = $row['arrangement']; ?>
-                        <input onchange='this.form.submit()' name='arrangement' type='checkbox' value='<?php echo $thisArrangement; ?>'<?php if (
+                    <p onclick="toggleInstruments(event, '.checkbox-items-arrangement')">Arrangement ▼</p>
+                    <div class="checkbox-items2">
+                        <?php
+/* $query =
+                            'SELECT * FROM `imslp_arrangements` WHERE 1 LIMIT 2';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisArrangement = $row['arrangement']; ?>
+                            <div><input onchange='this.form.submit()' name='arrangement' type='checkbox' value='<?php echo $thisArrangement; ?>'<?php if (
     isset($_SESSION['arrangement']) &&
     $_SESSION['arrangement'] == $thisArrangement
 ) {
     echo 'checked';
 } ?>>
-                        <p><?php echo $thisArrangement; ?></p>
+                            <p><?php echo $thisArrangement; ?></p></div>
+                            <?php
+                            }
+                        }*/
+?>
+                    </div>
+                    <div class="checkbox-items checkbox-items-arrangement">
                         <?php
-                    }
-                }
-                ?>
+                        $query = 'SELECT * FROM `imslp_arrangements` WHERE 1 ';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $thisArrangement = $row['arrangement']; ?>
+                            <div><input onchange='this.form.submit()' name='arrangement' type='checkbox' value='<?php echo $thisArrangement; ?>'<?php if (
+    isset($_SESSION['arrangement']) &&
+    $_SESSION['arrangement'] == $thisArrangement
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisArrangement; ?></p></div>
+                            <?php
+                            }
+                        }
+                        ?>
+                    </div>  
+                   <!-- <button onclick="toggleInstruments(event, '.checkbox-items-arrangement')">▼Show all</button>   -->      
                 </div>
-                </div>
+                <!-- einde arrangement filters -->
+                <!-- difficulty filters -->
                 <div class="checkboxen">
-                    <p>Difficulty</p>
-                    <div class="checkbox-items">
-                    <?php
-                    $query = 'SELECT * FROM `imslp_difficulty` WHERE 1';
-                    $result = $conn->query($query);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                    <p onclick="toggleInstruments(event, '.checkbox-items-difficulty')">Difficulty ▼</p>
+                    <div class="checkbox-items2">
+                        <?php
+/*   $query =
+                            'SELECT * FROM `imslp_difficulty` WHERE 1 LIMIT 2';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
 
-                            $thisDifficulty = $row['difficulty'];
-                            $thisDifficultyId = $row['difficulty_ID'];
-                            ?>
-                            <input onchange='this.form.submit()' name='difficulty' type='checkbox' value='<?php echo $thisDifficultyId; ?>'<?php if (
+                                $thisDifficulty = $row['difficulty'];
+                                $thisDifficultyId = $row['difficulty_ID'];
+                                ?>
+                            <div><input onchange='this.form.submit()' name='difficulty' type='checkbox' value='<?php echo $thisDifficultyId; ?>'<?php if (
     isset($_SESSION['difficulty']) &&
     $_SESSION['difficulty'] == $thisDifficultyId
 ) {
     echo 'checked';
 } ?>>
-                            <p><?php echo $thisDifficulty; ?></p>
+                            <p><?php echo $thisDifficulty; ?></p></div>
                             <?php
-                        }
-                    }
-                    ?>
+                            }
+                        }*/
+?>
                     </div>
+                    <div class="checkbox-items checkbox-items-difficulty">
+                        <?php
+                        $query = 'SELECT * FROM `imslp_difficulty` WHERE 1 ';
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+
+                                $thisDifficulty = $row['difficulty'];
+                                $thisDifficultyId = $row['difficulty_ID'];
+                                ?>
+                            <div><input onchange='this.form.submit()' name='difficulty' type='checkbox' value='<?php echo $thisDifficultyId; ?>'<?php if (
+    isset($_SESSION['difficulty']) &&
+    $_SESSION['difficulty'] == $thisDifficultyId
+) {
+    echo 'checked';
+} ?>>
+                            <p><?php echo $thisDifficulty; ?></p></div>
+                            <?php
+                            }
+                        }
+                        ?>
+                    </div>  
+                   <!-- <button onclick="toggleInstruments(event, '.checkbox-items-difficulty')">▼Show all</button>     -->    
                 </div>
+                <!-- einde difficulty filters -->
+                <!-- amount filters -->
                 <div class="checkboxen">
-                    <p>Amount</p>
-                    <div class="checkbox-items">
-                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="1" <?php if (
+                    <p onclick="toggleInstruments(event, '.checkbox-items-amount')">Amount ▼</p>
+                    <div class="checkbox-items2">
+                 <!--   <div><input onchange='this.form.submit()' name="amount" type="checkbox" value="1" <?php
+/*if (
+                     isset($_SESSION['amount']) &&
+                     $_SESSION['amount'] == 1
+                 ) {
+                     echo 'checked';
+                 } ?>>Solo</input></div>
+                            <div><input onchange='this.form.submit()' name="amount" type="checkbox" value="2"<?php if (
+                                isset($_SESSION['amount']) &&
+                                $_SESSION['amount'] == 2
+                            ) {
+                                echo 'checked';
+                            } */
+?>>Duo</input></div>-->
+                    </div>
+                    <div class="checkbox-items checkbox-items-amount">
+                        <div><input onchange='this.form.submit()' name="amount" type="checkbox" value="1" <?php if (
                             isset($_SESSION['amount']) &&
                             $_SESSION['amount'] == 1
                         ) {
                             echo 'checked';
-                        } ?>>Solo</input>
-                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="2"<?php if (
-                            isset($_SESSION['amount']) &&
-                            $_SESSION['amount'] == 2
-                        ) {
-                            echo 'checked';
-                        } ?>>Duo</input>
-                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="3" <?php if (
+                        } ?>>Solo</input></div>
+                            <div><input onchange='this.form.submit()' name="amount" type="checkbox" value="2"<?php if (
+                                isset($_SESSION['amount']) &&
+                                $_SESSION['amount'] == 2
+                            ) {
+                                echo 'checked';
+                            } ?>>Duo</input></div>
+                        <div><input onchange='this.form.submit()' name="amount" type="checkbox" value="3" <?php if (
                             isset($_SESSION['amount']) &&
                             $_SESSION['amount'] == 3
                         ) {
                             echo 'checked';
-                        } ?>>Trio</input>
-                        <input onchange='this.form.submit()' name="amount" type="checkbox" value="4" <?php if (
+                        } ?>>Trio</input></div>
+                        <div><input onchange='this.form.submit()' name="amount" type="checkbox" value="4" <?php if (
                             isset($_SESSION['amount']) &&
                             $_SESSION['amount'] == 4
                         ) {
                             echo 'checked';
-                        } ?>>Quatro</input>
+                        } ?>>Quatro</input></div>
                     </div>
-                </div>       
-                <button id="resetfilters" type="submit" name="reset" value="Reset">Reset</button> 
+                   <!-- <button onclick="toggleInstruments(event, '.checkbox-items-amount')">▼Show all</button>  -->       
+                </div>      
+                <!-- einde amount filters -->
             </div>
         </form>
+        <script>
+
+                         function toggleInstruments(event, elementClass) {
+                        // voorkomen dat de form al gesubmit wordt
+                        event.preventDefault();
+
+                        var instruments = document.querySelectorAll(elementClass);
+                        for (var i = 0; i < instruments.length; i++) {
+                            instruments[i].style.display = instruments[i].style.display === 'flex' ? 'none' : 'flex';
+                        }
+                        
+                        var button = event.target;
+                            if (button.textContent.includes('▼')) {
+                                button.textContent = button.textContent.replace('▼', '▲');
+                            } else {
+                                button.textContent = button.textContent.replace('▲', '▼');
+                            }
+                            }
+
+                        </script>
         <?php
         $query =
             'SELECT `sheets_title`,`sheets_genre_ID`, `sheets_instrument1`,`sheets_instrument2`, `sheets_difficulty`, `sheets_img`, `sheets_xml`, `sheets_id`, `sheets_amount`,`difficulty`, `genre`, `arrangement`, `composers`, `instruments`, `instruments2`, `instruments3`, `instruments4`, `instruments5` FROM `imslp_sheets`,`imslp_genre`, `imslp_difficulty`, `imslp_arrangements`, `imslp_composers`, `imslp_instruments`, `imslp_instruments2`, `imslp_instruments3`, `imslp_instruments4`, `imslp_instruments5` WHERE `sheets_genre_ID`=`genre_ID` AND `sheets_difficulty`=`difficulty_ID` AND `sheets_arrangement_ID`=`arrangement_ID` AND`sheets_composer_ID`=`composers_ID` AND `sheets_instrument1`=`instruments_ID` AND `sheets_instrument2`=`instruments2_ID` AND `sheets_instrument3`=`instruments3_ID`AND `sheets_instrument4`=`instruments4_ID`AND `sheets_instrument5`=`instruments5_ID`';
@@ -353,7 +515,9 @@ session_start();
                 if (!empty($genre)) {
                     echo "<div>
                 <form method='post'>
-                    <p>$genre </p>
+                    <div>    
+                        <p>$genre </p>
+                    </div>
                     <button type='submit' name='resetgenre' value='Reset Genre'>x</button>
                 </form></div>
                 ";
@@ -361,7 +525,9 @@ session_start();
                 if (!empty($instrument)) {
                     echo "<div>
                 <form method='post'>
-                    <p>$instrument </p>        
+                     <div>
+                        <p>$instrument </p>    
+                    </div>    
                     <button type='submit' name='resetinstrument' value='Reset Instrument'>x</button>
                 </form></div>
             ";
