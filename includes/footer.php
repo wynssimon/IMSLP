@@ -6,9 +6,9 @@
     <div>
         <p>Pages</p>
         <ul>
-            <li><a href="">Subscription</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Home</a></li>
+            <li><a href="./pages/subscription.php">Subscription</a></li>
+            <li><a href="./pages/about.php">About</a></li>
+            <li><a href="index.php">Home</a></li>
         </ul>
     </div>
     <div>

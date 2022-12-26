@@ -141,7 +141,7 @@ session_start();
         <?php
         } else {
              ?>
-            <p>Want be able to download and view as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want. <br>Log in or register so that you can take your subscription right now.</p>
+            <p>Want to be able to download and view as many sheets as you want? For only €2,99/month or €30/year you can use as much music sheets as you want. <br>Log in or register so that you can take your subscription right now.</p>
             <div id="wrapperAlign">
               <div class="wrapper2">
                 <a href="./login.php"><span>Log in</span></a>

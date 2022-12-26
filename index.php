@@ -741,30 +741,20 @@ session_start();
                             </div>
                             <div>
                             <?php if ($thisDifficulty == 'Beginner') {
-                                echo "<img class='solsleutel' src='img/solsleutel.png'>";
+                                echo "<p class='difficulty beginner'>Beginner</p>";
                             } elseif ($thisDifficulty == 'Amateur') {
                                 echo "
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
+                                <p class='difficulty amateur'>Amateur</p>
                                 ";
                             } elseif ($thisDifficulty == 'Intermediate') {
                                 echo "
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>";
+                                <p class='difficulty intermediate'>Intermediate</p>";
                             } elseif ($thisDifficulty == 'Advanced') {
                                 echo "
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>";
+                                <p class='difficulty advanced'>Advanced</p>";
                             } elseif ($thisDifficulty == 'Expert') {
                                 echo "
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>
-                                <img class='solsleutel' src='img/solsleutel.png'>";
+                                <p class='difficulty expert'>Expert</p>";
                             } ?>
                             </div>
                         </div>

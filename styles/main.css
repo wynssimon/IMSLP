@@ -2,3 +2,7 @@
   margin-top: 10px;
   position: relative;
 }
+::selection {
+  background-color: #2a6496;
+  color: white;
+}

@@ -166,9 +166,7 @@
 .shop-card .desc div {
   width: 310px;
 }
-.shop-card .desc .solsleutel {
-  width: 15%;
-}
+
 .shop-card .desc .instrument {
   width: 30%;
 }
@@ -221,4 +219,28 @@
   padding: 6px;
   font-family: 'Varela Round', sans-serif;
   border-radius: 4px;
+}
+.difficulty {
+  height: 2rem;
+  align-items: center;
+  line-height: 2rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.8rem;
+  width: 100%;
+}
+.beginner {
+  background-color: rgb(9, 221, 9);
+}
+.amateur {
+  background-color: green;
+}
+.intermediate {
+  background-color: #2a6496;
+}
+.advanced {
+  background-color: orange;
+}
+.expert {
+  background-color: red;
 }

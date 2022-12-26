@@ -6,14 +6,12 @@ footer {
   position: sticky;
   top: 100vh;
   margin-top: 30px;
-  padding-left: 10%;
-  padding-right: 10%;
   width: 100%;
-  padding-top: 1%;
+  padding: 1% 10% 1% 10%;
 }
 
 footer a {
-  font-family: 'Martel', serif;
+  font-family: 'Varela Round', sans-serif;
   text-decoration: none;
   color: black;
 }
@@ -27,8 +25,11 @@ footer li {
 footer p,
 footer h2 {
   margin-bottom: 10px;
-  font-family: 'Martel', serif;
+  font-family: 'Varela Round', sans-serif;
 }
 footer p:nth-child(1) {
   font-weight: 700;
+}
+span {
+  font-family: 'Varela Round', sans-serif;
 }

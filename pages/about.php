@@ -33,7 +33,44 @@ include './config.php';
           </ul>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2506.2001005101893!2d4.4495030513193194!3d51.08631454912394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3e5573b3d2d77%3A0xba2e6cdb2b1141cf!2sAntwerpsesteenweg%205%2C%202840%20Rumst!5e0!3m2!1sen!2sbe!4v1670864560096!5m2!1sen!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
         </div>
+        <form id="contact-form" method="POST" action="about.php">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <input type="submit" value="Submit">
+      </form>
       </div>
+    
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    if (empty($name) || empty($email) || empty($message)) {
+        echo 'Please fill out all fields';
+    } else {
+        $to = 'wynssimonw@gmail.com';
+        $subject = 'New Contact Form Submission';
+        $headers =
+            'From: ' .
+            $email .
+            "\r\n" .
+            'Reply-To: ' .
+            $email .
+            "\r\n" .
+            'X-Mailer: PHP/' .
+            phpversion();
+        $body = "Name: $name\n" . "Email: $email\n" . "Message:\n" . "$message";
+        if (mail($to, $subject, $body, $headers)) {
+            echo 'Thank you for your message. We will get back to you as soon as possible.';
+        } else {
+            echo 'An error occurred. Please try again later.';
+        }
+    }
+} ?>
     </main>
     <?php include '../includes/footer.php'; ?>
   </body>
