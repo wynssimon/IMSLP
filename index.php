@@ -735,7 +735,7 @@ session_start();
                             } elseif ($thisInstrument5 == 'Clarinet') {
                                 echo "<img class='instrument' src='img/clarinet.png'>";
                             } ?>       
-                            </div>
+                            </div> 
                             <div>
                             <?php echo "<p class='arrangement'>$thisArrangement</p>"; ?>
                             </div>
@@ -761,6 +761,8 @@ session_start();
                     </div>
         <?php
             }
+        } else {
+            echo '<p>No results for your criteria</p>';
         } ?>
         </div>
   </main>

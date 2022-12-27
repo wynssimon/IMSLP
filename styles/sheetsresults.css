@@ -52,12 +52,13 @@
   width: 20%;
   font-family: 'Varela Round', sans-serif;
   display: block;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   background-color: #f1f1f5;
-  min-height: 80vh;
+  height: 80vh;
   left: -20%;
   transition: left 0.5s ease-in-out;
+  overflow-y: scroll;
 }
 
 .show {
@@ -247,4 +248,7 @@
 }
 .expert {
   background-color: red;
+}
+.main p {
+  font-family: 'Varela Round', sans-serif;
 }
