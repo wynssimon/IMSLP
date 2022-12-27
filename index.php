@@ -737,7 +737,7 @@ session_start();
                             } ?>       
                             </div>
                             <div>
-                            <?php echo "$thisArrangement"; ?>
+                            <?php echo "<p class='arrangement'>$thisArrangement</p>"; ?>
                             </div>
                             <div>
                             <?php if ($thisDifficulty == 'Beginner') {

@@ -25,53 +25,63 @@ include './config.php';
         <p>Welcome to Sheetly! Here, you can find a wide variety of music sheets for all levels of musicians. Our collection includes popular songs as well as classical pieces, so there's something for everyone. Whether you're a beginner just starting out or an experienced musician, you'll be sure to find something that suits your needs. Our website is easy to navigate and user-friendly, so finding the perfect piece of music is a breeze. Thank you for visiting our site, and happy music-making!
         </p>
         <h2>Contact</h2> 
-        <div id="contact">
-          <ul>
-            <li><span>Mail: </span><a href="mailto:info@sheetly.com">info@sheetly.com</a></li>
-            <li><span>Adress:<br></span><a>Antwerpsesteenweg 5 <br>2840 Rumst <br>België
-            </a></li>
-          </ul>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2506.2001005101893!2d4.4495030513193194!3d51.08631454912394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3e5573b3d2d77%3A0xba2e6cdb2b1141cf!2sAntwerpsesteenweg%205%2C%202840%20Rumst!5e0!3m2!1sen!2sbe!4v1670864560096!5m2!1sen!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
-        </div>
-        <form id="contact-form" method="POST" action="about.php">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message"></textarea><br>
-        <input type="submit" value="Submit">
-      </form>
-      </div>
-    
-<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $message = $_POST['message'];
+        <p>If you want to contact Sheetly, please fill out the form below with your name, email address, and message, and we will get back to you as soon as possible. Thank you for reaching out to us. We look forward to assist you. You can also call us on our number: <a href="tel:03/552.01.25">03/552.01.25</a></p>
+        <div id="contactForm">
+            <form method="post" action="about.php">
+              <div>
+                <h3>Get in touch</h3>
+              </div>
+              <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="NAME" required>
+              </div>
+              <div>
+                <label for="Email">Email</label>
+                <input type="email" name="Email" placeholder="EMAIL" required>
+              </div>
+              <div>
+                <label for="Subject">Subject</label>
+                <input type="text" name="Subject" placeholder="SUBJECT" required>
+              </div>
+              <div>
+                <label for="Text">Your message</label>
+                <textarea type="text" name="Text" placeholder="WRITE SOMETHING" required></textarea>
+              </div>
+              <div>
+                <input type="submit" value="send">
+              </div>
+            </form> 
+            <?php if (isset($_POST['submit'])) {
+                $name = $_POST['name'];
+                $email = $_POST['Email'];
+                $subject = $_POST['Subject'];
+                $message = $_POST['Text'];
 
-    if (empty($name) || empty($email) || empty($message)) {
-        echo 'Please fill out all fields';
-    } else {
-        $to = 'wynssimonw@gmail.com';
-        $subject = 'New Contact Form Submission';
-        $headers =
-            'From: ' .
-            $email .
-            "\r\n" .
-            'Reply-To: ' .
-            $email .
-            "\r\n" .
-            'X-Mailer: PHP/' .
-            phpversion();
-        $body = "Name: $name\n" . "Email: $email\n" . "Message:\n" . "$message";
-        if (mail($to, $subject, $body, $headers)) {
-            echo 'Thank you for your message. We will get back to you as soon as possible.';
-        } else {
-            echo 'An error occurred. Please try again later.';
-        }
-    }
-} ?>
-    </main>
+                $to = 'wynssimonw@gmail.com';
+                $subject = 'Contact Form Submission';
+                $message =
+                    'Name: ' .
+                    $name .
+                    "\n" .
+                    'Email: ' .
+                    $email .
+                    "\n" .
+                    'Subject: ' .
+                    $subject .
+                    "\n" .
+                    'Message: ' .
+                    $message;
+                $headers = 'From: ' . $email;
+
+                if (mail($to, $subject, $message, $headers)) {
+                    echo '<p>Your message has been sent! We will contact you as soon as possible.</p>';
+                } else {
+                    echo '<p>There was an error sending your message. Please try again.</p>';
+                }
+            } ?>
+
+        </div>
+</main>
     <?php include '../includes/footer.php'; ?>
   </body>
 </html>

@@ -15,7 +15,7 @@
         <p>Contact</p>
         <ul>
             <li><span>E-mail: </span><a href="mailto:info@sheetly.com">info@sheetly.com</a></li>
-            <li><span>Call: </span><a href="03/552.01.25">03/552.01.25</a></li>
+            <li><span>Call: </span><a href="tel:03/552.01.25">03/552.01.25</a></li>
         </ul>
     </div>
 </footer>

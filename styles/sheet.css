@@ -5,7 +5,7 @@
   max-width: 99%;
 }
 .details {
-  position: absolute;
+  position: relative;
   z-index: 10;
 }
 .main p {
@@ -24,7 +24,7 @@
 .beide {
   width: 420px;
   display: flex;
-  margin: 24px 0 0 12%;
+  margin: 24px 0 0 5%;
 }
 .wrapper {
   position: relative;

@@ -170,6 +170,10 @@
 .shop-card .desc .instrument {
   width: 30%;
 }
+.arrangement {
+  margin-right: 50%;
+  text-align: left;
+}
 .onzichtbaar {
   position: absolute;
   color: transparent;

@@ -7,14 +7,10 @@ header {
   display: grid;
   grid-template-columns: 60% 40%;
   background-color: white;
-  /*padding: 4vh 0 0 0;*/
+  padding-top: 8px;
+  padding-bottom: 4px;
   min-height: 10vh;
   border-bottom: 1px solid lightgrey;
-}
-#onopvallend {
-  z-index: -1;
-  width: 100%;
-  position: absolute;
 }
 .logo {
   grid-column: 1 / 2;
@@ -82,4 +78,20 @@ header {
 .nav ul .loginbutton a {
   color: white;
   padding: 0;
+}
+@media (max-width: 1223px) {
+  header {
+    grid-template-columns: 50% 50%;
+  }
+}
+@media (max-width: 979px) {
+  header {
+    grid-template-columns: 40% 60%;
+  }
+}
+@media (max-width: 815px) {
+  header {
+    grid-template-columns: 30% 70%;
+    background-color: red;
+  }
 }

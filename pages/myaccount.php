@@ -24,45 +24,47 @@ session_start();
     <main class="main">
         <?php if (isset($_SESSION['users_username'])) { ?>
         <div id="contentAccount">
-            <h2>My Account</h2>
-            <div id='grid1'>
-                <p>Username: <?php echo $_SESSION['users_username']; ?></p>
-                <p>Name: <?php echo $_SESSION['users_name']; ?></p> 
-                <form method="post" action="<?php echo $_SERVER[
-                    'PHP_SELF'
-                ]; ?>" enctype = 'multipart/form-data'>
-                    <input type="hidden" name="action" value="update">
-                    <p>Password:
-                        <input id="password-field" name="password" type="password" value="<?php echo isset(
-                            $_POST['password']
-                        )
-                            ? $_POST['password']
-                            : $_SESSION['users_password']; ?>">                
-                        <img id="showpasswordbtn" onclick="showPassword()" src='../img/view.png'/>
-                    </p>
-                    <div id='passwordShould'>Password should have at least: 8 characters, one upper case letter, one number, one special character!</div>
-                    <script>
-                    function showPassword() {
-                        var passwordField = document.getElementById("password-field");
+                <h2>My Account</h2>
+                <div id='grid1'>
+                    <p>Username: <?php echo $_SESSION['users_username']; ?></p>
+                    <p>Name: <?php echo $_SESSION['users_name']; ?></p> 
+                    <form method="post" action="<?php echo $_SERVER[
+                        'PHP_SELF'
+                    ]; ?>" enctype = 'multipart/form-data'>
+                        <input type="hidden" name="action" value="update">
+                        <p>Password:
+                            <input id="password-field" name="password" type="password" value="<?php echo isset(
+                                $_POST['password']
+                            )
+                                ? $_POST['password']
+                                : $_SESSION[
+                                    'users_password'
+                                ]; ?>">                
+                            <img id="showpasswordbtn" onclick="showPassword()" src='../img/view.png'/>
+                        </p>
+                        <div id='passwordShould'>Password should have at least: 8 characters, one upper case letter, one number, one special character!</div>
+                        <script>
+                        function showPassword() {
+                            var passwordField = document.getElementById("password-field");
 
-                        if (passwordField.type === "password") {
-                        passwordField.type = "text";
-                        document.getElementById('showpasswordbtn').src = '../img/invisible.png';
-                        } else {
-                        passwordField.type = "password";
-                        document.getElementById('showpasswordbtn').src = '../img/view.png';
+                            if (passwordField.type === "password") {
+                            passwordField.type = "text";
+                            document.getElementById('showpasswordbtn').src = '../img/invisible.png';
+                            } else {
+                            passwordField.type = "password";
+                            document.getElementById('showpasswordbtn').src = '../img/view.png';
+                            }
                         }
-                    }
-                    </script>
-                    <p>Email:
-                        <input name="email" type="email" value="<?php echo isset(
-                            $_POST['email']
-                        )
-                            ? $_POST['email']
-                            : $_SESSION['users_email']; ?>">
-                    </p>
-                    <div id='emailExists'>User with this email already exists!</div>
-                    <input type="submit" name="submit" value="save">
+                        </script>
+                        <p>Email:
+                            <input name="email" type="email" value="<?php echo isset(
+                                $_POST['email']
+                            )
+                                ? $_POST['email']
+                                : $_SESSION['users_email']; ?>">
+                        </p>
+                        <div id='emailExists'>User with this email already exists!</div>
+                        <input type="submit" name="submit" value="save">
                 </div>
                 <div id="grid2">
                     <img class="profilePic"src='../img/<?php echo isset(
@@ -72,7 +74,7 @@ session_start();
                         : $_SESSION['users_img']; ?>'>
                     <input type="file" name="profileImg" accept="image/*">
                 </div>
-            </form>
+            </form> 
             <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($_POST['action'] == 'update') {
                     $thisPassword = $_POST['password'];
