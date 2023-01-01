@@ -267,6 +267,34 @@ section#formHolder {
 .form form .CTA a.switch:hover {
   color: #f95959;
 }
+#strength-meter {
+  height: 10px;
+  width: 100%;
+  background: #ddd;
+  margin: 10px 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#strength-meter div {
+  height: 100%;
+}
+
+#strength-meter.weak {
+  background: #ff0000;
+}
+
+#strength-meter.fair {
+  background: #ff9900;
+}
+
+#strength-meter.good {
+  background: #ffff00;
+}
+
+#strength-meter.strong {
+  background: #00ff00;
+}
 
 @media (max-width: 768px) {
   .container {

@@ -36,7 +36,7 @@ ob_start();
                      <div id='userExists'>User with this username already exists!</div>
                      <div class='form-group'>
                         <label for='users_username'>Username</label>
-                        <input type='text' name='users_username' id='name' class='name'onkeypress="return geenSpatie(event)" required>
+                        <input type='text' name='users_username' id='username' class='name'onkeypress="return geenSpatie(event)" required>
                         <script>
                            function geenSpatie(e) {
                               var key = e.which || e.keyCode;
@@ -55,6 +55,7 @@ ob_start();
                         <label for='users_password'>Password</label>
                         <input type='password' name='users_password' id='password' class='pass' required>
                         <span class='error'></span>
+                        <div id="strength-meter"></div>
                      </div>
 
                      <div class='form-group'>
@@ -77,8 +78,6 @@ ob_start();
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-<script  src='../scripts/formAnimation.js'></script>
-
     <?php
     include 'config.php';
 
@@ -129,6 +128,6 @@ ob_start();
         }
     }
     ob_end_flush();
-
-
-?>
+    ?>
+<script  src='../scripts/formAnimation.js'></script>
+<script  src='../scripts/passwordcheck.js'></script>
