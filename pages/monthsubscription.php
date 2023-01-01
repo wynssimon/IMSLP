@@ -11,6 +11,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../styles/reset.css" />
         <link rel="stylesheet" href="../styles/headers.css" />
+        <link rel="stylesheet" href="../styles/mysubscription.css" />
         <link rel="stylesheet" href="../styles/main.css" />
         <link rel="stylesheet" href="../styles/text.css" />
         <link rel="stylesheet" href="../styles/footer.css" />
@@ -33,7 +34,7 @@ session_start();
             } else {
                  ?>
         
-        <p>Confirm your subscription for one month. After that logout and log back in to activate your subscription.</p>
+        <p>Confirm your subscription for one month. After that log back in to activate your subscription.</p>
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['action'] == 'update') {
                 $thisPermissions = $_POST['permissie'];

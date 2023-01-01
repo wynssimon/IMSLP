@@ -18,7 +18,7 @@ session_start();
     <title>Sheetly</title>
   </head>
   <body>
-    <?php include 'includes/headerHome.php'; ?>
+    <?php include 'includes/header.php'; ?>
     <main class="main">
         <?php
         if (isset($_SESSION['users_permissions'])) {

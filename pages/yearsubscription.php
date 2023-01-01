@@ -12,6 +12,7 @@ session_start();
         <link rel="stylesheet" href="../styles/reset.css" />
         <link rel="stylesheet" href="../styles/headers.css" />
         <link rel="stylesheet" href="../styles/main.css" />
+        <link rel="stylesheet" href="../styles/mysubscription.css" />
         <link rel="stylesheet" href="../styles/text.css" />
         <link rel="stylesheet" href="../styles/footer.css" />
         <title>1 Month Subscription</title>
@@ -32,7 +33,7 @@ session_start();
             echo '<p>You already have a subscription, Come back when it expires.</p>';
         } else {
              ?>
-        <p>Confirm your subscription for one month. After that logout and log back in to activate your subscription.</p>
+        <p>Confirm your subscription for one month. After that log back in to activate your subscription.</p>
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['action'] == 'update') {
                 $thisPermissions = $_POST['permissie'];

@@ -112,7 +112,7 @@
 #alles {
   min-height: 300px;
   justify-content: center;
-  margin-top: 2%;
+  margin: 2% 2% 2% 2%;
 }
 .grid {
   display: flex;

@@ -1,0 +1,21 @@
+form input {
+  text-transform: uppercase;
+  padding: 5px 30px;
+  background: #2a6496;
+  border-radius: 4px;
+  color: #fff;
+  border: 1px solid transparent;
+  transition: 0.2s;
+  height: 40px;
+  font-family: 'Varela Round', sans-serif;
+  cursor: pointer;
+}
+form {
+  text-align: center;
+  margin-top: 20px;
+}
+form input:hover {
+  background-color: transparent;
+  color: #2a6496;
+  border: 1px solid #2a6496;
+}
