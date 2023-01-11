@@ -112,47 +112,44 @@ include './config.php';
           }
           if ($total_count > 0) {
               $average_rating = $total_rating / $total_count;
-              echo round($average_rating, 2);
+              echo round($average_rating, 2) . '<br>';
+              echo $total_count;
           } else {
               echo 'There are no ratings yet';
           }
 
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-              if ($_POST['action'] == 'vote') {
-                  $userId = $_SESSION['users_ID'];
-                  $rating = $_POST['rating'];
-                  $sheetId = $_POST['sheetId'];
-                  $query3 = "INSERT INTO `imslp_ratings` SET `id`=NULL, `sheets_rating_ID`='$sheetId', `rating_value`='$rating', `rating_user_ID`='$userId'";
-                  $result3 = $conn->query($query3);
+              $userId = $_SESSION['users_ID'];
+              $rating = $_POST['rating'];
+              $sheetId = $_POST['sheetId'];
+              $query3 = "SELECT * FROM `imslp_ratings` WHERE `sheets_rating_ID`='$sheetId' AND `rating_user_ID`='$userId'";
+              $result3 = $conn->query($query3);
+              if ($result3->num_rows == 0) {
+                  $query4 = "INSERT INTO `imslp_ratings` SET `id`=NULL, `sheets_rating_ID`='$sheetId', `rating_value`='$rating', `rating_user_ID`='$userId'";
+                  $result4 = $conn->query($query4);
+                  header("location: sheet.php?id=$sheetId");
+              } else {
+                  $query5 = "UPDATE `imslp_ratings` SET `rating_value`='$rating' WHERE`sheets_rating_ID`='$sheetId' AND `rating_user_ID`='$userId' ";
+                  $result5 = $conn->query($query5);
                   header("location: sheet.php?id=$sheetId");
               }
           }
           ?>
-                        <form action="sheet.php" method="post">
-                            <input type='hidden' name='action' value='vote'>
-                            <input type='hidden' name='sheetId' value='<?php echo "$id"; ?>'>
-                            <input type="radio" value="1" name='rating'/>
-                            <input type="radio" value="2" name='rating'/>
-                            <input type="radio" value="3" name='rating'/>
-                            <input type="radio" value="4" name='rating'/>
-                            <input type="radio" value="5" name='rating'/>
-                            <input type="submit" value="insert">
-                        </form>
-                        <?php  ?>
-              <div class="showbox">
-                    <div id="loading-spinner">
-                        <svg class="circular" viewBox="25 25 50 50">
-                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-                       </svg>
-                    </div>
+                     
+                        
+         
             </div>
-            <?php
-        } else {
-            echo '<p>Make an account or log in to watch the sheets!</p>';
-        } ?>
-            </div>
-          
+            <form action=sheet.php method=post>
+                            <input type="hidden" name="action" value="vote">
+                            <input type="hidden" name="sheetId" value="<?php echo $id; ?>">
+                            <input type="radio" value="1" name="rating" onclick="this.form.submit();"/>
+                            <input type="radio" value="2" name="rating" onclick="this.form.submit();"/>
+                            <input type="radio" value="3" name="rating" onclick="this.form.submit();"/>
+                            <input type="radio" value="4" name="rating" onclick="this.form.submit();"/>
+                            <input type="radio" value="5" name="rating" onclick="this.form.submit();"/>
+            </form>
             <div id="osmdCanvas"></div>
+          
             <script >    
                     var url_string = window.location.href; 
                     var url = new URL(url_string);
@@ -174,6 +171,17 @@ include './config.php';
                             document.getElementById("loading-spinner").style.display = "none";
                         });
             </script>
+                 <div class="showbox">
+                    <div id="loading-spinner">
+                        <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                       </svg>
+                    </div>
+            </div>
+            <?php
+        } else {
+            echo '<p>Make an account or log in to watch the sheets!</p>';
+        } ?>
     </main>
     <?php include '../includes/footer.php'; ?>
 </body>

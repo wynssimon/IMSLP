@@ -4,6 +4,10 @@
 #osmdCanvas {
   max-width: 99%;
 }
+form {
+  position: absolute;
+  z-index: 10;
+}
 .details {
   position: relative;
   z-index: 10;
