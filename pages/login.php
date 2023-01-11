@@ -65,7 +65,7 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
     } elseif (empty($users_password)) {
         echo '<script>document.getElementById("wrongUsernamePassword").style.display = "block";</script>';
     } else {
-        $query = "SELECT `users_username`, `users_password`, `users_permissions`, `users_name`, `users_email`, `users_ID`, `users_permissions_start`, `users_img` FROM imslp_users WHERE (users_username='$users_username' OR users_email='$users_username') AND users_password='$users_password'";
+        $query = "SELECT `users_username`, `users_password`, `users_permissions`, `users_name`, `users_email`, `users_ID`, `users_permissions_start` FROM imslp_users WHERE (users_username='$users_username' OR users_email='$users_username') AND users_password='$users_password'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
@@ -81,7 +81,6 @@ if (isset($_POST['users_username']) && isset($_POST['users_password'])) {
                 $_SESSION['users_password'] = $row['users_password'];
                 $_SESSION['users_email'] = $row['users_email'];
                 $_SESSION['users_ID'] = $row['users_ID'];
-                $_SESSION['users_img'] = $row['users_img'];
                 $_SESSION['users_permissions_start'] =
                     $row['users_permissions_start'];
                 header('Location: ../index.php?' . $row['users_username']);

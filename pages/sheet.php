@@ -77,18 +77,6 @@ include './config.php';
                         $thisXmlSheet
                     );
                     if ($thisId === $id) {
-                        /*echo '<p>Title: ' .
-                            $thisTitle .
-                            '</br>
-                        Composer: ' .
-                            $thisComposer .
-                            '</br>
-                        Difficulty: ' .
-                            $thisDifficulty .
-                            '</br>
-                        Genre: ' .
-                            $thisGenre .
-                            '</p></br>  */
                         echo '
                             <div class="beide">
                             <div class="wrapper">
@@ -117,6 +105,13 @@ include './config.php';
             echo '<p>Make an account or log in to watch the sheets!</p>';
         } ?>
             </div>
+            <div class="showbox">
+                    <div id="loading-spinner">
+                        <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                       </svg>
+                    </div>
+            </div>
             <div id="osmdCanvas"></div>
             <script >    
                     var url_string = window.location.href; 
@@ -129,8 +124,15 @@ include './config.php';
                     });
     
                     osmd.load('../xml/' + xml).then(function () {
-                    osmd.render();
-                    });   
+                    });  
+                    osmd.load('../xml/' + xml)
+                        .then(function () {
+                            document.getElementById("loading-spinner").style.display = "none";
+                            osmd.render();
+                        })
+                        .catch(function(){
+                            document.getElementById("loading-spinner").style.display = "none";
+                        });
             </script>
     </main>
     <?php include '../includes/footer.php'; ?>

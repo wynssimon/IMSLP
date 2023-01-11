@@ -75,6 +75,75 @@
 .wrapper a:hover:after {
   width: 200px;
 }
+#loading-spinner {
+  display: block;
+  position: relative;
+  margin: auto;
+  width: 100px;
+}
+#loading-spinner:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.circular {
+  animation: rotate 1s ease-in infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 80, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 80, 200;
+    stroke-dashoffset: -40;
+  }
+  100% {
+    stroke-dasharray: 40, 200;
+    stroke-dashoffset: -80;
+  }
+}
+@keyframes color {
+  100%,
+  0% {
+    stroke: #2a6496;
+  }
+  50% {
+    stroke: black;
+  }
+  80%,
+  90% {
+    stroke: #2a6496;
+  }
+}
+.showbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5%;
+}
 
 #fullscreen-button {
   position: absolute;

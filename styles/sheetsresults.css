@@ -24,13 +24,14 @@
 #resetfilters {
   background-color: #2a6496;
   color: white;
-  margin: 8px 10px 20px 0;
+  margin: 8px 10px 25px 0;
   border-radius: 4px;
   cursor: pointer;
   text-transform: uppercase;
   font-family: 'Varela Round', sans-serif;
-  transition: 0.2s;
+  transition: 0.5s;
   width: 60%;
+  border: 2px solid #2a6496;
 }
 #resetfilters:hover {
   color: #2a6496;
