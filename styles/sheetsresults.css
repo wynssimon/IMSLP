@@ -5,7 +5,7 @@
 #inputenbuttons {
   display: flex;
   align-items: center;
-  margin: 2% 10% 0% 10%;
+  margin: 2% 10% 2% 10%;
 }
 #inputenbuttons button img {
   height: 20px;
@@ -42,11 +42,12 @@
   position: relative;
   background: #f1f1f1;
   height: 40px;
+  color: #2a6496;
   width: 60%;
   padding: 12px 20px;
   margin: auto;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
   flex: 1;
 }
 #filters {
@@ -113,7 +114,7 @@
 #alles {
   min-height: 300px;
   justify-content: center;
-  margin: 2% 2% 2% 2%;
+  margin: 0% 2% 2% 2%;
 }
 .grid {
   display: flex;
@@ -125,7 +126,7 @@
   margin: 0 2% 0 2%;
 }
 .shop-card {
-  margin: 10px;
+  margin: 0 10px 20px 10px;
   width: 350px;
   height: 310px;
   background: white;

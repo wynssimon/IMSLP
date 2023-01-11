@@ -22,8 +22,6 @@ include './config.php';
     <main class="main" id="main">
         <?php if (isset($_SESSION['users_ID'])) {
 
-            //echo $_SESSION['users_ID'];
-
             $query = "INSERT INTO imslp_watched (id, watched_ID, watched) VALUES (NULL, {$_SESSION['users_ID']}, NOW() )";
             $result = mysqli_query($conn, $query);
             $currentDate = date('Y-m-d');
@@ -100,18 +98,60 @@ include './config.php';
                 }
             }
             }
+        ?>
+          <?php
+          $query2 = "SELECT SUM(rating_value) as total_rating, COUNT(*) as total_count FROM imslp_ratings WHERE `sheets_rating_ID`='$id'";
+          $result2 = $conn->query($query2);
+          $total_rating = 0;
+          $total_count = 0;
+          if ($result2->num_rows > 0) {
+              while ($row2 = $result2->fetch_assoc()) {
+                  $total_rating = $row2['total_rating'];
+                  $total_count = $row2['total_count'];
+              }
+          }
+          if ($total_count > 0) {
+              $average_rating = $total_rating / $total_count;
+              echo round($average_rating, 2);
+          } else {
+              echo 'There are no ratings yet';
+          }
 
-        } else {
-            echo '<p>Make an account or log in to watch the sheets!</p>';
-        } ?>
-            </div>
-            <div class="showbox">
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+              if ($_POST['action'] == 'vote') {
+                  $userId = $_SESSION['users_ID'];
+                  $rating = $_POST['rating'];
+                  $sheetId = $_POST['sheetId'];
+                  $query3 = "INSERT INTO `imslp_ratings` SET `id`=NULL, `sheets_rating_ID`='$sheetId', `rating_value`='$rating', `rating_user_ID`='$userId'";
+                  $result3 = $conn->query($query3);
+                  header("location: sheet.php?id=$sheetId");
+              }
+          }
+          ?>
+                        <form action="sheet.php" method="post">
+                            <input type='hidden' name='action' value='vote'>
+                            <input type='hidden' name='sheetId' value='<?php echo "$id"; ?>'>
+                            <input type="radio" value="1" name='rating'/>
+                            <input type="radio" value="2" name='rating'/>
+                            <input type="radio" value="3" name='rating'/>
+                            <input type="radio" value="4" name='rating'/>
+                            <input type="radio" value="5" name='rating'/>
+                            <input type="submit" value="insert">
+                        </form>
+                        <?php  ?>
+              <div class="showbox">
                     <div id="loading-spinner">
                         <svg class="circular" viewBox="25 25 50 50">
                         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
                        </svg>
                     </div>
             </div>
+            <?php
+        } else {
+            echo '<p>Make an account or log in to watch the sheets!</p>';
+        } ?>
+            </div>
+          
             <div id="osmdCanvas"></div>
             <script >    
                     var url_string = window.location.href; 

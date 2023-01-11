@@ -482,24 +482,23 @@ session_start();
                 $thisSheet = $row['sheets_img'];
                 $thisSheetXml = $row['sheets_xml'];
                 $thisSheetID = $row['sheets_id'];
-
-                if (is_null($thisComposer) && strlen($thisTitle) > 17) {
-                } elseif (strlen($thisTitle) > 17) {
+                //als de titel langer is dan 17 tekens en de composer niet leeg is dan wordt deze ingekort
+                if (strlen($thisTitle) > 17 && !empty($thisComposer)) {
                     $thisTitle = substr($thisTitle, 0, 17) . '...';
                 }
                 ?>  <div onclick="window.location='./pages/sheet.php?id=<?php echo $thisSheetID; ?>'" class='shop-card'>
                         <div class="title">
                             <?php echo "$thisTitle"; ?> <br> 
                             <div class="ondertitel">
-                                <?php if (!is_null($thisComposer)) {
+                                <!--Als de composer niet leeg is wordt deze gewoon getoond, als deze wel leeg is en de title is langer dan of exact 18 tekens dan gebeurt er niets maar wordt de titel gewoon op twee lijnen weergegeven dankzij de substr een paar lijnen hiervoor. En wanneer de composer leeg is en de title is korte dan 18 dan komt er een linebreak -->
+                                <?php if (!empty($thisComposer)) {
                                     echo "$thisComposer";
                                 } elseif (
-                                    strlen($thisComposer ?? '') &&
-                                    strlen($thisTitle) > 17
+                                    empty($thisComposer) &&
+                                    strlen($thisTitle) >= 18
                                 ) {
-                                    echo '<p  style="opacity: 0">.</p>';
                                 } else {
-                                    echo '<p  style="opacity: 0">.</p>';
+                                    echo '<br>';
                                 } ?>
                             </div>      
                         </div>
