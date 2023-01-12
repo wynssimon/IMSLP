@@ -42,7 +42,7 @@ include './config.php';
         $users_permissions = $_SESSION['users_permissions'];
 
         if (($count >= 6) & ($users_permissions == 0)) {
-            echo '<p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p>';
+            echo '<div class="tekst"><p>sorry you watched already 5 sheets today, come back tomorrow or take a subscription to watch as many sheets as you want</p></div>';
         } elseif (
             $count < 6 ||
             $count == null ||
@@ -109,10 +109,14 @@ include './config.php';
           if ($resultOwnchoice->num_rows > 0) {
               while ($rowChoice = $resultOwnchoice->fetch_assoc()) {
                   $ownChoiceRating = $rowChoice['rating_value'];
-                  echo '<script> var ownChoiceRating = ' .
+                  echo '<script>  var ownChoiceRating = ' .
                       $ownChoiceRating .
                       '; </script>';
               }
+          } else {
+              echo '<script>
+                let ownChoiceRating = 0;
+            </script>';
           }
           if ($result2->num_rows > 0) {
               while ($row2 = $result2->fetch_assoc()) {
@@ -189,7 +193,13 @@ include './config.php';
                         
          
             </div>
-           
+            <div class="showbox">
+                    <div id="loading-spinner">
+                        <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                       </svg>
+                    </div>
+                </div>
             <div id="osmdCanvas"></div>     
             <script >    
                     var url_string = window.location.href; 
@@ -212,18 +222,12 @@ include './config.php';
                             document.getElementById("loading-spinner").style.display = "none";
                         });
             </script>
-                 <div class="showbox">
-                    <div id="loading-spinner">
-                        <svg class="circular" viewBox="25 25 50 50">
-                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-                       </svg>
-                    </div>
-            </div>
+                 
             
             <?php }
 
         } else {
-            echo '<p>Make an account or log in to watch the sheets!</p>';
+            echo '<div class="tekst"><p>Make an account or log in to watch the sheets!</p></div>';
         } ?>
     </main>
     <?php include '../includes/footer.php'; ?>

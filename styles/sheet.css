@@ -35,6 +35,12 @@ input[type='submit'] {
 #averageAndAmount p {
   font-family: 'Varela Round', sans-serif;
 }
+.tekst p {
+  font-family: 'Varela Round', sans-serif;
+  text-align: center;
+  margin-top: 25px;
+  font-size: 1.5rem;
+}
 form {
   display: flex;
   flex-direction: row;
