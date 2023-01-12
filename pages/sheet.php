@@ -97,13 +97,23 @@ include './config.php';
                     }
                 }
             }
-            }
-        ?>
+            ?>
           <?php
           $query2 = "SELECT SUM(rating_value) as total_rating, COUNT(*) as total_count FROM imslp_ratings WHERE `sheets_rating_ID`='$id'";
           $result2 = $conn->query($query2);
           $total_rating = 0;
           $total_count = 0;
+          $userId = $_SESSION['users_ID'];
+          $queryOwnchoice = "SELECT `rating_value` FROM imslp_ratings WHERE `rating_user_ID`='$userId' AND `sheets_rating_ID`='$id'";
+          $resultOwnchoice = $conn->query($queryOwnchoice);
+          if ($resultOwnchoice->num_rows > 0) {
+              while ($rowChoice = $resultOwnchoice->fetch_assoc()) {
+                  $ownChoiceRating = $rowChoice['rating_value'];
+                  echo '<script> var ownChoiceRating = ' .
+                      $ownChoiceRating .
+                      '; </script>';
+              }
+          }
           if ($result2->num_rows > 0) {
               while ($row2 = $result2->fetch_assoc()) {
                   $total_rating = $row2['total_rating'];
@@ -111,11 +121,51 @@ include './config.php';
               }
           }
           if ($total_count > 0) {
-              $average_rating = $total_rating / $total_count;
-              echo round($average_rating, 2) . '<br>';
-              echo $total_count;
+              $average_rating = $total_rating / $total_count; ?> 
+              <div id="total">           
+              <form action=sheet.php method=post>
+                <input type="hidden" name="action" value="vote">
+                <input type="hidden" name="sheetId" value="<?php echo $id; ?>">
+                <input id="eerste" class="star" type="submit" value="1" name="rating" title="Give 1 stars">
+                <input class="star" type="submit" value="2" name="rating" title="Give 2 stars">
+                <input class="star" type="submit" value="3" name="rating" title="Give 3 stars">
+                <input class="star" type="submit" value="4" name="rating" title="Give 4 stars">
+                <input class="star" type="submit" value="5" name="rating" title="Give 5 star">
+              </form>
+              <div id="averageAndAmount">
+                <div id="stars">
+                <?php for ($i = 1; $i <= 5; $i++) { ?>
+                    <img class="average" src="<?php echo $i <=
+                    round($average_rating)
+                        ? '../img/star.svg'
+                        : '../img/star2.svg'; ?>" alt="Star">
+                <?php } ?>
+                </div>
+                <p><?php echo $total_count; ?> votes</p>
+              </div>
+              </div>
+              <?php
           } else {
-              echo 'There are no ratings yet';
+               ?><div id="total">           
+               <form action=sheet.php method=post>
+                 <input type="hidden" name="action" value="vote">
+                 <input type="hidden" name="sheetId" value="<?php echo $id; ?>">
+                 <input id="eerste" type="submit" value="1" name="rating" title="Give 1 stars">
+                 <input type="submit" value="2" name="rating" title="Give 2 stars">
+                 <input type="submit" value="3" name="rating" title="Give 3 stars">
+                 <input type="submit" value="4" name="rating" title="Give 4 stars">
+                 <input type="submit" value="5" name="rating" title="Give 5 star">
+               </form>
+               <div id="averageAndAmount">
+                 <div id="stars">
+                 <?php for ($i = 1; $i <= 5; $i++) { ?>
+                     <img class="average" src="../img/star2.svg" alt="Star">
+                 <?php } ?>
+                 </div>
+                 <p><?php echo $total_count; ?> votes</p>
+               </div>
+               </div>
+               <?php
           }
 
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -139,17 +189,8 @@ include './config.php';
                         
          
             </div>
-            <form action=sheet.php method=post>
-                            <input type="hidden" name="action" value="vote">
-                            <input type="hidden" name="sheetId" value="<?php echo $id; ?>">
-                            <input type="radio" value="1" name="rating" onclick="this.form.submit();"/>
-                            <input type="radio" value="2" name="rating" onclick="this.form.submit();"/>
-                            <input type="radio" value="3" name="rating" onclick="this.form.submit();"/>
-                            <input type="radio" value="4" name="rating" onclick="this.form.submit();"/>
-                            <input type="radio" value="5" name="rating" onclick="this.form.submit();"/>
-            </form>
-            <div id="osmdCanvas"></div>
-          
+           
+            <div id="osmdCanvas"></div>     
             <script >    
                     var url_string = window.location.href; 
                     var url = new URL(url_string);
@@ -178,11 +219,14 @@ include './config.php';
                        </svg>
                     </div>
             </div>
-            <?php
+            
+            <?php }
+
         } else {
             echo '<p>Make an account or log in to watch the sheets!</p>';
         } ?>
     </main>
     <?php include '../includes/footer.php'; ?>
+    <script src="../scripts/stars.js"></script>
 </body>
 </html>

@@ -4,27 +4,61 @@
 #osmdCanvas {
   max-width: 99%;
 }
-form {
-  position: absolute;
-  z-index: 10;
-}
+
 .details {
   position: relative;
   z-index: 10;
 }
-.main p {
-  text-align: center;
-  font-family: 'Varela Round', sans-serif;
-  margin-top: 15px;
+input[type='submit'] {
+  background: url(../img/star2.svg) no-repeat;
+  width: 40px;
+  height: 40px;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  color: transparent;
+  transition: 0.4s;
 }
-
+.average {
+  width: 40px;
+  height: 40px;
+}
+#averageAndAmount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+#stars {
+  margin-right: 10px;
+}
+#averageAndAmount p {
+  font-family: 'Varela Round', sans-serif;
+}
+form {
+  display: flex;
+  flex-direction: row;
+}
+#eerste {
+  margin-left: 5px;
+}
+#total {
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+  margin: 15px 5% 0 5%;
+}
+input[type='submit']:hover,
+input[type='submit'].beforeHover {
+  background: url(../img/star.svg) no-repeat;
+}
 /*fullscreen maken*/
 :fullscreen .wrapper {
   display: none;
 }
-:fullscreen p {
-  display: none;
-}
+
 .beide {
   width: 420px;
   display: flex;
